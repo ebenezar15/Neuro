@@ -41,7 +41,7 @@ PX('griefhope','Grieving With Hope','daily','10–15 min','Give grief a little t
 'I\'m afraid I won\'t stop crying => Set a timer and end with a soothing activity;It has been a long time and nothing is lifting => Talk to a counsellor; prolonged grief can be helped;People say I should be over it => Grief has no deadline; love goes on',
 'Losing someone we are attached to activates some of the same circuits as physical pain. Grief is not a problem to solve but love adjusting to a loss; giving it regular space, with support, helps the brain slowly update its map of the world.',{min:10},
 'When you miss someone very much, give the sadness a little time each day and tell God about it. Slowly, the pain gets softer.');
-PX('afterforty','After the 40 Days: Who Are You Now?','weekly','20 min','At the end of a season of prayer or change, look back, name who you are becoming and choose what comes next.',
+PX('afterforty','After the 40 Days: Who Are You Now?','deep','20 min','At the end of a season of prayer or change, look back, name who you are becoming and choose what comes next.',
 'Read back through your notes from the season;Write three ways you have changed, however small;Ask God: "Who are You making me to be?" and write what comes to mind that agrees with Scripture;Choose one practice to keep going;Tell someone what God has done',
 'I don\'t see any change => Ask a close friend what they have noticed;I feel I failed the season => Count the days you showed up, not the days you missed;I don\'t know what is next => Keep one simple daily rhythm for the next 40 days',
 'Reflecting on progress strengthens new identity and motivation; the brain remembers what we review. Naming who we are becoming helps new habits last beyond the first push.',{min:20},
