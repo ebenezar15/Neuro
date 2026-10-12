@@ -302,10 +302,10 @@ const DAILY_REPS=[['Three breaths before you pick up your phone','sigh'],['Name 
 function extendAtlas(){
  NEWSECS.forEach(s=>{if(!SEC[s.id]){SECS.push(s);SEC[s.id]=s}});
  Object.assign(TYPE,{X:'Model',D:'Everyday'});
- const extra=[...MAPS.filter(m=>m.type==='P'&&!ORDER.includes(m)),...DAYS,...MODELS];
+ const extra=[...MAPS.filter(m=>!ORDER.includes(m)),...DAYS,...MODELS].filter(m=>!ORDER.includes(m));
  extra.forEach(m=>{if(!m.area)m.area='tlk';m.num=ORDER.length+1;m.id='m'+m.num;m.h=SEC[m.area].h;if(m.type==='D'){const c=CATS.find(c=>c[0]===m.cat);m.h=c?c[1]:m.h}ORDER.push(m);BYT[m.t.toLowerCase()]=m});
  extra.forEach(m=>(m.links||[]).forEach(t=>{const x=find(t);if(x&&x!==m)(BACK[x.id]=BACK[x.id]||new Set()).add(m)}));
  Object.keys(USES).forEach(k=>delete USES[k]);
  ORDER.forEach(m=>{if(m.type==='P'||m.type==='F')return;const ps=m.type==='D'?m.tools.map(c=>PR[c]).filter(Boolean):planFor(m);ps.forEach(p=>(USES[p.code]=USES[p.code]||[]).push(m))});
 }
-extendAtlas();
+

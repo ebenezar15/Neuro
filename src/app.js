@@ -30,16 +30,19 @@ function helpModal(){openModal(`<div class="row-h" style="margin:0"><h2>Get help
  <p class="note" style="margin:0">Outside India, find a free helpline for your country at <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>. If the Call button does nothing on this device, dial the number yourself.</p>
  <div class="divider" style="height:1px;background:var(--line)"></div>
  <p style="margin:0"><b>While you wait or decide:</b></p><div class="minis">${['ground','tipp','sigh','reach'].map(c=>miniLink(pr(c))).join('')}</div>`,m=>{$$('[data-copy]',m).forEach(b=>b.onclick=()=>copyText(b.dataset.copy));$$('a.mini',m).forEach(a=>a.addEventListener('click',closeModal))})}
-function settingsModal(){const th=store.get('theme','system'),zm=store.get('zoom',1);
+const PALETTES=[['sage','Sage','#EDF1EE','#0E6A64','#D8932A'],['ocean','Ocean','#EAF0F5','#1D5C8C','#E07A3F'],['dusk','Dusk','#F1EEF4','#5B4A8C','#D4A03A'],['clay','Clay','#F5EFEA','#9A4A2E','#3E7C6E'],['forest','Forest','#ECF0E8','#3D6B2F','#C26A2D'],['contrast','High contrast','#FFFFFF','#00504A','#8A4B00']];
+function settingsModal(){const th=store.get('theme','system'),zm=store.get('zoom',1),pl=store.get('palette','sage');
  openModal(`<div class="row-h" style="margin:0"><h2>Settings</h2><button class="icon-btn" data-x aria-label="Close">${IC.x}</button></div>
  <div class="field">Appearance<div class="seg" role="tablist">${[['system','Match device'],['light','Light'],['dark','Dark']].map(([v,l])=>`<button role="tab" data-theme-set="${v}" aria-selected="${th===v}">${l}</button>`).join('')}</div></div>
+ <div class="field">Colour scheme<div class="swatches">${PALETTES.map(([v,l,bg,a,sp])=>`<button type="button" class="swatch" data-pal="${v}" aria-pressed="${pl===v}"><span class="sw" style="background:${bg}"><i style="background:${a}"></i><i style="background:${sp}"></i></span>${l}</button>`).join('')}</div><span class="hint">Each scheme has a light and a dark version that follows Appearance.</span></div>
  <div class="field">Text size<div class="seg">${[[.92,'Smaller'],[1,'Standard'],[1.1,'Larger'],[1.22,'Largest']].map(([v,l])=>`<button data-zoom="${v}" aria-selected="${zm==v}">${l}</button>`).join('')}</div></div>
  <div class="field">Install<span class="hint">On iPad or iPhone, open this page in Safari, tap Share, then Add to Home Screen. On a Mac, use Safari's File menu, then Add to Dock. It opens like an app.</span></div>
  <div class="field">Your data<span class="hint">Check-ins, notes, journal entries and pathways stay in this browser on this device. They are not uploaded anywhere. Use Journal, then Export to keep a copy.</span></div>
  <div class="note" style="display:grid;gap:8px"><p style="margin:0"><b>Educational, not diagnostic.</b> These maps support understanding and conversation. They do not replace assessment or care from a licensed professional. Neuroscience is simplified here; brain regions work as networks, and some models (such as the polyvagal ladder) are useful clinical maps whose physiology is still debated.</p></div>`,m=>{
   $$('[data-theme-set]',m).forEach(b=>b.onclick=()=>{store.set('theme',b.dataset.themeSet);applyPrefs();$$('[data-theme-set]',m).forEach(x=>x.setAttribute('aria-selected',x===b))});
+  $$('[data-pal]',m).forEach(b=>b.onclick=()=>{store.set('palette',b.dataset.pal);applyPrefs();$$('[data-pal]',m).forEach(x=>x.setAttribute('aria-pressed',x===b))});
   $$('[data-zoom]',m).forEach(b=>b.onclick=()=>{store.set('zoom',+b.dataset.zoom);applyPrefs();$$('[data-zoom]',m).forEach(x=>x.setAttribute('aria-selected',x===b))})})}
-function applyPrefs(){const th=store.get('theme','system'),r=document.documentElement;if(th==='system')r.removeAttribute('data-theme');else r.setAttribute('data-theme',th);r.style.setProperty('--zoom',store.get('zoom',1))}
+function applyPrefs(){const th=store.get('theme','system'),r=document.documentElement;if(th==='system')r.removeAttribute('data-theme');else r.setAttribute('data-theme',th);r.style.setProperty('--zoom',store.get('zoom',1));const pl=store.get('palette','sage');if(pl==='sage')r.removeAttribute('data-palette');else r.setAttribute('data-palette',pl)}
 
 // ---------- icons ----------
 const sv=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
@@ -49,8 +52,10 @@ const IC={today:sv('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 
  toolkit:sv('<path d="M4 20l6-6M14.5 4.5a4 4 0 0 0 5 5L12 17l-5-5z"/>'),
  journal:sv('<path d="M5 3h12a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2z"/><path d="M5 17a2 2 0 0 1 2-2h12M9 7h6M9 11h4"/>'),
  x:sv('<path d="M6 6l12 12M18 6L6 18"/>'),gear:sv('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'),
+ plan:sv('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M8 14l2.5 2.5L16 12"/>'),
+ back:sv('<path d="M15 5l-7 7 7 7"/>'),fwd:sv('<path d="M9 5l7 7-7 7"/>'),
  heart:sv('<path d="M12 21s-7-4.4-9.3-9A5.4 5.4 0 0 1 12 6a5.4 5.4 0 0 1 9.3 6c-2.3 4.6-9.3 9-9.3 9z"/>')};
-const NAV=[['today','Today'],['struggles','Struggles'],['library','Library'],['toolkit','Toolkit'],['journal','Journal']];
+const NAV=[['today','Today'],['plan','90 days'],['struggles','Struggles'],['library','Library'],['toolkit','Toolkit'],['journal','Journal']];
 function navHTML(){return NAV.map(([id,l])=>`<a class="nav-btn" href="#${id}" data-nav="${id}">${IC[id]}<span>${l}</span></a>`).join('')}
 function setNav(id){$$('[data-nav]').forEach(a=>a.setAttribute('aria-current',a.dataset.nav===id?'page':'false'))}
 
@@ -95,6 +100,8 @@ function viewToday(){const ck=store.get('checkins',[]),hs=scaleHues(WOT);let sel
   <div id="helpbox"></div></div>
   <div class="panel"><div class="sec-h" style="margin:0"><h3>Your recent check-ins</h3><a href="#journal" data-jtab="checkins">See all</a></div>
   ${ck.length?`${sparkSVG(ck,14)}<p class="note" style="margin:6px 0 0">Middle band = inside your window. Last: ${esc(WOT.levels[ck[0].v][0])}, ${esc(fmtD(ck[0].d))}.</p>`:`<div class="empty-s" style="margin-top:10px">Your check-ins will appear here as a line over time, so you can see patterns: which days, times or events push you out of your window and what brings you back.</div>`}</div></div>
+
+ <section class="sec"><div class="sec-h"><h2>Your 90-day plan</h2><a href="#plan">All days →</a></div>${planCard()}</section>
 
  <section class="sec"><div class="sec-h"><h2>Quick help</h2><span class="note">Pick how you feel. Each opens a step-by-step practice.</span></div>
   <div class="quick">${QUICK.map(([lab,sub,c,hh])=>{const p=PR[c];return p?`<a class="qcard" href="#${p.id}" style="--h:${hh}">${glyph({...p,h:hh})}<span><b>${esc(lab)}</b><small>${esc(sub)} · ${esc(p.t)}</small></span></a>`:''}).join('')}</div></section>
@@ -157,6 +164,8 @@ function renderD(m){const ps=m.tools.map(c=>PR[c]).filter(Boolean);const maps=m.
 let LF=store.get('libf',{sec:'all',type:'all'});
 function viewLibrary(){const types=[['all','All types'],...Object.entries(TYPE).map(([k,v])=>[k,v])];
  app().innerHTML=`<div class="wrap fade"><div class="page-h"><p class="eyebrow">A visual library · ${ORDER.length} maps · ${SECS.length} shelves</p><h1>The <em>Rewiring</em> Atlas</h1><p>Maps of the brain, emotions, patterns and relationships. Each one helps you understand what is happening, recognise it in yourself, see the cycle, and take the next small step that rewires it.</p></div>
+ ${studiesSection()}
+ <section class="sec"><div class="sec-h"><h2>Maps</h2><span class="note">${ORDER.length} maps on ${SECS.length} shelves</span></div></section>
  <div class="steps6">${STEP6.map((s,i)=>`<div style="--h:${s[1]}"><span class="mono note">0${i+1}</span><b>${s[0]}</b><small>${s[2]}</small></div>`).join('')}</div>
  <p class="eyebrow" style="margin:18px 0 6px">Shelf</p><div class="filters scroller" style="margin-top:0">${[{id:'all',n:'All shelves',h:176},...SECS].map(s=>`<button class="chip" style="--h:${s.h}" data-sec="${s.id}" aria-pressed="${LF.sec===s.id}">${esc(s.n)}</button>`).join('')}</div>
  <p class="eyebrow" style="margin:0 0 6px">Type</p><div class="filters scroller" style="margin-top:0">${types.map(([k,v])=>`<button class="chip" style="--h:200" data-type="${k}" aria-pressed="${LF.type===k}">${esc(v)}</button>`).join('')}</div>
@@ -203,6 +212,8 @@ function exportText(){const L=['REWIRING ATLAS · personal export · '+fmtD(now(
  const j=store.get('journal',[]);if(j.length){L.push('== JOURNAL ==');j.forEach(e=>{L.push(`[${e.k}] ${e.t} · ${fmtD(e.d)}`);if(e.b)L.push(e.b);L.push('')})}
  const ps=store.get('paths',[]);if(ps.length){L.push('== PATHWAYS ==');ps.forEach(p=>L.push(`${p.name} · ${p.reps.length} reps`));L.push('')}
  const ns=ORDER.map(m=>[m,store.get('note-'+m.id,'')]).filter(x=>x[1].trim());if(ns.length){L.push('== MAP NOTES ==');ns.forEach(([m,n])=>{L.push(m.t);L.push(n);L.push('')})}
+ const pp=planGet(),pd=Object.keys(pp.n).map(Number).sort((a,b)=>a-b).filter(d=>dayObj(d));if(pd.length||Object.keys(pp.done).length){L.push('== 90-DAY PLAN ==');L.push(Object.keys(pp.done).length+' of 90 days complete');pd.forEach(d=>{const n=pp.n[d];L.push(`Day ${d}: ${dayObj(d).t}${pp.done[d]?' (done)':''}`);if(n.before!=null)L.push('Before: '+WOT.levels[n.before][0]);if(n.after!=null)L.push('After: '+WOT.levels[n.after][0]);if(n.when)L.push(`If-then: When ${n.when}, I will ${n.will||''}`);if(n.applied)L.push('Used it in a real situation.');if(n.note)L.push(n.note);L.push('')})}
+ const sn=STUDIES.map(x=>[x,store.get('note-study-'+x.id,'')]).filter(x=>x[1].trim());if(sn.length){L.push('== STUDY NOTES ==');sn.forEach(([x,n])=>{L.push(x.t);L.push(n);L.push('')})}
  if(L.length<3)L.push('Nothing saved yet.');return L.join('\n')}
 
 // ---------- SEARCH ----------
@@ -210,7 +221,13 @@ let lastQ='',preSearch='today';
 function viewSearch(){const q=lastQ.trim().toLowerCase();const words=q.split(/\s+/).filter(Boolean);
  const res=ORDER.filter(m=>{const hay=(m.t+' '+(m.u||'')+' '+(m.tags||'')+' '+SEC[m.area].n+' '+(m.body||[]).join(' ')+' '+(m.th||[]).join(' ')).toLowerCase();return words.every(w=>hay.includes(w))});
  res.sort((a,b)=>(b.t.toLowerCase().includes(q)?1:0)-(a.t.toLowerCase().includes(q)?1:0));
- app().innerHTML=`<div class="wrap fade"><div class="row-h"><h2>Results for "${esc(lastQ)}"</h2><span class="note">${res.length} map${res.length===1?'':'s'}</span></div>${res.length?`<div class="grid">${res.map(card).join('')}</div>`:`<div class="empty">Nothing matches yet. Try a feeling ("angry"), a body sign ("tight chest") or a topic ("boundaries").</div>`}</div>`}
+ const sres=STUDIES.filter(x=>words.every(w=>STUDY_TEXT[x.id].includes(w)));
+ const dres=RM.DAYS.filter(o=>{const hay=(o.t+' '+o.l+' '+o.p+' '+o.j+' '+o.fr).toLowerCase();return words.every(w=>hay.includes(w))}).slice(0,12);
+ const n=res.length+sres.length+dres.length;
+ app().innerHTML=`<div class="wrap fade"><div class="row-h"><h2>Results for "${esc(lastQ)}"</h2><span class="note">${res.length} map${res.length===1?'':'s'} · ${sres.length} stud${sres.length===1?'y':'ies'} · ${dres.length} plan day${dres.length===1?'':'s'}</span></div>
+ ${sres.length?`<p class="eyebrow" style="margin:6px 0 8px">Studies</p><div class="tiles" style="margin-bottom:18px">${sres.map(studyTile).join('')}</div>`:''}
+ ${dres.length?`<p class="eyebrow" style="margin:6px 0 8px">90-day plan</p><div class="chips" style="margin-bottom:18px">${dres.map(o=>`<a class="chip" href="#day-${o.d}" style="--h:${KIND_H[o.k]}">Day ${o.d}: ${esc(o.t)}</a>`).join('')}</div>`:''}
+ ${res.length?`<p class="eyebrow" style="margin:6px 0 8px">Maps</p><div class="grid">${res.map(card).join('')}</div>`:''}${n?'':`<div class="empty">Nothing matches yet. Try a feeling ("angry"), a body sign ("tight chest") or a topic ("boundaries").</div>`}</div>`}
 
 // ---------- SHEET (map page) ----------
 function sheet(m){const sec=SEC[m.area],list=ORDER.filter(x=>x.area===m.area),i=list.indexOf(m),prev=list[i-1],next=list[i+1],st=starred(m.id);
@@ -221,8 +238,9 @@ function sheet(m){const sec=SEC[m.area],list=ORDER.filter(x=>x.area===m.area),i=
  const rel=related(m);
  app().innerHTML=`<article class="wrap sheet fade" style="--h:${m.h}"><div class="crumbs"><a href="#${m.type==='D'?'struggles':m.type==='P'?'toolkit':'library'}" data-lib-sec="${sec.id}">${esc(sec.n)}</a><span>/</span><span class="mono">${TYPE[m.type]} ${pad(m.num)}</span></div>
  <div class="sheet-h"><div class="big mono">${pad(m.num)}</div><div class="tt"><h1>${esc(m.t)}</h1>${m.u&&m.type!=='E'?`<p>${esc(m.u)}</p>`:''}${m.type==='E'?`<p>${esc(m.u)}</p>`:''}</div>
- <div class="tools"><button class="pill ${st?'on':''}" id="star">${st?'★ Saved':'☆ Save'}</button>${m.type==='P'?`<button class="pill" id="pdone">I did it</button>`:''}</div></div>
+ <div class="tools"><button class="pill ${st?'on':''}" id="star">${st?'★ Saved':'☆ Save'}</button>${m.type==='P'?`<button class="pill" id="pdone">I did it</button>`:''}${prev?`<a class="pill" href="#${prev.id}" aria-label="Previous: ${esc(prev.t)}">← Prev</a>`:''}${next?`<a class="pill" href="#${next.id}" aria-label="Next: ${esc(next.t)}">Next →</a>`:''}</div></div>
  ${R}
+ ${planUse(m)}
  ${rel.length?`<div class="box w12" style="margin-top:14px"><h3>Connected maps</h3><div class="chips">${rel.map(chip).join('')}</div></div>`:''}
  <div class="pager">${prev?`<a href="#${prev.id}" style="--h:${prev.h}"><small>← ${pad(prev.num)}</small><b>${esc(prev.t)}</b></a>`:'<span></span>'}${next?`<a href="#${next.id}" style="--h:${next.h}"><small>${pad(next.num)} →</small><b>${esc(next.t)}</b></a>`:''}</div></article>`;
  $('#star').onclick=()=>{let s=store.get('star',[]);const on=!s.includes(m.id);s=on?[...s,m.id]:s.filter(x=>x!==m.id);store.set('star',s);const b=$('#star');b.classList.toggle('on',on);b.textContent=on?'★ Saved':'☆ Save';toast(on?'Saved to your Journal':'Removed from saved')};
@@ -238,11 +256,20 @@ function sheet(m){const sec=SEC[m.area],list=ORDER.filter(x=>x.area===m.area),i=
 function route(){stopPractice();stopSurf();const h=location.hash.slice(1)||'today';const sq=$('#q');
  if(/^m\d+$/.test(h)){const m=ORDER.find(x=>x.id===h);if(m){setNav(m.type==='D'?'struggles':m.type==='P'?'toolkit':'library');sheet(m);document.title=m.t+' · Rewiring Atlas';return}}
  document.title='Rewiring Atlas';
+ let mt;if((mt=h.match(/^day-(\d+)$/))&&dayObj(+mt[1])){setNav('plan');viewDay(+mt[1]);document.title='Day '+mt[1]+' · Rewiring Atlas';return}
+ if((mt=h.match(/^study-(\w+)$/))&&STUDY[mt[1]]){setNav('library');viewStudy(mt[1]);document.title=STUDY[mt[1]].t+' · Rewiring Atlas';return}
  if(h==='search'&&lastQ.trim()){setNav('');viewSearch();return}
  if(sq&&h!=='search'){sq.value='';lastQ=''}
- const V={today:viewToday,struggles:viewStruggles,library:viewLibrary,toolkit:viewToolkit,journal:viewJournal}[h]||viewToday;
+ const V={today:viewToday,struggles:viewStruggles,library:viewLibrary,toolkit:viewToolkit,journal:viewJournal,plan:viewPlan}[h]||viewToday;
  setNav(V===viewToday?'today':h);V();window.scrollTo(0,0)}
+// own history stack so back/forward buttons work inside the artifact frame too
+const HIST={s:[],i:-1,nav:false};
+function histPush(){const h=location.hash||'#today';if(HIST.nav){HIST.nav=false}else if(HIST.s[HIST.i]!==h){HIST.s=HIST.s.slice(0,HIST.i+1);HIST.s.push(h);if(HIST.s.length>200)HIST.s.shift();HIST.i=HIST.s.length-1}histBtns()}
+function histGo(k){const j=HIST.i+k;if(j<0||j>=HIST.s.length)return;HIST.i=j;HIST.nav=true;const h=HIST.s[j];if(location.hash===h){HIST.nav=false;route();histBtns()}else location.hash=h.slice(1)}
+function histBtns(){const b=$('#hback'),f=$('#hfwd');if(b)b.disabled=HIST.i<=0;if(f)f.disabled=HIST.i>=HIST.s.length-1}
 function boot(){applyPrefs();$('#railnav').innerHTML=navHTML();$('#tabnav').innerHTML=navHTML();
  document.addEventListener('click',e=>{if(e.target.closest('[data-help]')){e.preventDefault();helpModal()}if(e.target.closest('[data-settings]')){e.preventDefault();settingsModal()}const jt=e.target.closest('[data-jtab]');if(jt)JT=jt.dataset.jtab});
  $('#q').addEventListener('input',e=>{lastQ=e.target.value;if(lastQ.trim()){if(location.hash!=='#search'){preSearch=location.hash||'#today';location.hash='search'}else viewSearch()}else if(location.hash==='#search')location.hash=preSearch});
- window.addEventListener('hashchange',route);route()}
+ $('#hback').onclick=()=>histGo(-1);$('#hfwd').onclick=()=>histGo(1);
+ document.addEventListener('keydown',e=>{if(e.altKey&&!e.ctrlKey&&!e.metaKey&&(e.key==='ArrowLeft'||e.key==='ArrowRight')&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();histGo(e.key==='ArrowLeft'?-1:1)}});
+ window.addEventListener('hashchange',()=>{histPush();route()});histPush();route()}

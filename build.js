@@ -1,6 +1,6 @@
 // Builds the single-file app: dist/rewiring-atlas.html (body fragment) and index.html (full document, installable).
 const fs=require('fs'),r=f=>fs.readFileSync(__dirname+'/src/'+f,'utf8');
-const js=['atlas-data.js','atlas-engine.js','additions.js','widgets.js','app.js'].map(r).join('\n');
+const js=['atlas-data.js','atlas-engine.js','additions.js','additions2.js','plan-data.js','plan-links.js','studies.js','widgets.js','app.js','plan.js'].map(r).join('\n');
 const frag=r('shell.html').replace('/*ATLAS_CSS*/',()=>r('atlas.css')).replace('/*APP_CSS*/',()=>r('app.css')).replace('/*JS*/',()=>js);
 fs.mkdirSync(__dirname+'/dist',{recursive:true});
 fs.writeFileSync(__dirname+'/dist/rewiring-atlas.html',frag);
