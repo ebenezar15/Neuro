@@ -49,3 +49,7 @@ Rebuild with `node build.js`, which writes `index.html` (and `dist/rewiring-atla
 - Every practice and struggle shows a **mental model**, **why it works**, **how God designed it**, a verse to meditate on and an action for today.
 - Every page ends with **In simple words**, a summary a child can follow.
 - Pages remember where you were when you come back.
+
+## Tamil edition
+
+`ta/index.html` is the full Tamil app (Rewiring தமிழ்). Rebuild with `node build-ta.js`. UI code translations live in `src-ta/`; content translations are in `i18n/ta/out/` (generated into `src-ta/ta-data.js` by `i18n/ta/gen-data.js`) and are applied to the English data at load time by `src-ta/ta-apply.js`.
