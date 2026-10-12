@@ -5,7 +5,7 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
 <title>Rewiring Atlas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
 <style>
 :root{
   --bg:#EDF1EE; --surface:#F9FBF9; --sunk:#E2E8E4; --ink:#16232A; --muted:#55666B; --line:#C8D2CE;
@@ -560,6 +560,118 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .gx[data-mode="heal"] .ch{stroke:hsl(150 var(--as) var(--al));stroke-dasharray:10 8;animation:gxflow 2.4s linear infinite reverse}
 @keyframes gxflow{to{stroke-dashoffset:-36}}
 @media (prefers-reduced-motion: reduce){.gx .ch{animation:none!important}}
+
+/* Colour schemes from your study pages: Paper & Pine (September series), Kelp & Ochre (The Regulated Mind), Navy Manuscript (the studies) */
+:root[data-palette="pine"]{--bg:#E9ECEE;--surface:#F6F7F8;--sunk:#DDE2E6;--ink:#18202B;--muted:#4C5866;--line:#C3CAD0;--accent:#2F6257;--spark:#8C5A3B;--on-accent:#FFFFFF;--glow:rgba(140,90,59,.3)}
+@media (prefers-color-scheme: dark){:root[data-palette="pine"]:not([data-theme="light"]){--bg:#141A21;--surface:#1C242D;--sunk:#232D38;--ink:#E4E8EB;--muted:#A3AFBA;--line:#33404C;--accent:#77BAAA;--spark:#D09A72;--on-accent:#141A21;--glow:rgba(208,154,114,.3)}}
+:root[data-palette="pine"][data-theme="dark"]{--bg:#141A21;--surface:#1C242D;--sunk:#232D38;--ink:#E4E8EB;--muted:#A3AFBA;--line:#33404C;--accent:#77BAAA;--spark:#D09A72;--on-accent:#141A21;--glow:rgba(208,154,114,.3)}
+:root[data-palette="kelp"]{--bg:#EBF1EF;--surface:#F8FBFA;--sunk:#DCE6E2;--ink:#15303A;--muted:#4D6670;--line:#CBD9D5;--accent:#2A6650;--spark:#8F6417;--on-accent:#FFFFFF;--glow:rgba(143,100,23,.3)}
+@media (prefers-color-scheme: dark){:root[data-palette="kelp"]:not([data-theme="light"]){--bg:#0E1A1D;--surface:#15252A;--sunk:#1B2E33;--ink:#E3EFEB;--muted:#9DB5B0;--line:#2A3F45;--accent:#6FC29F;--spark:#E2B25A;--on-accent:#0E1A1D;--glow:rgba(226,178,90,.3)}}
+:root[data-palette="kelp"][data-theme="dark"]{--bg:#0E1A1D;--surface:#15252A;--sunk:#1B2E33;--ink:#E3EFEB;--muted:#9DB5B0;--line:#2A3F45;--accent:#6FC29F;--spark:#E2B25A;--on-accent:#0E1A1D;--glow:rgba(226,178,90,.3)}
+:root[data-palette="manuscript"]{--bg:#F0F3F7;--surface:#FFFFFF;--sunk:#E3E8EF;--ink:#2C3E50;--muted:#5A6B7C;--line:#CBD2D9;--accent:#1A3A52;--spark:#C41E3A;--on-accent:#FFFFFF;--glow:rgba(196,30,58,.25)}
+@media (prefers-color-scheme: dark){:root[data-palette="manuscript"]:not([data-theme="light"]){--bg:#0F1620;--surface:#17212D;--sunk:#1E2A38;--ink:#E6ECF2;--muted:#A0AEBD;--line:#2E3C4C;--accent:#8FB6DA;--spark:#F07A8A;--on-accent:#0F1620;--glow:rgba(240,122,138,.28)}}
+:root[data-palette="manuscript"][data-theme="dark"]{--bg:#0F1620;--surface:#17212D;--sunk:#1E2A38;--ink:#E6ECF2;--muted:#A0AEBD;--line:#2E3C4C;--accent:#8FB6DA;--spark:#F07A8A;--on-accent:#0F1620;--glow:rgba(240,122,138,.28)}
+
+/* Editorial look: the typography and quiet, ruled layout of your study pages (Archivo headings, Newsreader text, 3px panels, left-ruled callouts) */
+:root[data-look="editorial"]{--f-display:"Archivo","Helvetica Neue",Arial,sans-serif;--f-body:"Newsreader",Georgia,"Times New Roman",serif;--r:3px}
+:root[data-look="editorial"] body{font-size:17px;line-height:1.6}
+:root[data-look="editorial"] :is(h1,h2,h3,h4){font-family:var(--f-display);font-weight:600;letter-spacing:-.015em}
+:root[data-look="editorial"] :is(.panel,.tile,.box,.qcard,.pcard,.card,.stepbox,.dayrow,.studylink,.pathcard,.state,.helpbox,.modal,.acc,.empty,.empty-s,.out,.say,.practice-box,.tablebox,.pager a,.play>div,.node,.info,.att,.helpline,.netwrap,.canvas,.netbox,.readout,.scale .fig,.helps,.fq,.lvls button,.timeline button,.dist div,.swatch,.mini,.nav-btn,.field input,.field select,.field textarea,textarea,.study *){border-radius:3px}
+:root[data-look="editorial"] :is(.pill,.chip,.seg,.seg button,.chipset button,.search,.secnav a,.icon-btn){border-radius:4px}
+:root[data-look="editorial"] .seg button[aria-selected="true"]{box-shadow:none;outline:1px solid var(--line)}
+:root[data-look="editorial"] .eyebrow{font-family:var(--f-display);text-transform:none;letter-spacing:.01em;font-size:13px;font-weight:500;color:var(--accent)}
+:root[data-look="editorial"] .page-h h1{font-weight:600;letter-spacing:-.02em}
+:root[data-look="editorial"] .page-h h1 em{color:var(--accent)}
+:root[data-look="editorial"] .page-h>p:not(.eyebrow),:root[data-look="editorial"] .sheet-h .tt p{font-style:italic;color:var(--muted)}
+:root[data-look="editorial"] .sec{border-top:1px solid var(--line);padding-top:18px}
+:root[data-look="editorial"] .sec-h h2{font-size:21px}
+:root[data-look="editorial"] .panel,:root[data-look="editorial"] .box{box-shadow:none}
+:root[data-look="editorial"] .box h3 .k{border-radius:2px;font-family:var(--f-display);letter-spacing:.02em}
+:root[data-look="editorial"] .say{font-family:var(--f-body);font-style:italic;font-weight:400;border:0;border-left:3px solid var(--spark);background:none;padding:4px 0 4px 18px}
+:root[data-look="editorial"] .practice-box{background:none;border-left:3px solid hsl(var(--h) var(--as) var(--al));padding:4px 0 4px 16px}
+:root[data-look="editorial"] .studylink,:root[data-look="editorial"] .plancard{border-left-width:3px}
+:root[data-look="editorial"] .tile b,:root[data-look="editorial"] .card b{font-family:var(--f-display);font-weight:600}
+:root[data-look="editorial"] .mono.big,:root[data-look="editorial"] .sheet-h .big{font-family:var(--f-display);font-weight:700}
+/* study reader in the editorial look */
+:root[data-look="editorial"] .study{font-size:17.5px;font-weight:300;line-height:1.62;max-width:45rem}
+:root[data-look="editorial"] .study strong,:root[data-look="editorial"] .study b{font-weight:600}
+:root[data-look="editorial"] .study h2{font-size:1.3rem;border-top:1px solid var(--line);padding-top:1.3rem;margin-top:2.9rem}
+:root[data-look="editorial"] .study h3{font-size:1.05rem}
+:root[data-look="editorial"] .study :is(.box,.gospel-truth,.practical-tip,.positive-example,.negative-example,.case-study-box,.stage-box,.script,.callout,.safety){background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--bl,var(--accent))}
+:root[data-look="editorial"] .study :is(.box.gospel,.gospel-truth){--bl:hsl(258 var(--as) var(--al))}
+:root[data-look="editorial"] .study :is(.box.tip,.practical-tip,.positive-example){--bl:var(--accent)}
+:root[data-look="editorial"] .study :is(.box.warn,.box.contested,.negative-example){--bl:var(--spark)}
+:root[data-look="editorial"] .study :is(.box.safety,.safety,.box.critic){--bl:hsl(0 var(--as) var(--al))}
+:root[data-look="editorial"] .study .box.source{--bl:var(--muted);font-size:15px}
+:root[data-look="editorial"] .study .intro-box{background:none;border:0;padding:0;font-size:1.08rem}
+:root[data-look="editorial"] .study .intro-box p:first-child::first-letter{font-family:var(--f-display);font-weight:700;float:left;font-size:2.8rem;line-height:.84;margin:.18rem .5rem 0 0;color:var(--accent)}
+:root[data-look="editorial"] .study th{background:none;font-family:var(--f-display);font-size:12.5px;color:var(--accent);border:0;border-bottom:1px solid var(--line)}
+:root[data-look="editorial"] .study td{border:0;border-bottom:1px solid var(--line)}
+:root[data-look="editorial"] .study td.k{background:none}
+:root[data-look="editorial"] .study .label{font-family:var(--f-display);text-transform:none;letter-spacing:.01em;font-size:13px;color:var(--accent)}
+.looks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.look{display:grid;gap:4px;text-align:left;padding:10px 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;border-radius:12px;font:inherit}
+.look[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.look .lk1{font-size:19px;font-weight:700}.look small{color:var(--muted);font-size:13px}
+
+/* Colour schemes from your Cadenza apps (Practise-app, Booky, Mindapp) */
+:root[data-palette="cadenza"]{--bg:#F9F6FE;--surface:#FFFFFF;--sunk:#F3EDFD;--ink:#1A093A;--muted:#634F8F;--line:#EDE3FC;--accent:#7c3aed;--spark:#d946ef;--on-accent:#FFFFFF;--glow:rgba(217,70,239,.35);--deep:#1f0b44;--deep2:#12052a;--pri:#7c3aed;--acc2:#d946ef}
+@media (prefers-color-scheme: dark){:root[data-palette="cadenza"]:not([data-theme="light"]){--bg:#12052a;--surface:#1f0b44;--sunk:#301362;--ink:#F6F4FF;--muted:#CDB4F8;--line:#4C3C69;--accent:#B089F4;--spark:#E47EF4;--on-accent:#12052a;--glow:rgba(217,70,239,.35)}}
+:root[data-palette="cadenza"][data-theme="dark"]{--bg:#12052a;--surface:#1f0b44;--sunk:#301362;--ink:#F6F4FF;--muted:#CDB4F8;--line:#4C3C69;--accent:#B089F4;--spark:#E47EF4;--on-accent:#12052a;--glow:rgba(217,70,239,.35)}
+:root[data-palette="orchid"]{--bg:#FBF7FF;--surface:#FFFFFF;--sunk:#F7F0FE;--ink:#270E56;--muted:#6E5692;--line:#F3E7FE;--accent:#974CDE;--spark:#DC67A4;--on-accent:#FFFFFF;--glow:rgba(244,114,182,.35);--deep:#2e1065;--deep2:#170531;--pri:#a855f7;--acc2:#f472b6}
+@media (prefers-color-scheme: dark){:root[data-palette="orchid"]:not([data-theme="light"]){--bg:#170531;--surface:#2e1065;--sunk:#441C7F;--ink:#F6F4FF;--muted:#DEBEFC;--line:#584084;--accent:#CB99FA;--spark:#F79CCC;--on-accent:#170531;--glow:rgba(244,114,182,.35)}}
+:root[data-palette="orchid"][data-theme="dark"]{--bg:#170531;--surface:#2e1065;--sunk:#441C7F;--ink:#F6F4FF;--muted:#DEBEFC;--line:#584084;--accent:#CB99FA;--spark:#F79CCC;--on-accent:#170531;--glow:rgba(244,114,182,.35)}
+:root[data-palette="indigo"]{--bg:#F7F7FE;--surface:#FFFFFF;--sunk:#EFEEFD;--ink:#1A1740;--muted:#58528D;--line:#E6E5FB;--accent:#4f46e5;--spark:#8b5cf6;--on-accent:#FFFFFF;--glow:rgba(139,92,246,.35);--deep:#1e1b4b;--deep2:#0f0d2e;--pri:#4f46e5;--acc2:#8b5cf6}
+@media (prefers-color-scheme: dark){:root[data-palette="indigo"]:not([data-theme="light"]){--bg:#0f0d2e;--surface:#1e1b4b;--sunk:#272367;--ink:#F6F4FF;--muted:#BCB9F5;--line:#4B496F;--accent:#9590EF;--spark:#AE8DF9;--on-accent:#0f0d2e;--glow:rgba(139,92,246,.35)}}
+:root[data-palette="indigo"][data-theme="dark"]{--bg:#0f0d2e;--surface:#1e1b4b;--sunk:#272367;--ink:#F6F4FF;--muted:#BCB9F5;--line:#4B496F;--accent:#9590EF;--spark:#AE8DF9;--on-accent:#0f0d2e;--glow:rgba(139,92,246,.35)}
+:root[data-palette="emerald"]{--bg:#F4FAF8;--surface:#FFFFFF;--sunk:#E8F6F2;--ink:#04271F;--muted:#46666E;--line:#DCF0EA;--accent:#047A55;--spark:#609510;--on-accent:#FFFFFF;--glow:rgba(132,204,22,.35);--deep:#052e25;--deep2:#021a15;--pri:#059669;--acc2:#84cc16}
+@media (prefers-color-scheme: dark){:root[data-palette="emerald"]:not([data-theme="light"]){--bg:#021a15;--surface:#052e25;--sunk:#054131;--ink:#F6F4FF;--muted:#A0D7C6;--line:#375851;--accent:#69C0A5;--spark:#A9DB5C;--on-accent:#021a15;--glow:rgba(132,204,22,.35)}}
+:root[data-palette="emerald"][data-theme="dark"]{--bg:#021a15;--surface:#052e25;--sunk:#054131;--ink:#F6F4FF;--muted:#A0D7C6;--line:#375851;--accent:#69C0A5;--spark:#A9DB5C;--on-accent:#021a15;--glow:rgba(132,204,22,.35)}
+:root[data-palette="rose"]{--bg:#FEF5F7;--surface:#FFFFFF;--sunk:#FCEBEF;--ink:#360818;--muted:#7C4866;--line:#FBDFE5;--accent:#BE123C;--spark:#CB7631;--on-accent:#FFFFFF;--glow:rgba(251,146,60,.35);--deep:#3f0a1c;--deep2:#24040f;--pri:#e11d48;--acc2:#fb923c}
+@media (prefers-color-scheme: dark){:root[data-palette="rose"]:not([data-theme="light"]){--bg:#24040f;--surface:#3f0a1c;--sunk:#5C0D24;--ink:#F6F4FF;--muted:#F4A9B9;--line:#653B49;--accent:#ED7791;--spark:#FCB377;--on-accent:#24040f;--glow:rgba(251,146,60,.35)}}
+:root[data-palette="rose"][data-theme="dark"]{--bg:#24040f;--surface:#3f0a1c;--sunk:#5C0D24;--ink:#F6F4FF;--muted:#F4A9B9;--line:#653B49;--accent:#ED7791;--spark:#FCB377;--on-accent:#24040f;--glow:rgba(251,146,60,.35)}
+:root[data-palette="sunset"]{--bg:#FFF8F5;--surface:#FFFFFF;--sunk:#FFF1EA;--ink:#311305;--muted:#845A5A;--line:#FFEADF;--accent:#BA4C12;--spark:#B2781A;--on-accent:#FFFFFF;--glow:rgba(245,165,36,.35);--deep:#3a1606;--deep2:#210b02;--pri:#ff6719;--acc2:#f5a524}
+@media (prefers-color-scheme: dark){:root[data-palette="sunset"]:not([data-theme="light"]){--bg:#210b02;--surface:#3a1606;--sunk:#5D2509;--ink:#F6F4FF;--muted:#FFC5A8;--line:#614538;--accent:#FFA475;--spark:#F8C066;--on-accent:#210b02;--glow:rgba(245,165,36,.35)}}
+:root[data-palette="sunset"][data-theme="dark"]{--bg:#210b02;--surface:#3a1606;--sunk:#5D2509;--ink:#F6F4FF;--muted:#FFC5A8;--line:#614538;--accent:#FFA475;--spark:#F8C066;--on-accent:#210b02;--glow:rgba(245,165,36,.35)}
+:root[data-palette="graphite"]{--bg:#F6F6F7;--surface:#FFFFFF;--sunk:#EDEEF0;--ink:#0f172a;--muted:#515169;--line:#E2E4E7;--accent:#334155;--spark:#64748b;--on-accent:#FFFFFF;--glow:rgba(100,116,139,.35);--deep:#1e293b;--deep2:#0f172a;--pri:#334155;--acc2:#64748b}
+@media (prefers-color-scheme: dark){:root[data-palette="graphite"]:not([data-theme="light"]){--bg:#0f172a;--surface:#1e293b;--sunk:#222D40;--ink:#E2E8F0;--muted:#B1B7BE;--line:#4B5462;--accent:#979EA8;--spark:#929EAE;--on-accent:#0f172a;--glow:rgba(100,116,139,.35)}}
+:root[data-palette="graphite"][data-theme="dark"]{--bg:#0f172a;--surface:#1e293b;--sunk:#222D40;--ink:#E2E8F0;--muted:#B1B7BE;--line:#4B5462;--accent:#979EA8;--spark:#929EAE;--on-accent:#0f172a;--glow:rgba(100,116,139,.35)}
+:root[data-palette="bocean"]{--bg:#F5F8FE;--surface:#FFFFFF;--sunk:#EBF1FD;--ink:#0A1A3B;--muted:#4E598F;--line:#E0E9FC;--accent:#2563eb;--spark:#0494AC;--on-accent:#FFFFFF;--glow:rgba(6,182,212,.35);--deep:#0c1e45;--deep2:#06122b;--pri:#2563eb;--acc2:#06b6d4}
+@media (prefers-color-scheme: dark){:root[data-palette="bocean"]:not([data-theme="light"]){--bg:#06122b;--surface:#0c1e45;--sunk:#102A63;--ink:#F6F4FF;--muted:#ACC4F7;--line:#3D4B6A;--accent:#7CA1F3;--spark:#51CCE1;--on-accent:#06122b;--glow:rgba(6,182,212,.35)}}
+:root[data-palette="bocean"][data-theme="dark"]{--bg:#06122b;--surface:#0c1e45;--sunk:#102A63;--ink:#F6F4FF;--muted:#ACC4F7;--line:#3D4B6A;--accent:#7CA1F3;--spark:#51CCE1;--on-accent:#06122b;--glow:rgba(6,182,212,.35)}
+:root[data-palette="sepia"]{--bg:#F1E8D6;--surface:#FBF5E9;--sunk:#E8DCC4;--ink:#3B2A1A;--muted:#6E5B45;--line:#D9C8A8;--accent:#8A4B1F;--spark:#B5651D;--on-accent:#FFFFFF;--glow:rgba(217,160,90,.35)}
+@media (prefers-color-scheme: dark){:root[data-palette="sepia"]:not([data-theme="light"]){--bg:#1C150E;--surface:#261D14;--sunk:#30251A;--ink:#F1E6D2;--muted:#BFAE93;--line:#43352A;--accent:#E3A86C;--spark:#E9B97A;--on-accent:#1C150E;--glow:rgba(233,185,122,.3)}}
+:root[data-palette="sepia"][data-theme="dark"]{--bg:#1C150E;--surface:#261D14;--sunk:#30251A;--ink:#F1E6D2;--muted:#BFAE93;--line:#43352A;--accent:#E3A86C;--spark:#E9B97A;--on-accent:#1C150E;--glow:rgba(233,185,122,.3)}
+
+/* Cadenza look: the UI style of Practise-app and Booky (deep gradient sidebar, gradient buttons, glowing background, soft rounded cards, Inter) */
+:root[data-look="cadenza"]{--f-display:"Inter","SF Pro Display","Segoe UI",system-ui,sans-serif;--f-body:"Inter","SF Pro Text","Segoe UI",system-ui,sans-serif;--r:16px;
+ --dp:var(--deep,color-mix(in srgb,var(--accent) 30%,#0b0716));--dp2:var(--deep2,color-mix(in srgb,var(--accent) 16%,#06030d));
+ --grad:linear-gradient(135deg,var(--accent) 0%,color-mix(in srgb,var(--accent) 50%,var(--spark)) 55%,var(--spark) 100%);
+ --side:linear-gradient(160deg,color-mix(in srgb,var(--dp) 86%,var(--accent)) 0%,var(--dp) 55%,var(--dp2) 100%);
+ --shadow:0 1px 2px color-mix(in srgb,var(--dp) 6%,transparent),0 12px 32px -14px color-mix(in srgb,var(--accent) 34%,transparent)}
+:root[data-look="cadenza"] body{background:radial-gradient(1200px 600px at 110% -10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),radial-gradient(900px 500px at 30% 120%,color-mix(in srgb,var(--spark) 9%,transparent),transparent 60%),var(--bg);background-attachment:fixed}
+:root[data-look="cadenza"] :is(h1,h2,h3){font-weight:700;letter-spacing:-.02em}
+:root[data-look="cadenza"] .page-h h1 em{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+:root[data-look="cadenza"] :is(.app-rail,.app-tabs){background:var(--side);border-color:transparent;--ink:#FFFFFF;--muted:rgba(255,255,255,.68);--line:rgba(255,255,255,.16);--surface:rgba(255,255,255,.07);--sunk:rgba(255,255,255,.11);color:#fff}
+:root[data-look="cadenza"] .app-rail .nav-btn,:root[data-look="cadenza"] .app-tabs .nav-btn{color:rgba(255,255,255,.72)}
+:root[data-look="cadenza"] :is(.app-rail,.app-tabs) .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+:root[data-look="cadenza"] :is(.app-rail,.app-tabs) .nav-btn[aria-current="page"]{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 3px 0 0 var(--spark)}
+:root[data-look="cadenza"] .app-tabs .nav-btn[aria-current="page"]{box-shadow:inset 0 3px 0 var(--spark)}
+:root[data-look="cadenza"] .app-rail .pill:not(.btn-help){background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+:root[data-look="cadenza"] .brand svg{background:var(--grad);border-radius:12px;padding:5px;box-shadow:0 8px 24px -6px color-mix(in srgb,var(--spark) 70%,transparent);--accent:#fff;--spark:#fff}
+:root[data-look="cadenza"] .app-rail .brand{color:#fff}
+:root[data-look="cadenza"] .app-top{background:color-mix(in srgb,var(--bg) 80%,transparent)}
+:root[data-look="cadenza"] .pill.on,:root[data-look="cadenza"] .chipset button[aria-pressed="true"]{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 8px 22px -10px color-mix(in srgb,var(--accent) 80%,transparent)}
+:root[data-look="cadenza"] :is(.panel,.tile,.box,.qcard,.pcard,.card,.stepbox,.dayrow,.studylink,.pathcard,.pager a,.tablebox,.helpbox,.info){border-radius:18px;border-color:color-mix(in srgb,var(--line) 70%,transparent);box-shadow:var(--shadow)}
+:root[data-look="cadenza"] :is(.tile,.card,.qcard,.dayrow,.pager a){transition:transform .25s cubic-bezier(.2,1.35,.4,1),box-shadow .25s}
+:root[data-look="cadenza"] :is(.tile,.card,.qcard,.dayrow,.pager a):hover{transform:translateY(-2px)}
+:root[data-look="cadenza"] .modal{border-radius:24px;box-shadow:0 30px 60px -20px color-mix(in srgb,var(--dp) 55%,transparent)}
+:root[data-look="cadenza"] .sn,:root[data-look="cadenza"] .dstat.on{background:var(--grad);border-color:transparent;color:#fff}
+:root[data-look="cadenza"] .eyebrow{font-family:"JetBrains Mono",var(--f-mono)}
+:root[data-look="cadenza"] .plancard{background:var(--side);color:#fff;border:0;--ink:#fff;--muted:rgba(255,255,255,.72);--line:rgba(255,255,255,.18)}
+:root[data-look="cadenza"] .plancard .eyebrow{color:rgba(255,255,255,.7)}
+:root[data-look="cadenza"] .plancard .pill.on{background:#fff;color:var(--dp)}
+@media (prefers-reduced-motion: reduce){:root[data-look="cadenza"] :is(.tile,.card,.qcard,.dayrow,.pager a):hover{transform:none}}
 
 </style>
 <div class="app-shell">
@@ -4236,19 +4348,26 @@ function helpModal(){openModal(`<div class="row-h" style="margin:0"><h2>Get help
  <p class="note" style="margin:0">Outside India, find a free helpline for your country at <a href="https://findahelpline.com" target="_blank" rel="noopener">findahelpline.com</a>. If the Call button does nothing on this device, dial the number yourself.</p>
  <div class="divider" style="height:1px;background:var(--line)"></div>
  <p style="margin:0"><b>While you wait or decide:</b></p><div class="minis">${['ground','tipp','sigh','reach'].map(c=>miniLink(pr(c))).join('')}</div>`,m=>{$$('[data-copy]',m).forEach(b=>b.onclick=()=>copyText(b.dataset.copy));$$('a.mini',m).forEach(a=>a.addEventListener('click',closeModal))})}
-const PALETTES=[['sage','Sage','#EDF1EE','#0E6A64','#D8932A'],['ocean','Ocean','#EAF0F5','#1D5C8C','#E07A3F'],['dusk','Dusk','#F1EEF4','#5B4A8C','#D4A03A'],['clay','Clay','#F5EFEA','#9A4A2E','#3E7C6E'],['forest','Forest','#ECF0E8','#3D6B2F','#C26A2D'],['contrast','High contrast','#FFFFFF','#00504A','#8A4B00']];
-function settingsModal(){const th=store.get('theme','system'),zm=store.get('zoom',1),pl=store.get('palette','sage');
+const PALETTES=[['sage','Sage','#EDF1EE','#0E6A64','#D8932A'],['ocean','Ocean','#EAF0F5','#1D5C8C','#E07A3F'],['dusk','Dusk','#F1EEF4','#5B4A8C','#D4A03A'],['clay','Clay','#F5EFEA','#9A4A2E','#3E7C6E'],['forest','Forest','#ECF0E8','#3D6B2F','#C26A2D'],['contrast','High contrast','#FFFFFF','#00504A','#8A4B00'],['pine','Paper & Pine','#E9ECEE','#2F6257','#8C5A3B'],['kelp','Kelp & Ochre','#EBF1EF','#2A6650','#8F6417'],['manuscript','Navy Manuscript','#F0F3F7','#1A3A52','#C41E3A'],['cadenza','Cadenza violet','#F9F6FE','#7c3aed','#d946ef'],['orchid','Orchid','#FBF7FF','#a855f7','#f472b6'],['indigo','Indigo ink','#F7F7FE','#4f46e5','#8b5cf6'],['emerald','Emerald','#F4FAF8','#059669','#84cc16'],['rose','Rose','#FEF5F7','#BE123C','#fb923c'],['sunset','Notes orange','#FFF8F5','#ff6719','#f5a524'],['graphite','Graphite','#F6F6F7','#334155','#64748b'],['bocean','Booky ocean','#F5F8FE','#2563eb','#06b6d4'],['sepia','Sepia','#F1E8D6','#8A4B1F','#B5651D']];
+function settingsModal(){const th=store.get('theme','system'),zm=store.get('zoom',1),pl=store.get('palette','sage'),lk=store.get('look','atlas');
  openModal(`<div class="row-h" style="margin:0"><h2>Settings</h2><button class="icon-btn" data-x aria-label="Close">${IC.x}</button></div>
  <div class="field">Appearance<div class="seg" role="tablist">${[['system','Match device'],['light','Light'],['dark','Dark']].map(([v,l])=>`<button role="tab" data-theme-set="${v}" aria-selected="${th===v}">${l}</button>`).join('')}</div></div>
+ <div class="field">Match my other work<span class="hint">One tap to restyle the whole app like your other projects. You can still change colours and look below.</span><div class="actions"><button type="button" class="pill on" id="matchapps">Like my apps (Cadenza)</button><button type="button" class="pill" id="matchstudy">Like my study pages</button><button type="button" class="pill" id="matchatlas">Original Atlas</button></div></div>
+ <div class="field">Look<div class="looks">${[['atlas','Atlas','Rounded cards, bold display type','font-family:Bricolage Grotesque,system-ui'],['editorial','Editorial','Serif reading text, thin rules, quiet panels, like your study pages','font-family:Newsreader,Georgia,serif'],['cadenza','Cadenza','Deep gradient sidebar, gradient buttons, soft glowing cards, like Practise-app and Booky','font-family:Inter,system-ui']].map(([v,l,d,f])=>`<button type="button" class="look" data-look-set="${v}" aria-pressed="${lk===v}"><span class="lk1" style="${f}">${l}</span><small>${d}</small></button>`).join('')}</div></div>
  <div class="field">Colour scheme<div class="swatches">${PALETTES.map(([v,l,bg,a,sp])=>`<button type="button" class="swatch" data-pal="${v}" aria-pressed="${pl===v}"><span class="sw" style="background:${bg}"><i style="background:${a}"></i><i style="background:${sp}"></i></span>${l}</button>`).join('')}</div><span class="hint">Each scheme has a light and a dark version that follows Appearance.</span></div>
  <div class="field">Text size<div class="seg">${[[.92,'Smaller'],[1,'Standard'],[1.1,'Larger'],[1.22,'Largest']].map(([v,l])=>`<button data-zoom="${v}" aria-selected="${zm==v}">${l}</button>`).join('')}</div></div>
  <div class="field">Install<span class="hint">On iPad or iPhone, open this page in Safari, tap Share, then Add to Home Screen. On a Mac, use Safari's File menu, then Add to Dock. It opens like an app.</span></div>
  <div class="field">Your data<span class="hint">Check-ins, notes, journal entries and pathways stay in this browser on this device. They are not uploaded anywhere. Use Journal, then Export to keep a copy.</span></div>
  <div class="note" style="display:grid;gap:8px"><p style="margin:0"><b>Educational, not diagnostic.</b> These maps support understanding and conversation. They do not replace assessment or care from a licensed professional. Neuroscience is simplified here; brain regions work as networks, and some models (such as the polyvagal ladder) are useful clinical maps whose physiology is still debated.</p></div>`,m=>{
   $$('[data-theme-set]',m).forEach(b=>b.onclick=()=>{store.set('theme',b.dataset.themeSet);applyPrefs();$$('[data-theme-set]',m).forEach(x=>x.setAttribute('aria-selected',x===b))});
+  const syncLook=()=>{const l=store.get('look','atlas'),p=store.get('palette','sage');$$('[data-look-set]',m).forEach(x=>x.setAttribute('aria-pressed',x.dataset.lookSet===l));$$('[data-pal]',m).forEach(x=>x.setAttribute('aria-pressed',x.dataset.pal===p))};
+  $$('[data-look-set]',m).forEach(b=>b.onclick=()=>{store.set('look',b.dataset.lookSet);applyPrefs();syncLook()});
+  $('#matchstudy',m).onclick=()=>{store.set('look','editorial');store.set('palette','pine');applyPrefs();syncLook();toast('Matched to your study pages')};
+  $('#matchapps',m).onclick=()=>{store.set('look','cadenza');store.set('palette','cadenza');applyPrefs();syncLook();toast('Matched to Practise-app and Booky')};
+  $('#matchatlas',m).onclick=()=>{store.set('look','atlas');store.set('palette','sage');applyPrefs();syncLook();toast('Back to the original Atlas style')};
   $$('[data-pal]',m).forEach(b=>b.onclick=()=>{store.set('palette',b.dataset.pal);applyPrefs();$$('[data-pal]',m).forEach(x=>x.setAttribute('aria-pressed',x===b))});
   $$('[data-zoom]',m).forEach(b=>b.onclick=()=>{store.set('zoom',+b.dataset.zoom);applyPrefs();$$('[data-zoom]',m).forEach(x=>x.setAttribute('aria-selected',x===b))})})}
-function applyPrefs(){const th=store.get('theme','system'),r=document.documentElement;if(th==='system')r.removeAttribute('data-theme');else r.setAttribute('data-theme',th);r.style.setProperty('--zoom',store.get('zoom',1));const pl=store.get('palette','sage');if(pl==='sage')r.removeAttribute('data-palette');else r.setAttribute('data-palette',pl)}
+function applyPrefs(){const th=store.get('theme','system'),r=document.documentElement;if(th==='system')r.removeAttribute('data-theme');else r.setAttribute('data-theme',th);r.style.setProperty('--zoom',store.get('zoom',1));const pl=store.get('palette','sage');if(pl==='sage')r.removeAttribute('data-palette');else r.setAttribute('data-palette',pl);r.setAttribute('data-look',store.get('look','atlas'))}
 
 // ---------- icons ----------
 const sv=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;

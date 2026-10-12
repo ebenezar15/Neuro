@@ -17,7 +17,7 @@ Open `index.html` in any modern browser. It is a single self-contained file and 
 
 All personal data stays in the browser on the device (`localStorage`). Nothing is uploaded.
 
-Settings offers six colour schemes (Sage, Ocean, Dusk, Clay, Forest, High contrast), each with light and dark versions, plus text size. Back and forward buttons in the top bar (or Alt + ← / →) move through the pages you have visited.
+Settings offers three looks (Atlas, Editorial like the study pages, and Cadenza like Practise-app and Booky) and 18 colour schemes, each with light and dark versions: the originals (Sage, Ocean, Dusk, Clay, Forest, High contrast), the study pages (Paper & Pine, Kelp & Ochre, Navy Manuscript) and the Cadenza family (Cadenza violet, Orchid, Indigo ink, Emerald, Rose, Notes orange, Graphite, Booky ocean, Sepia). One-tap buttons match the app to your other projects. Back and forward buttons in the top bar (or Alt + ← / →) move through the pages you have visited.
 
 ## Install on iPad, iPhone or Mac
 
