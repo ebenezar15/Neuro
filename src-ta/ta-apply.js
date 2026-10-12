@@ -12,5 +12,6 @@
  ORDER.forEach(m=>{BYT[String(m.t).toLowerCase()]=m});
  STUDIES.forEach(s=>{if(STUDY_TEXT[s.id]!==undefined)STUDY_TEXT[s.id]=(s.t+' '+s.full+' '+s.sum+' '+s.html.replace(/<[^>]+>/g,' ')).toLowerCase()});
  UI.ofDone='/';
+ const SHORT={struggles:'சவால்கள்',toolkit:'கருவிகள்',journal:'குறிப்பேடு'};NAV.forEach(n=>{if(SHORT[n[0]])n[1]=SHORT[n[0]]});
  if(miss)console.warn('Tamil: '+miss+' entries could not be placed');
 })();
