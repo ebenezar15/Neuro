@@ -3,7 +3,7 @@
 // UI code files come from src-ta/ where a translated copy exists.
 const fs=require('fs'),path=require('path');const S=f=>fs.readFileSync(__dirname+'/src/'+f,'utf8');
 const T=f=>fs.existsSync(__dirname+'/src-ta/'+f)?fs.readFileSync(__dirname+'/src-ta/'+f,'utf8'):null;
-const ORDER=['atlas-data.js','atlas-engine.js','additions.js','additions2.js','plan-data.js','plan-links.js','studies.js','gut.js','brain.js','mm.js','design.js','body.js','parent.js','parent-study.js','widgets.js','gut-ui.js','brain-ui.js','body-ui.js','parent-ui.js','app.js','plan.js','simple.js','hooks.js'];
+const ORDER=['atlas-data.js','atlas-engine.js','additions.js','additions2.js','plan-data.js','plan-links.js','studies.js','gut.js','brain.js','mm.js','design.js','body.js','parent.js','parent-study.js','spirit.js','widgets.js','gut-ui.js','brain-ui.js','body-ui.js','parent-ui.js','app.js','plan.js','simple.js','hooks.js','extras-ui.js'];
 // small renderer strings in files that are mostly data (translated by hand here)
 const REPL={
  'design.js':[['>WHY</span>Why this works</h3>','>ஏன்</span>இது ஏன் உதவுகிறது</h3>'],['>WHY</span>Why these steps work</h3>','>ஏன்</span>இந்தப் படிகள் ஏன் உதவுகின்றன</h3>'],['<b>How your body responds</b>','<b>உங்கள் உடல் எப்படிப் பதிலளிக்கிறது</b>'],['<b>What happens in you</b>','<b>உங்களுக்குள் என்ன நடக்கிறது</b>'],['<b>How God designed it</b>','<b>தேவன் இதை எப்படி வடிவமைத்தார்</b>'],['<b>Meditate on this</b>','<b>இதைத் தியானியுங்கள்</b>'],['Also read: ','மேலும் வாசியுங்கள்: '],['<b>Take action today:</b>','<b>இன்றே செயல்படுங்கள்:</b>']],
