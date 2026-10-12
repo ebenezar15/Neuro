@@ -11,5 +11,6 @@
  Object.assign(TYPE,{P:'பயிற்சி',E:'மன வரைபடம்',N:'மூளை வரைபடம்',M:'உருவகம்',C:'ஒப்பீடு',S:'அளவுகோல்',F:'வழிகாட்டி வரைபடம்',A:'சிகிச்சை முறை',X:'மாதிரி',D:'அன்றாடம்',B:'உடல் நிலை',K:'பெற்றோர் வளர்ப்பு'});
  ORDER.forEach(m=>{BYT[String(m.t).toLowerCase()]=m});
  STUDIES.forEach(s=>{if(STUDY_TEXT[s.id]!==undefined)STUDY_TEXT[s.id]=(s.t+' '+s.full+' '+s.sum+' '+s.html.replace(/<[^>]+>/g,' ')).toLowerCase()});
+ UI.ofDone='/';
  if(miss)console.warn('Tamil: '+miss+' entries could not be placed');
 })();
