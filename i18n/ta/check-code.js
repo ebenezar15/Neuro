@@ -1,0 +1,8 @@
+// usage: node check-code.js <file name in src>   compares /home/user/Neuro/src/<f> with /home/user/Neuro/src-ta/<f>
+const fs=require('fs'),cp=require('child_process');const f=process.argv[2];const A=fs.readFileSync('/home/user/Neuro/src/'+f,'utf8');let B;
+try{B=fs.readFileSync('/home/user/Neuro/src-ta/'+f,'utf8')}catch(e){console.log('FAIL: src-ta/'+f+' missing');process.exit(1)}
+const errs=[];try{cp.execSync('node --check /home/user/Neuro/src-ta/'+f,{stdio:'pipe'})}catch(e){errs.push('Syntax error: '+String(e.stderr).slice(0,600))}
+const pats={'find() arguments':/find\((['"`])([^'"`]*)\1\)/g,'store keys':/store\.(?:get|set)\((['"`])([^'"`]*)\1/g,'data-* attribute names':/data-[a-z0-9-]+/g,'hash routes':/#(?:today|plan|struggles|library|toolkit|journal|search|day-|study-|m\$\{|\$\{)/g,'ids/classes in querySelector':/\$\$?\((['"`])([^'"`]*)\1/g,'PLAN/AREA_PLAN keys':/^\s*['"][^'"]+['"]:\s*['"][a-z0-9 ]+['"]/gm,'element ids':/id="[^"$]*"/g,'class names':/class="[^"$]*"/g,'comparisons with strings':/[=!]==\s*(['"])([^'"]*)\1/g,'function names':/function\s+[A-Za-z_$][\w$]*/g};
+for(const [n,re] of Object.entries(pats)){const a=(A.match(re)||[]).sort().join('\n'),b=(B.match(re)||[]).sort().join('\n');if(a!==b){const sa=new Set(a.split('\n')),sb=new Set(b.split('\n'));const miss=[...sa].filter(x=>!sb.has(x)).slice(0,6),extra=[...sb].filter(x=>!sa.has(x)).slice(0,6);errs.push(n+' changed. Missing: '+JSON.stringify(miss)+' Unexpected: '+JSON.stringify(extra))}}
+const ta=(B.match(/[஀-௿]/g)||[]).length;if(ta<200)errs.push('Very little Tamil text found ('+ta+' Tamil characters); visible strings still need translating');
+if(errs.length){console.log('FAIL:\n'+errs.join('\n'));process.exit(1)}console.log('OK '+f+' ('+ta+' Tamil characters)');
