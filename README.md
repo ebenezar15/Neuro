@@ -1,6 +1,6 @@
 # Rewiring Atlas
 
-An interactive, installable app version of the Rewiring Atlas: 403 visual maps of the brain, emotions, patterns and relationships, a 90-day plan that joins study to daily practice, 13 in-depth studies, and practical tools for everyday struggles.
+An interactive, installable app version of the Rewiring Atlas: 422 visual maps of the brain, emotions, patterns and relationships, a 90-day plan that joins study to daily practice, 14 in-depth studies (including how the brain–gut axis works and how to heal it), and practical tools for everyday struggles.
 
 Open `index.html` in any modern browser. It is a single self-contained file and works offline once it has been opened from a web server.
 
@@ -10,7 +10,7 @@ Open `index.html` in any modern browser. It is a single self-contained file and 
 | --- | --- |
 | **Today** | A 10-second window-of-tolerance check-in that suggests matching practices, quick help for ten states, a daily micro-practice, your habit "pathways", and lookup flowcharts. |
 | **90 days** | *The Regulated Mind*, a 90-day plan in which every day has five steps: check in, learn (linked to the Atlas maps and a study), practise (linked to a toolkit tool), apply it as an if-then for a real moment, and reflect (Scripture, journal prompt, check in again). Every seventh day reviews your own notes from the week. Progress, notes and if-thens are saved and exported. |
-| **Struggles** | 35 everyday moments (racing thoughts at night, the same fight with your partner, doomscrolling…), each with *Right now / Today / Rewire it* steps, a line to say to yourself, linked practices and maps. |
+| **Struggles** | 39 everyday moments (racing thoughts at night, the same fight with your partner, doomscrolling…), each with *Right now / Today / Rewire it* steps, a line to say to yourself, linked practices and maps. |
 | **Library** | All original Atlas maps (mind maps, brain maps, metaphors, comparison sheets, scales, flowcharts, therapy approaches) plus 12 interactive models and new maps and comparison sheets (Helping vs. Rescuing vs. Enabling, Care vs. Control, Forgiveness vs. Trust vs. Reconciliation and more), filterable by shelf and type. 13 studies (belief formation, emotions, shame, forgiveness, revenge and justice, apology, love or control, the gospel of union, and others) open in a reader with contents, linked plan days and maps, and notes. |
 | **Toolkit** | 54 practices with breath pacers, timers and fixes. Fill-in tools for thought records, DEAR MAN scripts, values compass, urge surfing, 5-4-3-2-1 grounding, opposite action, HALT, Cope Ahead, IFS parts check-ins, and two quick checks: Helping, Rescuing or Enabling? and Care or Control? |
 | **Journal** | Saved entries, check-in history chart, pathways, saved maps, map notes, and plain-text export. |
@@ -31,6 +31,7 @@ Source lives in `src/`:
 - `additions.js`: new practices, everyday struggles and interactive model content
 - `additions2.js`: maps, comparison sheets, struggles and quick checks drawn from the studies
 - `plan-data.js`, `studies.js`: the 90-day plan and the studies, generated from the source pages
+- `gut.js`, `gut-ui.js`: the Brain & Gut shelf (interactive axis model, maps, comparison sheets, practices, struggles, study) and its diary and plant-tally tools
 - `plan-links.js`: links each plan day to its maps, practices and study
 - `widgets.js`: fill-in tools and interactive model visuals
 - `plan.js`: the 90-day plan views and the study reader

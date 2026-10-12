@@ -4,6 +4,9 @@ const STUDY=Object.fromEntries(STUDIES.map(s=>[s.id,s]));
 const STUDY_TEXT=Object.fromEntries(STUDIES.map(s=>[s.id,(s.t+' '+s.full+' '+s.sum+' '+s.html.replace(/<[^>]+>/g,' ')).toLowerCase()]));
 const MAP_STUDIES={},MAP_DAYS={};
 PLAN_LINKS.forEach(([d])=>{const L=PL[d];L.maps.forEach(m=>{(MAP_STUDIES[m.id]=MAP_STUDIES[m.id]||new Set()).add(L.study);(MAP_DAYS[m.id]=MAP_DAYS[m.id]||[]).push(d)})});
+const XS_LINKS=typeof STUDY_LINKS!=='undefined'?STUDY_LINKS:{},XS_DAYS=typeof STUDY_DAYS!=='undefined'?STUDY_DAYS:{};
+Object.entries(XS_LINKS).forEach(([sid,ts])=>ts.forEach(t=>{const m=find(t);if(m)(MAP_STUDIES[m.id]=MAP_STUDIES[m.id]||new Set()).add(sid)}));
+const dayStudies=d=>[...new Set([PL[d]&&PL[d].study,...Object.keys(XS_DAYS).filter(k=>XS_DAYS[k].includes(d))])].map(id=>STUDY[id]).filter(Boolean);
 const KIND_H={body:150,mind:220,heart:330,bond:30,craft:200,spirit:258};
 const LOOKBACK={85:[5,21],86:[49,63],87:[28,70],88:[62,35],89:[84],90:[1,42,63,84]};
 const planGet=()=>store.get('plan',{done:{},n:{}});
@@ -30,7 +33,7 @@ function viewPlan(){const p=planGet(),n=Object.keys(p.done).length,nx=nextPlanDa
  <div style="margin-top:12px"><button class="pill" id="planreset">Reset plan progress</button></div></div>`;
  $('#planreset').onclick=e=>{const b=e.target;if(b.dataset.armed){planSet({done:{},n:{}});toast('Plan progress cleared');viewPlan()}else{b.dataset.armed=1;b.textContent='Tap again to clear all plan progress'}}}
 
-function viewDay(d){const o=dayObj(d);if(!o){location.hash='plan';return}const p=planGet(),N=p.n[d]||{},L=PL[d]||{maps:[],codes:[],study:null},st=STUDY[L.study],w=weekOf(d),wk=RM.WEEKS.find(x=>x.n===w);
+function viewDay(d){const o=dayObj(d);if(!o){location.hash='plan';return}const p=planGet(),N=p.n[d]||{},L=PL[d]||{maps:[],codes:[],study:null},sts=dayStudies(d),w=weekOf(d),wk=RM.WEEKS.find(x=>x.n===w);
  const save=f=>{const q=planGet();q.n[d]=Object.assign(q.n[d]||{},f);planSet(q)};
  const res=(o.r||[]).map(([t,u])=>u.charAt(0)==='#'?`<a class="chip" href="#study-brainstates">${esc(t)}</a>`:`<a class="chip" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join('');
  let review='';
@@ -45,7 +48,7 @@ function viewDay(d){const o=dayObj(d);if(!o){location.hash='plan';return}const p
   <section class="stepbox"><div class="sn">1</div><div><h3>Check in</h3><p class="note" style="margin:2px 0 8px">How is your nervous system right now? (3 min)</p><div id="pb">${stateChips('before',N.before)}</div></div></section>
   <section class="stepbox"><div class="sn">2</div><div><h3>Learn</h3><p class="learn">${esc(o.l)}</p>
    ${L.maps.length?`<p class="eyebrow" style="margin:12px 0 6px">See it on the map</p><div class="chips">${L.maps.map(chip).join('')}</div>`:''}
-   ${st?`<p class="eyebrow" style="margin:12px 0 6px">Go deeper in your studies</p><a class="studylink" href="#study-${st.id}" style="--h:${st.h}"><b>${esc(st.t)}</b><span class="note">${esc(st.sum)}</span></a>`:''}
+   ${sts.length?`<p class="eyebrow" style="margin:12px 0 6px">Go deeper in your studies</p><div style="display:grid;gap:8px">${sts.map(st=>`<a class="studylink" href="#study-${st.id}" style="--h:${st.h}"><b>${esc(st.t)}</b><span class="note">${esc(st.sum)}</span></a>`).join('')}</div>`:''}
    ${res?`<p class="eyebrow" style="margin:12px 0 6px">Free resources</p><div class="chips">${res}</div>`:''}</div></section>
   <section class="stepbox"><div class="sn">3</div><div><h3>Practise today</h3><div class="practice-box">${esc(o.p)}</div>
    ${L.codes.length?`<p class="eyebrow" style="margin:12px 0 6px">Open a tool for this</p><div class="minis">${L.codes.map(c=>miniLink(PR[c])).join('')}</div>`:''}</div></section>
@@ -72,7 +75,7 @@ function viewDay(d){const o=dayObj(d);if(!o){location.hash='plan';return}const p
 function studyTile(s){const done=store.get('study-read',[]).includes(s.id);return `<a class="tile" href="#study-${s.id}" style="--h:${s.h}"><div class="top"><span class="tag-h">${esc(s.group)}</span><span class="count">${done?'✓ read · ':''}${Math.max(1,Math.round(s.words/220))} min</span></div><b>${esc(s.t)}</b><p>${esc(s.sum)}</p></a>`}
 function studiesSection(){const groups=[...new Set(STUDIES.map(s=>s.group))];return `<section class="sec"><div class="sec-h"><h2>Studies</h2><span class="note">${STUDIES.length} in-depth studies, linked to the maps and the 90-day plan</span></div>${groups.map(g=>`<p class="eyebrow" style="margin:14px 0 8px">${esc(g)}</p><div class="tiles">${STUDIES.filter(s=>s.group===g).map(studyTile).join('')}</div>`).join('')}</section>`}
 function viewStudy(id){const s=STUDY[id];if(!s){location.hash='library';return}const i=STUDIES.indexOf(s),prev=STUDIES[i-1],next=STUDIES[i+1],read=store.get('study-read',[]).includes(id);
- const days=PLAN_LINKS.filter(x=>x[3]===id).map(x=>x[0]);const maps=[...new Set(days.flatMap(d=>PL[d].maps))].slice(0,18);
+ const days=[...new Set([...PLAN_LINKS.filter(x=>x[3]===id).map(x=>x[0]),...(XS_DAYS[id]||[])])].sort((a,b)=>a-b);const own=(XS_LINKS[id]||[]).map(t=>find(t)).filter(Boolean);const maps=own.length?own:[...new Set(days.flatMap(d=>PL[d].maps))].slice(0,18);
  app().innerHTML=`<article class="wrap sheet fade" style="--h:${s.h}"><div class="crumbs"><a href="#library">Studies</a><span>/</span><span class="mono">${esc(s.group)} · ${Math.max(1,Math.round(s.words/220))} min read</span></div>
  <div class="sheet-h"><div class="tt" style="flex-basis:100%"><h1>${esc(s.full)}</h1>${s.sub?`<p>${esc(s.sub)}</p>`:''}</div>
  <div class="tools"><button class="pill ${read?'on':''}" id="sread">${read?'✓ Read':'Mark as read'}</button>${prev?`<a class="pill" href="#study-${prev.id}">← Previous</a>`:''}${next?`<a class="pill" href="#study-${next.id}">Next →</a>`:''}</div></div>

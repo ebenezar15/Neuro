@@ -101,7 +101,7 @@ html,body{min-height:100%}
 @media (max-width:700px){.wgrid.two{grid-template-columns:minmax(0,1fr)}}
 .field{display:grid;gap:5px;font-weight:700;font-size:14.5px;min-width:0}
 .field .hint{font-weight:400;color:var(--muted);font-size:13px}
-.field input[type=text],.field select{width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;padding:8px 12px}
+.field input[type=text],.field input[type=number],.field select{width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;padding:8px 12px}
 .field textarea{min-height:76px}
 input[type=range]{width:100%;accent-color:var(--accent);min-height:30px}
 .rangerow{display:grid;grid-template-columns:minmax(0,1fr) 3.2em;gap:10px;align-items:center}
@@ -311,3 +311,20 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .study div,.study p,.study li{min-width:0;max-width:100%}
 .sheet .chips .chip{max-width:100%;white-space:normal;text-align:left}
 @media (max-width:560px){.app-top .wrap{flex-wrap:wrap;row-gap:8px}.app-top .search{order:9;flex:1 1 100%}.app-top .hnav{margin-right:auto}}
+
+/* Brain–gut axis model */
+.gx{width:100%;max-width:400px;height:auto;display:block;margin:auto}
+.gx .ch{fill:none;stroke:hsl(var(--h) 38% var(--amid));stroke-width:5;stroke-linecap:round;transition:stroke .2s,stroke-width .2s}
+.gx .hit{fill:none;stroke:transparent;stroke-width:26;cursor:pointer;pointer-events:stroke}
+.gx [data-ch]{cursor:pointer}
+.gx [data-ch].on .ch{stroke:hsl(var(--h) var(--as) var(--al));stroke-width:8}
+.gx .node-c{fill:hsl(var(--h) 42% var(--atint));stroke:hsl(var(--h) var(--as) var(--al));stroke-width:2}
+.gx .gut{fill:hsl(82 42% var(--atint));stroke:hsl(82 var(--as) var(--al));stroke-width:3}
+.gx [data-ch="ens"].on .gut{stroke-width:6;fill:hsl(82 42% var(--amid))}
+.gx .brain{fill:hsl(285 40% var(--atint));stroke:hsl(285 var(--as) var(--al));stroke-width:3}
+.gx .mic{fill:hsl(110 var(--as) var(--al))}
+.gx .gt{fill:var(--ink);font-family:var(--f-display)}.gx .gm{fill:var(--muted);font-family:var(--f-mono)}
+.gx[data-mode="stress"] .ch{stroke:hsl(0 var(--as) var(--al));stroke-dasharray:10 8;animation:gxflow 1.2s linear infinite}
+.gx[data-mode="heal"] .ch{stroke:hsl(150 var(--as) var(--al));stroke-dasharray:10 8;animation:gxflow 2.4s linear infinite reverse}
+@keyframes gxflow{to{stroke-dashoffset:-36}}
+@media (prefers-reduced-motion: reduce){.gx .ch{animation:none!important}}
