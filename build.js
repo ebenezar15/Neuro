@@ -1,6 +1,6 @@
 // Builds the single-file app: dist/rewiring-atlas.html (body fragment) and index.html (full document, installable).
 const fs=require('fs'),r=f=>fs.readFileSync(__dirname+'/src/'+f,'utf8');
-const js=['atlas-data.js','atlas-engine.js','additions.js','additions2.js','plan-data.js','plan-links.js','studies.js','gut.js','brain.js','mm.js','design.js','body.js','parent.js','parent-study.js','widgets.js','gut-ui.js','brain-ui.js','body-ui.js','parent-ui.js','app.js','plan.js','simple.js','hooks.js'].map(r).join('\n');
+const js=['atlas-data.js','atlas-engine.js','additions.js','additions2.js','plan-data.js','plan-links.js','studies.js','gut.js','brain.js','mm.js','design.js','body.js','parent.js','parent-study.js','spirit.js','widgets.js','gut-ui.js','brain-ui.js','body-ui.js','parent-ui.js','app.js','plan.js','simple.js','hooks.js','extras-ui.js'].map(r).join('\n');
 const frag=r('shell.html').replace('/*ATLAS_CSS*/',()=>r('atlas.css')).replace('/*APP_CSS*/',()=>r('app.css')).replace('/*JS*/',()=>js);
 fs.mkdirSync(__dirname+'/dist',{recursive:true});
 fs.writeFileSync(__dirname+'/dist/rewiring-atlas.html',frag);
