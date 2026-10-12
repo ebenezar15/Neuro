@@ -1,0 +1,8 @@
+// ===== HOOKS: extend the shared renderers with the newer sections (loaded last) =====
+const _renderP=renderP;renderP=function(m){return _renderP(m)+designBox(m)};
+const _renderD=renderD;renderD=function(m){return _renderD(m)+dwhyBox(m)};
+const _viewToolkit=viewToolkit;viewToolkit=function(){_viewToolkit();const w=$('#app .wrap');if(w)w.insertAdjacentHTML('beforeend',mmLibrary())};
+const _planBox=planBox;planBox=function(m){const k=m.mm||MM_AREA[m.area];return (k&&MM[k]?`<div class="cols"><div class="box w12" style="--h:${m.h}"><h3><span class="k">MODEL</span>A picture to remember</h3>${mmCard(k)}</div></div>`:'')+_planBox(m)};
+const _viewToday=viewToday;viewToday=function(){_viewToday();const sec=$$('#app .sec')[0];if(!sec)return;
+ const it=[['Brain Tour: How Each Part Works','brain','Tap the amygdala, cortex and more; watch signals move'],['Body Map: Where Stress Shows Up','bodymap','How stress shows up in head, heart, skin and gut'],['Behind the Behaviour: Decoder','iceberg','Understand what is behind your child\'s behaviour'],['The Brain–Gut Axis','garden','How your gut and mind talk, and how to heal']].map(([t,k,d])=>[find(t),k,d]).filter(x=>x[0]);
+ sec.insertAdjacentHTML('afterend',`<section class="sec"><div class="sec-h"><h2>Explore and understand</h2><span class="note">Interactive, animated guides</span></div><div class="explore">${it.map(([m,k,d])=>`<a href="#${m.id}" style="--h:${m.h}">${MM[k]?mmSVG(k,64):`<span style="width:64px;height:51px;display:grid;place-items:center">${glyph(m)}</span>`}<span><b>${esc(m.t.split(':')[0])}</b><small>${esc(d)}</small></span></a>`).join('')}</div></section>`)};

@@ -69,7 +69,7 @@ function viewDay(d){const o=dayObj(d);if(!o){location.hash='plan';return}const p
  $('#pdone').onclick=()=>{const q=planGet();if(q.done[d]){delete q.done[d];planSet(q);viewDay(d);return}q.done[d]=now();planSet(q);const n=q.n[d]||{};
   addEntry('Plan day',`Day ${d}: ${o.t}`,[n.before!=null?`Before: ${WOT.levels[n.before][0]}`:'',n.after!=null?`After: ${WOT.levels[n.after][0]}`:'',n.when?`If-then: When ${n.when}, I will ${n.will||''}`:'',n.applied?'Used it in a real situation.':'',n.note?`Journal: ${n.note}`:''].filter(Boolean).join('\n'));
   toast(d<90?`Day ${d} complete. See you on Day ${d+1}.`:'All 90 days complete!');if(d<90)location.hash='day-'+(d+1);else viewDay(d)};
- window.scrollTo(0,0)}
+ }
 
 // ---------- study reader ----------
 function studyTile(s){const done=store.get('study-read',[]).includes(s.id);return `<a class="tile" href="#study-${s.id}" style="--h:${s.h}"><div class="top"><span class="tag-h">${esc(s.group)}</span><span class="count">${done?'✓ read · ':''}${Math.max(1,Math.round(s.words/220))} min</span></div><b>${esc(s.t)}</b><p>${esc(s.sum)}</p></a>`}
@@ -87,7 +87,7 @@ function viewStudy(id){const s=STUDY[id];if(!s){location.hash='library';return}c
  $$('[data-toc]').forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.toc);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})});
  $$('textarea[data-k]').forEach(t=>t.oninput=()=>store.set(t.dataset.k,t.value));
  $('#sread').onclick=()=>{let r=store.get('study-read',[]);const on=!r.includes(id);r=on?[...r,id]:r.filter(x=>x!==id);store.set('study-read',r);if(on)addEntry('Study',s.t,'Finished reading.');viewStudy(id)};
- window.scrollTo(0,0)}
+ }
 
 // On a map sheet: where this map shows up in the plan and studies
 function planUse(m){const ss=[...(MAP_STUDIES[m.id]||[])].map(id=>STUDY[id]).filter(Boolean),ds=MAP_DAYS[m.id]||[];if(!ss.length&&!ds.length)return '';

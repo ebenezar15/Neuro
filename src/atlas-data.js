@@ -15,7 +15,7 @@ const AREAS = [
  {id:'fth', n:'Relational & Faith Lens', h:285, brain:'Being securely held, by people and by a sense of being loved, calms the threat system and builds the soothing system that compassion work strengthens.', neuro:['n19','n11','n03']}
 ];
 const MAPS = [];
-const sp = s => s ? s.split(';').map(x=>x.trim()).filter(Boolean) : [];
+const sp = s => s ? s.split(/;(?! )/).map(x=>x.trim()).filter(Boolean) : [];
 function E(a,t,u,b,th,bh,cy,q,nd,bl,nx,rl){
   MAPS.push({type:'E',area:a,t,u,body:sp(b),th:sp(th),bh:sp(bh),cy:cy.split('>').map(x=>x.trim()),q:sp(q),nd:sp(nd),bl:sp(bl),nx:sp(nx),rl});
 }

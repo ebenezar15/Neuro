@@ -31,11 +31,12 @@ function helpModal(){openModal(`<div class="row-h" style="margin:0"><h2>Get help
  <div class="divider" style="height:1px;background:var(--line)"></div>
  <p style="margin:0"><b>While you wait or decide:</b></p><div class="minis">${['ground','tipp','sigh','reach'].map(c=>miniLink(pr(c))).join('')}</div>`,m=>{$$('[data-copy]',m).forEach(b=>b.onclick=()=>copyText(b.dataset.copy));$$('a.mini',m).forEach(a=>a.addEventListener('click',closeModal))})}
 const PALETTES=[['sage','Sage','#EDF1EE','#0E6A64','#D8932A'],['ocean','Ocean','#EAF0F5','#1D5C8C','#E07A3F'],['dusk','Dusk','#F1EEF4','#5B4A8C','#D4A03A'],['clay','Clay','#F5EFEA','#9A4A2E','#3E7C6E'],['forest','Forest','#ECF0E8','#3D6B2F','#C26A2D'],['contrast','High contrast','#FFFFFF','#00504A','#8A4B00'],['pine','Paper & Pine','#E9ECEE','#2F6257','#8C5A3B'],['kelp','Kelp & Ochre','#EBF1EF','#2A6650','#8F6417'],['manuscript','Navy Manuscript','#F0F3F7','#1A3A52','#C41E3A'],['cadenza','Cadenza violet','#F9F6FE','#7c3aed','#d946ef'],['orchid','Orchid','#FBF7FF','#a855f7','#f472b6'],['indigo','Indigo ink','#F7F7FE','#4f46e5','#8b5cf6'],['emerald','Emerald','#F4FAF8','#059669','#84cc16'],['rose','Rose','#FEF5F7','#BE123C','#fb923c'],['sunset','Notes orange','#FFF8F5','#ff6719','#f5a524'],['graphite','Graphite','#F6F6F7','#334155','#64748b'],['bocean','Booky ocean','#F5F8FE','#2563eb','#06b6d4'],['sepia','Sepia','#F1E8D6','#8A4B1F','#B5651D']];
-function settingsModal(){const th=store.get('theme','system'),zm=store.get('zoom',1),pl=store.get('palette','sage'),lk=store.get('look','atlas');
+function settingsModal(){const th=store.get('theme','system'),zm=store.get('zoom',1),pl=store.get('palette','sage'),lk=store.get('look','atlas'),fo=store.get('font','avenir');
  openModal(`<div class="row-h" style="margin:0"><h2>Settings</h2><button class="icon-btn" data-x aria-label="Close">${IC.x}</button></div>
  <div class="field">Appearance<div class="seg" role="tablist">${[['system','Match device'],['light','Light'],['dark','Dark']].map(([v,l])=>`<button role="tab" data-theme-set="${v}" aria-selected="${th===v}">${l}</button>`).join('')}</div></div>
  <div class="field">Match my other work<span class="hint">One tap to restyle the whole app like your other projects. You can still change colours and look below.</span><div class="actions"><button type="button" class="pill on" id="matchapps">Like my apps (Cadenza)</button><button type="button" class="pill" id="matchstudy">Like my study pages</button><button type="button" class="pill" id="matchatlas">Original Atlas</button></div></div>
  <div class="field">Look<div class="looks">${[['atlas','Atlas','Rounded cards, bold display type','font-family:Bricolage Grotesque,system-ui'],['editorial','Editorial','Serif reading text, thin rules, quiet panels, like your study pages','font-family:Newsreader,Georgia,serif'],['cadenza','Cadenza','Deep gradient sidebar, gradient buttons, soft glowing cards, like Practise-app and Booky','font-family:Inter,system-ui']].map(([v,l,d,f])=>`<button type="button" class="look" data-look-set="${v}" aria-pressed="${lk===v}"><span class="lk1" style="${f}">${l}</span><small>${d}</small></button>`).join('')}</div></div>
+ <div class="field">Typeface<div class="seg">${[['avenir','Avenir Next'],['look','Look\'s own'],['system','System']].map(([v,l])=>`<button data-font-set="${v}" aria-selected="${fo===v}" style="${v==='avenir'?'font-family:Avenir Next,Avenir,Nunito Sans,sans-serif':''}">${l}</button>`).join('')}</div><span class="hint">Avenir Next is built into Mac, iPad and iPhone. Other devices show Nunito Sans, a close match.</span></div>
  <div class="field">Colour scheme<div class="swatches">${PALETTES.map(([v,l,bg,a,sp])=>`<button type="button" class="swatch" data-pal="${v}" aria-pressed="${pl===v}"><span class="sw" style="background:${bg}"><i style="background:${a}"></i><i style="background:${sp}"></i></span>${l}</button>`).join('')}</div><span class="hint">Each scheme has a light and a dark version that follows Appearance.</span></div>
  <div class="field">Text size<div class="seg">${[[.92,'Smaller'],[1,'Standard'],[1.1,'Larger'],[1.22,'Largest']].map(([v,l])=>`<button data-zoom="${v}" aria-selected="${zm==v}">${l}</button>`).join('')}</div></div>
  <div class="field">Install<span class="hint">On iPad or iPhone, open this page in Safari, tap Share, then Add to Home Screen. On a Mac, use Safari's File menu, then Add to Dock. It opens like an app.</span></div>
@@ -43,13 +44,14 @@ function settingsModal(){const th=store.get('theme','system'),zm=store.get('zoom
  <div class="note" style="display:grid;gap:8px"><p style="margin:0"><b>Educational, not diagnostic.</b> These maps support understanding and conversation. They do not replace assessment or care from a licensed professional. Neuroscience is simplified here; brain regions work as networks, and some models (such as the polyvagal ladder) are useful clinical maps whose physiology is still debated.</p></div>`,m=>{
   $$('[data-theme-set]',m).forEach(b=>b.onclick=()=>{store.set('theme',b.dataset.themeSet);applyPrefs();$$('[data-theme-set]',m).forEach(x=>x.setAttribute('aria-selected',x===b))});
   const syncLook=()=>{const l=store.get('look','atlas'),p=store.get('palette','sage');$$('[data-look-set]',m).forEach(x=>x.setAttribute('aria-pressed',x.dataset.lookSet===l));$$('[data-pal]',m).forEach(x=>x.setAttribute('aria-pressed',x.dataset.pal===p))};
+  $$('[data-font-set]',m).forEach(b=>b.onclick=()=>{store.set('font',b.dataset.fontSet);applyPrefs();$$('[data-font-set]',m).forEach(x=>x.setAttribute('aria-selected',x===b))});
   $$('[data-look-set]',m).forEach(b=>b.onclick=()=>{store.set('look',b.dataset.lookSet);applyPrefs();syncLook()});
   $('#matchstudy',m).onclick=()=>{store.set('look','editorial');store.set('palette','pine');applyPrefs();syncLook();toast('Matched to your study pages')};
   $('#matchapps',m).onclick=()=>{store.set('look','cadenza');store.set('palette','cadenza');applyPrefs();syncLook();toast('Matched to Practise-app and Booky')};
   $('#matchatlas',m).onclick=()=>{store.set('look','atlas');store.set('palette','sage');applyPrefs();syncLook();toast('Back to the original Atlas style')};
   $$('[data-pal]',m).forEach(b=>b.onclick=()=>{store.set('palette',b.dataset.pal);applyPrefs();$$('[data-pal]',m).forEach(x=>x.setAttribute('aria-pressed',x===b))});
   $$('[data-zoom]',m).forEach(b=>b.onclick=()=>{store.set('zoom',+b.dataset.zoom);applyPrefs();$$('[data-zoom]',m).forEach(x=>x.setAttribute('aria-selected',x===b))})})}
-function applyPrefs(){const th=store.get('theme','system'),r=document.documentElement;if(th==='system')r.removeAttribute('data-theme');else r.setAttribute('data-theme',th);r.style.setProperty('--zoom',store.get('zoom',1));const pl=store.get('palette','sage');if(pl==='sage')r.removeAttribute('data-palette');else r.setAttribute('data-palette',pl);r.setAttribute('data-look',store.get('look','atlas'))}
+function applyPrefs(){const th=store.get('theme','system'),r=document.documentElement;if(th==='system')r.removeAttribute('data-theme');else r.setAttribute('data-theme',th);r.style.setProperty('--zoom',store.get('zoom',1));const pl=store.get('palette','sage');if(pl==='sage')r.removeAttribute('data-palette');else r.setAttribute('data-palette',pl);r.setAttribute('data-look',store.get('look','atlas'));r.setAttribute('data-font',store.get('font','avenir'))}
 
 // ---------- icons ----------
 const sv=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
@@ -214,7 +216,7 @@ function viewJournal(){const tabs=[['entries','Entries'],['checkins','Check-ins'
    $('#expcopy').onclick=()=>copyText(txt,$('#exp'));
    $('#wipe').onclick=e=>{const b=e.target;if(b.dataset.armed){try{Object.keys(localStorage).filter(k=>k.startsWith('ra-')).forEach(k=>localStorage.removeItem(k))}catch(_){}toast('All data cleared');applyPrefs();drawJ()}else{b.dataset.armed=1;b.textContent='Tap again to clear everything';b.style.borderColor='hsl(0 52% 46%)'}}}};
  drawJ()}
-function exportText(){const L=['REWIRING ATLAS · personal export · '+fmtD(now()),''];
+function exportText(){const L=['REWIRING · personal export · '+fmtD(now()),''];
  const c=store.get('checkins',[]);if(c.length){L.push('== CHECK-INS ==');c.forEach(x=>L.push(`${fmtD(x.d)} · ${WOT.levels[x.v][0]} · ${x.i}/10${x.n?' · '+x.n:''}`));L.push('')}
  const j=store.get('journal',[]);if(j.length){L.push('== JOURNAL ==');j.forEach(e=>{L.push(`[${e.k}] ${e.t} · ${fmtD(e.d)}`);if(e.b)L.push(e.b);L.push('')})}
  const ps=store.get('paths',[]);if(ps.length){L.push('== PATHWAYS ==');ps.forEach(p=>L.push(`${p.name} · ${p.reps.length} reps`));L.push('')}
@@ -239,7 +241,7 @@ function viewSearch(){const q=lastQ.trim().toLowerCase();const words=q.split(/\s
 // ---------- SHEET (map page) ----------
 function sheet(m){const sec=SEC[m.area],list=ORDER.filter(x=>x.area===m.area),i=list.indexOf(m),prev=list[i-1],next=list[i+1],st=starred(m.id);
  const W=m.type==='P'&&WIDGET[m.code];
- let R;if(m.type==='D')R=renderD(m);else if(m.type==='X')R=renderX(m);else R={E:renderE,N:renderN,M:renderM,C:renderC,S:renderS,F:renderF,A:renderA,P:renderP}[m.type](m);
+ let R;if(m.type==='D')R=renderD(m);else if(m.type==='B')R=renderB(m);else if(m.type==='K')R=renderK(m);else if(m.type==='X')R=renderX(m);else R={E:renderE,N:renderN,M:renderM,C:renderC,S:renderS,F:renderF,A:renderA,P:renderP}[m.type](m);
  if(W)R=`<div class="cols" style="margin-top:0"><div class="box w12" style="--h:${m.h}"><h3><span class="k">TRY IT</span>${esc(W.title)}</h3><div id="widget">${W.html(m)}</div></div></div>`+R;
  if(!'PFD'.includes(m.type))R+=planBox(m);
  const rel=related(m);
@@ -257,18 +259,26 @@ function sheet(m){const sec=SEC[m.area],list=ORDER.filter(x=>x.area===m.area),i=
  $$('textarea[data-k]',app()).forEach(t=>t.oninput=()=>store.set(t.dataset.k,t.value));
  $$('input[data-ck]',app()).forEach(c=>c.onchange=()=>{const k=c.dataset.ck;let a=store.get(k,[]);const n=+c.dataset.i;a=c.checked?[...new Set([...a,n])]:a.filter(x=>x!==n);store.set(k,a)});
  if(m.type==='S')bindScale(m);if(m.type==='P')bindPractice(m);if(W)W.mount($('#widget'),m);if(m.type==='X'&&XV[m.key].mount)XV[m.key].mount($('#xvis'),m);
- window.scrollTo(0,0)}
+ }
 
 // ---------- ROUTER ----------
-function route(){stopPractice();stopSurf();const h=location.hash.slice(1)||'today';const sq=$('#q');
- if(/^m\d+$/.test(h)){const m=ORDER.find(x=>x.id===h);if(m){setNav(m.type==='D'?'struggles':m.type==='P'?'toolkit':'library');sheet(m);document.title=m.t+' · Rewiring Atlas';return}}
- document.title='Rewiring Atlas';
- let mt;if((mt=h.match(/^day-(\d+)$/))&&dayObj(+mt[1])){setNav('plan');viewDay(+mt[1]);document.title='Day '+mt[1]+' · Rewiring Atlas';return}
- if((mt=h.match(/^study-(\w+)$/))&&STUDY[mt[1]]){setNav('library');viewStudy(mt[1]);document.title=STUDY[mt[1]].t+' · Rewiring Atlas';return}
+// remember where you were on every page, and return there when you come back
+const POS=(()=>{try{return JSON.parse(sessionStorage.getItem('ra-pos')||'{}')}catch(e){return {}}})();
+let curH=null,posT=0,userMoved=false;
+addEventListener('scroll',()=>{if(!curH)return;POS[curH]=Math.round(scrollY);clearTimeout(posT);posT=setTimeout(()=>{try{sessionStorage.setItem('ra-pos',JSON.stringify(POS))}catch(e){}},250)},{passive:true});
+['wheel','touchstart','keydown','mousedown'].forEach(ev=>addEventListener(ev,()=>userMoved=true,{passive:true}));
+function restoreScroll(h){const y=h==='search'?0:(POS[h]||0);userMoved=false;scrollTo(0,y);
+ requestAnimationFrame(()=>{if(!userMoved)scrollTo(0,y);curH=h;setTimeout(()=>{if(!userMoved&&Math.abs(scrollY-y)>4)scrollTo(0,y)},180)})}
+function route(){curH=null;renderRoute();if(matchMedia('(prefers-reduced-motion: reduce)').matches)$$('#app animate,#app animateMotion').forEach(x=>x.remove());restoreScroll(location.hash.slice(1)||'today')}
+function renderRoute(){stopPractice();if(XV.brain&&XV.brain.stop)XV.brain.stop();stopSurf();const h=location.hash.slice(1)||'today';const sq=$('#q');
+ if(/^m\d+$/.test(h)){const m=ORDER.find(x=>x.id===h);if(m){setNav(m.type==='D'?'struggles':m.type==='P'?'toolkit':'library');sheet(m);document.title=m.t+' · Rewiring';return}}
+ document.title='Rewiring';
+ let mt;if((mt=h.match(/^day-(\d+)$/))&&dayObj(+mt[1])){setNav('plan');viewDay(+mt[1]);document.title='Day '+mt[1]+' · Rewiring';return}
+ if((mt=h.match(/^study-(\w+)$/))&&STUDY[mt[1]]){setNav('library');viewStudy(mt[1]);document.title=STUDY[mt[1]].t+' · Rewiring';return}
  if(h==='search'&&lastQ.trim()){setNav('');viewSearch();return}
  if(sq&&h!=='search'){sq.value='';lastQ=''}
  const V={today:viewToday,struggles:viewStruggles,library:viewLibrary,toolkit:viewToolkit,journal:viewJournal,plan:viewPlan}[h]||viewToday;
- setNav(V===viewToday?'today':h);V();window.scrollTo(0,0)}
+ setNav(V===viewToday?'today':h);V()}
 // own history stack so back/forward buttons work inside the artifact frame too
 const HIST={s:[],i:-1,nav:false};
 function histPush(){const h=location.hash||'#today';if(HIST.nav){HIST.nav=false}else if(HIST.s[HIST.i]!==h){HIST.s=HIST.s.slice(0,HIST.i+1);HIST.s.push(h);if(HIST.s.length>200)HIST.s.shift();HIST.i=HIST.s.length-1}histBtns()}

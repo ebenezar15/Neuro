@@ -63,6 +63,8 @@ function cycleSVG(steps,h){
     s+=`<rect x="${x-bw/2}" y="${y-bh/2}" width="${bw}" height="${bh}" rx="12" class="f-surf hk" stroke-width="1.5"/>
     <circle cx="${x-bw/2+4}" cy="${y-bh/2+4}" r="11" class="hs"/><text x="${x-bw/2+4}" y="${y-bh/2+8}" text-anchor="middle" class="t-bg sv-m" font-size="11" font-weight="700">${i+1}</text>
     <text x="${x}" y="${y-(L.length-1)*7.5+4.5}" text-anchor="middle" class="t-ink sv-b" font-size="12.5">${ts(L,x,15)}</text>`});
+  {const dur=n*1.5;s+=`<circle r="9" class="cy-dot"><animateMotion dur="${dur}s" repeatCount="indefinite" path="M${c} ${c-R}A${R} ${R} 0 1 1 ${c} ${c+R}A${R} ${R} 0 1 1 ${c} ${c-R}"/></circle>`;
+   steps.forEach((t,i)=>{const x=c+R*Math.cos(ang(i)),y=c+R*Math.sin(ang(i));s+=`<circle cx="${x}" cy="${y}" r="76" class="cy-glow" opacity="0"><animate attributeName="opacity" values="0;.35;0;0" keyTimes="0;.06;.2;1" dur="${dur}s" begin="${(i*dur/n-0.3).toFixed(2)}s" repeatCount="indefinite"/></circle>`})}
   s+=`<g opacity=".9"><path d="M${c-26} ${c-8} a30 30 0 1 1 6 26" fill="none" class="hk" stroke-width="3" marker-end="url(#${id})"/></g>
   <text x="${c}" y="${c+50}" text-anchor="middle" class="t-mut sv-m" font-size="11" letter-spacing="1.5">THE LOOP</text></svg>`;
   return s;

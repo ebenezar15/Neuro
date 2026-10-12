@@ -426,7 +426,7 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 :root[data-look="cadenza"] :is(.app-rail,.app-tabs) .nav-btn[aria-current="page"]{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 3px 0 0 var(--spark)}
 :root[data-look="cadenza"] .app-tabs .nav-btn[aria-current="page"]{box-shadow:inset 0 3px 0 var(--spark)}
 :root[data-look="cadenza"] .app-rail .pill:not(.btn-help){background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
-:root[data-look="cadenza"] .brand svg{background:var(--grad);border-radius:12px;padding:5px;box-shadow:0 8px 24px -6px color-mix(in srgb,var(--spark) 70%,transparent);--accent:#fff;--spark:#fff}
+:root[data-look="cadenza"] .brand svg{background:var(--grad);border-radius:12px;padding:4px;box-shadow:0 8px 24px -6px color-mix(in srgb,var(--spark) 70%,transparent);--accent:#fff;--ink:#fff;--spark:#FDE68A}
 :root[data-look="cadenza"] .app-rail .brand{color:#fff}
 :root[data-look="cadenza"] .app-top{background:color-mix(in srgb,var(--bg) 80%,transparent)}
 :root[data-look="cadenza"] .pill.on,:root[data-look="cadenza"] .chipset button[aria-pressed="true"]{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 8px 22px -10px color-mix(in srgb,var(--accent) 80%,transparent)}
@@ -440,3 +440,137 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 :root[data-look="cadenza"] .plancard .eyebrow{color:rgba(255,255,255,.7)}
 :root[data-look="cadenza"] .plancard .pill.on{background:#fff;color:var(--dp)}
 @media (prefers-reduced-motion: reduce){:root[data-look="cadenza"] :is(.tile,.card,.qcard,.dayrow,.pager a):hover{transform:none}}
+
+/* logo: the new path draws in and the spark glows */
+.brand svg.logo{width:34px;height:34px;flex:none}
+.logo .lg-new{stroke-dasharray:40;stroke-dashoffset:40;animation:lgdraw 1.4s .3s ease-out forwards}
+.logo .lg-spark{transform-origin:45px 26px;animation:lgspark 3.2s 1.6s ease-in-out infinite}
+@keyframes lgdraw{to{stroke-dashoffset:0}}
+@keyframes lgspark{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+@media (prefers-reduced-motion: reduce){.logo .lg-new{animation:none;stroke-dashoffset:0}.logo .lg-spark{animation:none}}
+
+/* Typeface: Avenir Next (Apple devices) with Nunito Sans as the close match elsewhere; System uses the device font */
+:root[data-font="avenir"]{--f-display:"Avenir Next","Avenir","Nunito Sans","Segoe UI",system-ui,sans-serif;--f-body:"Avenir Next","Avenir","Nunito Sans","Segoe UI",system-ui,sans-serif}
+:root[data-font="avenir"] :is(h1,h2,h3,.brand){font-weight:700;letter-spacing:-.01em}
+:root[data-font="avenir"] .study{font-weight:400}
+:root[data-font="system"]{--f-display:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;--f-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
+
+/* Brain tour */
+.btour{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-areas:'vis side' 'scen side';grid-template-rows:auto 1fr;gap:16px;align-items:start}
+.bt-vis{grid-area:vis}
+.bt-scen{grid-area:scen;display:grid;gap:10px}
+.bt-side{grid-area:side;display:grid;gap:10px}
+.bsvg{width:100%;height:auto;display:block}
+.bsvg .cortex{fill:hsl(285 30% var(--atint));stroke:hsl(285 30% var(--amid));stroke-width:3;pointer-events:none}
+.bsvg .gyri path{fill:none;stroke:hsl(285 25% var(--amid));stroke-width:2;stroke-linecap:round;opacity:.7;pointer-events:none}
+.bsvg .gyri .cc{stroke-width:6;opacity:.5}
+.bsvg .rg>*{fill:hsl(var(--h) 45% var(--amid));stroke:hsl(var(--h) var(--as) var(--al));stroke-width:2;cursor:pointer;transition:fill .2s,stroke-width .2s;opacity:.85}
+.bsvg .rg .st{fill:none;stroke-width:12;stroke-linecap:round;opacity:.75}
+.bsvg .rg:hover>*,.bsvg .rg:focus-visible>*{opacity:1;stroke-width:3}
+.bsvg .rg.on>*{fill:hsl(var(--h) var(--as) var(--al));opacity:1;stroke-width:3;animation:bpulse 1.6s ease-in-out infinite}
+.bsvg .rg.on .st{fill:none;stroke-width:15}
+@keyframes bpulse{50%{filter:drop-shadow(0 0 8px hsl(var(--h) var(--as) var(--al)))}}
+.bsvg .rg:focus{outline:none}
+.bsvg .bnode *{fill:var(--surface);stroke:var(--muted);stroke-width:2}
+.bsvg .bl{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
+.bsvg .spk{fill:var(--spark);opacity:.75}
+.bsvg .blabel rect{fill:var(--ink)}.bsvg .blabel text{fill:var(--bg);font-family:var(--f-display);font-weight:700;font-size:12.5px;text-anchor:middle}
+.bsvg .btrail{fill:none;stroke:var(--spark);stroke-width:3;stroke-linecap:round;opacity:.8}
+.bsvg .bsig{fill:#fff;stroke:var(--spark);stroke-width:2}
+.bbody{animation:bbreath 6s ease-in-out infinite;transform-origin:260px 200px}
+@keyframes bbreath{50%{transform:scale(1.012)}}
+.bcap{background:var(--sunk);border-radius:12px;padding:12px 16px;min-height:64px;border-left:4px solid var(--spark)}
+.vq{margin:6px 0 0;padding:6px 0 6px 14px;border-left:3px solid var(--spark);font-style:italic}.vq p{margin:0}.vq cite{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:4px}
+@media (max-width:760px){.btour{grid-template-columns:minmax(0,1fr);grid-template-areas:'vis' 'scen' 'side'}.bt-vis{position:static}}
+@media (prefers-reduced-motion: reduce){.bbody,.bsvg .rg.on>*{animation:none}}
+
+/* why-it-works box on practices */
+.why3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.why3>div{display:grid;gap:4px;align-content:start;padding:12px 14px;border-radius:12px;background:var(--sunk)}
+.why3 b{font-family:var(--f-display);font-size:16px}.why3 p{margin:0}
+.why3 .wi{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:hsl(var(--h) var(--as) var(--al));color:var(--bg)}
+.why3 .wi svg{width:18px;height:18px}
+.why3 .w-god .wi{background:hsl(258 var(--as) var(--al))}.why3 .w-word .wi{background:var(--spark)}
+.why3 blockquote{margin:0;font-style:italic}.why3 blockquote p{margin:0}.why3 cite{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:4px}
+.actline{margin-top:12px;padding:10px 14px;border-radius:10px;border:1px dashed hsl(var(--h) var(--as) var(--al))}
+
+/* In simple words */
+.simple{margin-top:16px;padding:14px 18px;border-radius:16px;background:hsl(48 90% var(--atint));border:2px solid hsl(44 80% var(--amid));display:grid;gap:4px}
+.simple b{font-family:var(--f-display);font-size:17px;display:flex;align-items:center;gap:8px}
+.simple b::before{content:"";width:26px;height:26px;flex:none;border-radius:50%;background:hsl(44 85% var(--al)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='9' cy='10' r='1.4' fill='white'/%3E%3Ccircle cx='15' cy='10' r='1.4' fill='white'/%3E%3Cpath d='M8 14.5c2.2 2.4 5.8 2.4 8 0' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/20px no-repeat}
+.simple p{margin:0;font-size:17px;line-height:1.55}
+.simple.sm{margin-top:10px;padding:10px 14px}.simple.sm p{font-size:15.5px}
+.cy-dot{fill:var(--spark);filter:drop-shadow(0 0 6px var(--glow))}
+.cy-glow{fill:none;stroke:var(--spark);stroke-width:5;pointer-events:none}
+
+/* Mental models */
+.mmcard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;padding:12px 14px;border-radius:14px;background:hsl(var(--h) 40% var(--atint));border:1px solid hsl(var(--h) 35% var(--amid));margin-bottom:14px}
+.mmcard b{font-family:var(--f-display);font-size:17px}.mm-txt{display:grid;gap:4px}.mm-txt p{margin:0}
+.mm-rule{font-family:var(--f-display);font-weight:700;color:hsl(var(--h) var(--as) var(--al))}
+.mm-pic{background:var(--surface);border-radius:12px;padding:6px;display:grid;place-items:center}
+.mmgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:12px}.mmgrid .mmcard{margin:0;align-items:start}
+@media (max-width:520px){.mmcard{grid-template-columns:minmax(0,1fr)}.mm-pic{justify-self:start}}
+.mmsvg *{stroke-linecap:round;stroke-linejoin:round}
+.mmsvg .ml{fill:none;stroke:hsl(var(--h) var(--as) var(--al));stroke-width:3}
+.mmsvg .mlg{fill:none;stroke:var(--line);stroke-width:5}
+.mmsvg .mlo{fill:none;stroke:hsl(var(--h) 38% var(--amid));stroke-width:4}
+.mmsvg .mf{fill:hsl(var(--h) 40% var(--atint));stroke:hsl(var(--h) var(--as) var(--al));stroke-width:2}
+.mmsvg .ma{fill:var(--spark)}.mmsvg .mb{fill:var(--ink)}.mmsvg .mam{fill:hsl(44 85% 55%)}
+.mmsvg .mr{fill:hsl(0 60% 62%)}.mmsvg .mg{fill:hsl(150 45% 52%)}.mmsvg .mbl{fill:hsl(215 45% 60%)}
+.mmsvg .mt{font-family:var(--f-mono);font-size:8px;fill:var(--muted);text-anchor:middle}
+.mmsvg .mpulse{animation:mmpulse 1s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.mmsvg .mdash{stroke-dasharray:3 4;animation:mmdash 1s linear infinite}
+.mmsvg .mfill{transform-box:fill-box;transform-origin:bottom;animation:mmfill 3s ease-in-out infinite}
+.mmsvg .mdrip{animation:mmdrip 1.4s ease-in infinite}
+.mmsvg .mgrow{stroke-dasharray:110;animation:mmgrow 3s ease-out infinite}
+.mmsvg .mpress{transform-box:fill-box;transform-origin:bottom;animation:mmpress 2s ease-in-out infinite}
+.mmsvg .mclock{transform-origin:50px 40px;animation:mmspin 6s linear infinite}
+.mmsvg .mlid{transform-box:fill-box;transform-origin:left bottom;animation:mmlid 3s ease-in-out infinite}
+.mmsvg .mtint{animation:mmtint 3s ease-in-out infinite}
+.mmsvg .mcharge{transform-box:fill-box;transform-origin:left;animation:mmcharge 3s ease-in-out infinite}
+.mmsvg .mjoin{stroke-width:5;stroke:var(--spark);fill:none;stroke-dasharray:16;animation:mmgrow 2.4s ease-out infinite}
+.mmsvg .mgate{fill:none;stroke-width:3;transform-box:fill-box;transform-origin:left;animation:mmgate 3s ease-in-out infinite}
+.mmsvg .mclimb{animation:mmclimb 4s ease-in-out infinite}
+.mmsvg .mspin{transform-origin:50px 40px;animation:mmwob 4s ease-in-out infinite}
+.mmsvg .mcalm{animation:mmcalm 3s ease-in-out infinite}
+.mmsvg .mbob{animation:mmbob 3s ease-in-out infinite}
+.mmsvg .mblink1{animation:mmb 3s infinite}.mmsvg .mblink2{animation:mmb 3s 1s infinite;opacity:.3}.mmsvg .mblink3{animation:mmb 3s 2s infinite;opacity:.3}
+.mmsvg .mwave{stroke-dasharray:4 0}
+@keyframes mmpulse{50%{transform:scale(1.5)}}@keyframes mmdash{to{stroke-dashoffset:-14}}
+@keyframes mmfill{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+@keyframes mmdrip{0%{transform:translateY(-6px);opacity:0}30%{opacity:1}100%{transform:translateY(6px);opacity:0}}
+@keyframes mmgrow{0%{stroke-dashoffset:110}60%,100%{stroke-dashoffset:0}}
+@keyframes mmpress{50%{transform:scaleY(.7)}}@keyframes mmspin{to{transform:rotate(360deg)}}
+@keyframes mmlid{50%{transform:rotate(-14deg)}}@keyframes mmtint{50%{opacity:.35}}
+@keyframes mmcharge{0%{transform:scaleX(.2)}70%,100%{transform:scaleX(1.5)}}
+@keyframes mmgate{50%{transform:scaleX(.3)}}
+@keyframes mmclimb{0%{transform:translateY(0)}33%{transform:translateY(-14px)}66%{transform:translateY(-28px)}100%{transform:translateY(-42px)}}
+@keyframes mmwob{25%{transform:rotate(18deg)}75%{transform:rotate(-12deg)}}
+@keyframes mmcalm{0%{fill:hsl(0 60% 62%)}60%,100%{fill:hsl(150 45% 52%)}}
+@keyframes mmbob{50%{transform:translateY(-3px)}}@keyframes mmb{0%,30%{opacity:1}34%,100%{opacity:.25}}
+@media (prefers-reduced-motion: reduce){.mmsvg *{animation:none!important}}
+.redflag{border-color:hsl(0 55% var(--amid));background:hsl(0 50% var(--atint))}
+.bodysvg{width:100%;max-width:300px;height:auto;display:block;margin:auto}
+.bodysvg .bsil{fill:hsl(340 30% var(--atint));stroke:none}
+.bodysvg .bnerve{fill:none;stroke:hsl(340 40% var(--amid));stroke-width:2;stroke-dasharray:3 4}
+.bodysvg .bpulse{fill:var(--spark)}
+.bodysvg .bpt{cursor:pointer}.bodysvg .bring{fill:hsl(340 60% var(--al));opacity:.2;transform-box:fill-box;transform-origin:center;animation:bpring 2s ease-out infinite}
+.bodysvg .bdot{fill:hsl(340 60% var(--al));stroke:var(--surface);stroke-width:2}
+.bodysvg .bpt.on .bdot{fill:var(--spark)}.bodysvg .bpt.on .bring{opacity:.5;fill:var(--spark)}
+@keyframes bpring{0%{transform:scale(.6);opacity:.5}100%{transform:scale(1.4);opacity:0}}
+@media (prefers-reduced-motion: reduce){.bodysvg .bring{animation:none}}
+/* parenting */
+.dodont{grid-column:span 6}.dodont.do{background:hsl(150 40% var(--atint));border-color:hsl(150 35% var(--amid))}.dodont.dont{background:hsl(0 45% var(--atint));border-color:hsl(0 35% var(--amid))}
+.box.w4.dodont{grid-column:span 4}
+@media (max-width:760px){.dodont,.box.w4.dodont{grid-column:span 12}}
+.kprob{display:grid;gap:8px}
+.iceberg-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center}
+.ice-pic{background:var(--surface);border-radius:12px;padding:6px}
+@media (max-width:520px){.iceberg-row{grid-template-columns:minmax(0,1fr)}.ice-pic{justify-self:start}}
+.saylist{display:grid;gap:8px}.say.sm{font-size:17px;padding:10px 14px}
+.decoder .chipset{margin:0}
+.explore{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px}
+.explore a{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;padding:12px 14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);text-decoration:none;color:inherit}
+.explore a:hover{border-color:hsl(var(--h) var(--as) var(--al))}.explore b{font-family:var(--f-display);font-size:16px;display:block}.explore small{color:var(--muted)}
+.bodysvg .blimb{fill:none;stroke:hsl(340 30% var(--atint));stroke-width:20;stroke-linecap:round}
+.bodysvg .bsilg{filter:drop-shadow(0 0 0 hsl(340 30% var(--amid)))}
