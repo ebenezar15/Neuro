@@ -1,0 +1,35 @@
+<title>Rewiring Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
+<style>
+/*ATLAS_CSS*/
+/*APP_CSS*/
+</style>
+<div class="app-shell">
+ <aside class="app-rail" aria-label="Main navigation">
+  <a class="brand" href="#today" aria-label="Rewiring Atlas home"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="9" r="4" fill="var(--accent)"/><circle cx="24" cy="8" r="3" fill="var(--ink)"/><circle cx="16" cy="24" r="4" fill="var(--spark)"/><path d="M8 9L24 8M8 9L16 24M24 8L16 24" stroke="var(--accent)" stroke-width="2.4" fill="none"/></svg>Rewiring Atlas</a>
+  <nav class="nav" id="railnav"></nav>
+  <div class="rail-foot"><button class="pill btn-help" data-help>Get help now</button><button class="pill" data-settings>Settings</button><p class="note">Educational, not diagnostic.</p></div>
+ </aside>
+ <div class="app-main">
+  <header class="app-top"><div class="wrap">
+   <a class="brand" href="#today" aria-label="Rewiring Atlas home"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="9" r="4" fill="var(--accent)"/><circle cx="24" cy="8" r="3" fill="var(--ink)"/><circle cx="16" cy="24" r="4" fill="var(--spark)"/><path d="M8 9L24 8M8 9L16 24M24 8L16 24" stroke="var(--accent)" stroke-width="2.4" fill="none"/></svg><span>Rewiring Atlas</span></a>
+   <label class="search" for="q"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="var(--muted)" stroke-width="2.4"/><path d="M15 15l6 6" stroke="var(--muted)" stroke-width="2.4"/></svg><input id="q" type="search" placeholder="Search: a feeling, body sign, topic" autocomplete="off" aria-label="Search the atlas"></label>
+   <button class="pill btn-help help-top" data-help>Help</button>
+   <button class="icon-btn" data-settings aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
+  </div></header>
+  <main id="app"></main>
+  <footer class="app-foot"><div class="wrap grid2">
+   <div><b>Educational, not diagnostic.</b> These maps support understanding and conversation. They do not replace assessment or care from a licensed professional. Neuroscience is simplified here; brain regions work as networks, and some models (such as the polyvagal ladder) are useful clinical maps whose physiology is still debated.</div>
+   <div class="crisis"><b>If you are in crisis or thinking of harming yourself,</b> please reach out now. In India, Tele-MANAS is free and 24/7: <b class="mono">14416</b> or <b class="mono">1-800-891-4416</b>. Elsewhere, contact your local emergency number or a trusted person.</div>
+   <div><b>Drawn from the work of</b> Aaron &amp; Judith Beck (CBT), Jeffrey Young (Schema), Marsha Linehan (DBT), Steven Hayes (ACT), John Bowlby &amp; Mary Ainsworth (Attachment), Paul Gilbert (CFT), Leslie Greenberg &amp; Sue Johnson (EFT), James Gross (emotion regulation), Dan Siegel (window of tolerance, hand model), Stephen Porges (polyvagal theory), Donald Hebb (Hebbian learning), Bruce Ecker (memory reconsolidation), Peter Levine (SE), Richard Schwartz (IFS), Prochaska &amp; DiClemente (stages of change), Stephen Karpman (drama triangle). Citations indicate inspiration, not endorsement.</div>
+  </div></footer>
+ </div>
+</div>
+<nav class="app-tabs" id="tabnav" aria-label="Main navigation"></nav>
+<div id="modal" hidden></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script>
+/*JS*/
+boot();
+</script>
