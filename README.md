@@ -1,6 +1,6 @@
-# Rewiring Atlas
+# Rewiring
 
-An interactive, installable app version of the Rewiring Atlas: 422 visual maps of the brain, emotions, patterns and relationships, a 90-day plan that joins study to daily practice, 14 in-depth studies (including how the brain–gut axis works and how to heal it), and practical tools for everyday struggles.
+Rewiring is an interactive, installable app: 468 visual maps of the brain, emotions, patterns and relationships, a 90-day plan that joins study to daily practice, 15 in-depth studies, and practical tools for everyday struggles.
 
 Open `index.html` in any modern browser. It is a single self-contained file and works offline once it has been opened from a web server.
 
@@ -40,3 +40,12 @@ Source lives in `src/`:
 Rebuild with `node build.js`, which writes `index.html` (and `dist/rewiring-atlas.html`, a body-only version for embedding).
 
 *Educational, not diagnostic.* In crisis in India, call Tele-MANAS (free, 24/7): 14416 or 1-800-891-4416. Elsewhere, contact your local emergency number or a trusted person.
+
+## Newer sections
+
+- **Brain Tour**: an animated brain; tap the amygdala, prefrontal cortex, hippocampus and ten other regions, or play six scenarios (a scary moment, calming with breath, building a habit, making a memory, naming a feeling, pain).
+- **Mind & Body Conditions**: headaches, tension pain, chronic pain, heart, breathing, skin, immunity and fatigue, each with the stress pathway, red flags, steps, why they work and scripture; plus an interactive body map.
+- **Gospel Parenting**: seven age stages, sixteen everyday problems, practices, comparison sheets, a behaviour decoder and a full study.
+- Every practice and struggle shows a **mental model**, **why it works**, **how God designed it**, a verse to meditate on and an action for today.
+- Every page ends with **In simple words**, a summary a child can follow.
+- Pages remember where you were when you come back.

@@ -574,3 +574,4 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .explore a:hover{border-color:hsl(var(--h) var(--as) var(--al))}.explore b{font-family:var(--f-display);font-size:16px;display:block}.explore small{color:var(--muted)}
 .bodysvg .blimb{fill:none;stroke:hsl(340 30% var(--atint));stroke-width:20;stroke-linecap:round}
 .bodysvg .bsilg{filter:drop-shadow(0 0 0 hsl(340 30% var(--amid)))}
+.simple.pg{margin-top:22px}
