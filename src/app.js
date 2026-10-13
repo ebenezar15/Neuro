@@ -241,7 +241,7 @@ function viewSearch(){const q=lastQ.trim().toLowerCase();const words=q.split(/\s
 // ---------- SHEET (map page) ----------
 function sheet(m){const sec=SEC[m.area],list=ORDER.filter(x=>x.area===m.area),i=list.indexOf(m),prev=list[i-1],next=list[i+1],st=starred(m.id);
  const W=m.type==='P'&&WIDGET[m.code];
- let R;if(m.type==='D')R=renderD(m);else if(m.type==='B')R=renderB(m);else if(m.type==='K')R=renderK(m);else if(m.type==='X')R=renderX(m);else R={E:renderE,N:renderN,M:renderM,C:renderC,S:renderS,F:renderF,A:renderA,P:renderP}[m.type](m);
+ let R;if(m.type==='D')R=renderD(m);else if(m.type==='B')R=renderB(m);else if(m.type==='K')R=renderK(m);else if(m.type==='X')R=renderX(m);else if(m.type==='Z')R=renderZ(m);else R={E:renderE,N:renderN,M:renderM,C:renderC,S:renderS,F:renderF,A:renderA,P:renderP}[m.type](m);
  if(W)R=`<div class="cols" style="margin-top:0"><div class="box w12" style="--h:${m.h}"><h3><span class="k">TRY IT</span>${esc(W.title)}</h3><div id="widget">${W.html(m)}</div></div></div>`+R;
  if(!'PFD'.includes(m.type))R+=planBox(m);
  const rel=related(m);
