@@ -6068,6 +6068,8 @@ const CORTEX_SCEN=[
  {t:'Hearing and answering',steps:[[300,205,'Sound enters the ear and reaches the hearing area in the temporal lobe.'],[265,180,'Wernicke\'s area turns the sounds into meaning: "Do you want tea?"'],[215,105,'A bundle of fibres carries the meaning forward to the speech area.'],[122,165,'Broca\'s area plans your reply: "Yes, please."'],[188,140,'The motor cortex moves your lips, tongue and voice.'],[58,205,'You speak. Practising kind, true words strengthens this whole pathway.']]},
  {t:'Reading a verse aloud',steps:[[338,160,'Your eyes send the printed words to the occipital lobe at the back.'],[265,180,'Wernicke\'s area understands the words: "The Lord is my shepherd."'],[215,105,'The meaning travels forward.'],[122,165,'Broca\'s area turns the words into speech.'],[188,140,'The motor cortex moves your mouth.'],[58,205,'You speak and hear the verse, so memory, language and hearing work together and it sticks.']]}];
 
+// generated: case studies (set 2)
+
 // ===== INTERACTIVE WIDGETS on practice pages =====
 const rng=(id,val,min=0,max=10)=>`<span class="rangerow"><input type="range" id="${id}" min="${min}" max="${max}" value="${val}"><output id="${id}-v">${val}</output></span>`;
 const bindRng=(r,id,cb)=>{const el=$('#'+id,r);el.oninput=()=>{$('#'+id+'-v',r).textContent=el.value;if(cb)cb()}};
