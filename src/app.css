@@ -655,3 +655,14 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .cx-face,.cx-lips{fill:none;stroke:var(--muted);stroke-width:2}.cx-lips{fill:var(--sunk)}
 .cxdot{fill:var(--spark);stroke:var(--bg);stroke-width:2;filter:drop-shadow(0 0 5px var(--spark))}
 .cx-cap{min-height:3em;margin:8px 0;font-weight:600}
+/* ---- personality tools ---- */
+.b5row{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px;background:var(--surface)}
+.b5row summary{display:grid;grid-template-columns:minmax(0,9em) minmax(0,1fr) auto;gap:10px;align-items:center;cursor:pointer;list-style:none}.b5row summary::-webkit-details-marker{display:none}
+.b5n{font-weight:700}.b5bar{height:12px;border-radius:7px;background:var(--sunk);overflow:hidden}.b5bar i{display:block;height:100%;background:hsl(var(--h) var(--as) var(--al));border-radius:7px;animation:b5grow .8s ease}
+@keyframes b5grow{from{width:0}}.b5v{font-size:12px;color:var(--muted)}.b5body p{margin:8px 0 0}
+@media (max-width:480px){.b5row summary{grid-template-columns:minmax(0,1fr) auto}.b5bar{grid-column:1/-1;grid-row:2}}
+.batrow{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:12px}.batsvg{width:140px;max-width:100%;height:auto}.bat-o{fill:none;stroke:var(--ink);stroke-width:3}.bat-f{transition:width .5s,fill .5s}
+.batpct{font-family:var(--f-display);font-size:32px}.batacts{display:flex;flex-wrap:wrap;gap:6px}.batacts .pill{white-space:normal;text-align:left}
+.vsg h3{margin:16px 0 8px;color:hsl(var(--h) var(--as) var(--al))}.vsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:8px}
+.vscard{display:grid;gap:4px;text-align:left;font:inherit;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:transform .15s}
+.vscard:hover{transform:translateY(-2px)}.vscard.on{background:hsl(var(--h) 45% var(--atint));border-color:hsl(var(--h) var(--as) var(--al));box-shadow:0 0 0 2px hsl(var(--h) var(--as) var(--al)) inset}
