@@ -14,5 +14,6 @@
  UI.ofDone='/';
  const SHORT={struggles:'சவால்கள்',toolkit:'கருவிகள்',journal:'குறிப்பேடு'};NAV.forEach(n=>{if(SHORT[n[0]])n[1]=SHORT[n[0]]});
  Object.assign(WHEN,{now:'இந்த நொடியில்',daily:'தினசரிப் பயிற்சி',deep:'ஆழமான பணி'});
+ Object.assign(UI,{cnT:'தொடர்புடையவை',cnWhy:'இது ஏன் உதவுகிறது: பின்னால் உள்ள காரணம்',cnHelps:'இந்தச் சூழ்நிலைகளுக்கு உதவுகிறது',cnStories:'உண்மை வாழ்க்கை அனுபவங்கள்',cnSit:'அன்றாடச் சூழ்நிலைகள்',cnSimilar:'இதே போன்ற அனுபவங்கள்',cnTools:'இதற்கான பயிற்சிகள்'});
  if(miss)console.warn('Tamil: '+miss+' entries could not be placed');
 })();
