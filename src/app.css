@@ -666,3 +666,12 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .vsg h3{margin:16px 0 8px;color:hsl(var(--h) var(--as) var(--al))}.vsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:8px}
 .vscard{display:grid;gap:4px;text-align:left;font:inherit;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:transform .15s}
 .vscard:hover{transform:translateY(-2px)}.vscard.on{background:hsl(var(--h) 45% var(--atint));border-color:hsl(var(--h) var(--as) var(--al));box-shadow:0 0 0 2px hsl(var(--h) var(--as) var(--al)) inset}
+/* ---- motivation tools ---- */
+.stkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:8px}
+.stkr{padding:10px 0;border-top:1px solid var(--line)}.stkr:first-of-type{border-top:0}
+.stkbar{height:8px;border-radius:5px;background:var(--sunk);overflow:hidden;margin-bottom:6px}.stkbar i{display:block;height:100%;background:hsl(var(--h) var(--as) var(--al));animation:b5grow .6s ease}
+.sninput{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);margin-top:6px}
+.snring{position:relative;width:min(220px,70vw);margin:8px auto}.snring svg{width:100%;height:auto;display:block;transform:rotate(-90deg)}
+.sn-bg{fill:none;stroke:var(--sunk);stroke-width:10}.sn-fg{fill:none;stroke:var(--accent);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .5s linear}
+.sn-mid{position:absolute;inset:0;display:grid;place-items:center}.sn-mid b{font-size:clamp(28px,8vw,40px)}
+.sn-cheer{min-height:2.6em;text-align:center;font-weight:600;margin:6px 0}
