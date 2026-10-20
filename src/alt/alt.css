@@ -1,0 +1,34 @@
+/* ===== Rewiring Hubs: alternative layout ===== */
+.homehero{padding-block:22px 6px}.homehero h1{font-size:clamp(30px,5vw,48px);letter-spacing:-.03em;margin:4px 0 6px;text-wrap:balance}.homehero p{color:var(--muted);font-size:17px;max-width:60ch;margin:0}
+.needgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:8px;margin:16px 0 8px}
+.needbtn{display:flex;gap:10px;align-items:center;padding:14px 16px;border-radius:16px;background:hsl(var(--h,176) 45% var(--atint));border:1px solid hsl(var(--h,176) 40% 80% / .6);color:var(--ink);text-decoration:none;font-weight:600;line-height:1.3;transition:transform .15s}
+.needbtn:hover{transform:translateY(-2px)}.needbtn.ask{background:var(--accent);color:var(--on-accent);border-color:transparent}.needbtn .hub-ic{flex:none}
+.hub-ic{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--surface);color:hsl(var(--h,176) var(--as) var(--al));font-weight:800}.hub-ic.big{width:72px;height:72px;border-radius:20px}
+.needbtn.ask .hub-ic{background:rgba(255,255,255,.18);color:inherit}.hub-ic svg{display:block}
+.hubgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:12px;margin-top:12px}.hubgrid.sm{grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:8px}
+.hubcard{display:grid;gap:6px;align-content:start;padding:16px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);border-left:6px solid hsl(var(--h) var(--as) var(--al));text-decoration:none;color:inherit;min-width:0;transition:transform .15s,box-shadow .15s}
+.hubcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px -14px hsl(var(--h) 50% 30% / .5)}.hubcard b{font-family:var(--f-display);font-size:18px;line-height:1.25}
+.hubgrid.sm .hubcard{grid-template-columns:auto minmax(0,1fr);align-items:center;padding:10px 12px}.hubgrid.sm .hubcard b{font-size:15px}
+.hub-meta{font-size:12px;color:var(--muted)}
+.hubhero{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding-block:22px 10px}.hubhero h1{font-size:clamp(28px,4.6vw,44px);letter-spacing:-.03em;margin:2px 0 6px;text-wrap:balance}.hubhero p{margin:0;color:var(--muted);font-size:17px;max-width:60ch}
+.hubpage .hub-ic.big{background:hsl(var(--h) 45% var(--atint))}
+.hubtabs{display:flex;gap:6px;overflow-x:auto;padding-block:8px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 0px);z-index:4;background:var(--bg);scrollbar-width:thin}
+.hubtabs .pill{white-space:nowrap;flex:none}.hubtabs .mono{opacity:.6;margin-right:2px}
+.hubsec{margin-top:26px;scroll-margin-top:70px}.hubsec h2{display:flex;gap:10px;align-items:center;font-size:clamp(21px,3vw,27px);margin:0 0 4px;text-wrap:balance}
+.hubsec h2 .mono{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:hsl(var(--h,176) 45% var(--atint));color:hsl(var(--h,176) var(--as) var(--al));font-size:14px;flex:none}
+.hubsec>.note{margin:0 0 12px}.hubsub{margin:16px 0 8px;font-size:16px}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}.agrid.more{margin-top:10px}.amore{margin-top:10px}
+.acard{display:grid;gap:5px;align-content:start;padding:14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);border-top:4px solid hsl(var(--h,176) var(--as) var(--al));text-decoration:none;color:inherit;min-width:0}
+a.acard:hover,.acard-main:hover b{color:hsl(var(--h,176) var(--as) var(--al))}.acard b{font-family:var(--f-display);font-size:16px;line-height:1.3}
+.acard-t{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-family:var(--f-mono)}
+.acard.prac{padding:0;overflow:hidden}.acard-main{display:grid;gap:5px;padding:14px 14px 10px;text-decoration:none;color:inherit}
+.because{display:block;padding:9px 14px;background:hsl(var(--h,176) 45% var(--atint));font-size:13px;text-decoration:none;color:var(--ink);border-top:1px solid var(--line)}.because span{font-weight:700}
+.acard.tool{border-top-color:var(--spark)}
+.hubcrumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 6px}.hubcrumb .pill{display:inline-flex;gap:6px;align-items:center;border-color:hsl(var(--h) 40% 75%);color:hsl(var(--h) var(--as) var(--al))}
+.hubacc summary{display:flex;gap:10px;align-items:center}.hubacc summary .note{margin-left:auto}
+.graphwrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;align-items:start}@media (max-width:860px){.graphwrap{grid-template-columns:minmax(0,1fr)}}
+.hubgraph{width:100%;height:auto;display:block;overflow:visible}
+.gedge{fill:none;stroke:var(--line);stroke-opacity:.9;transition:stroke .2s,stroke-opacity .2s}.gedge.on{stroke:var(--accent);stroke-opacity:1}.gedge.dim{stroke-opacity:.25}
+.gnode{cursor:pointer}.gnode circle{fill:hsl(var(--h) 55% 60%);stroke:var(--bg);stroke-width:3;transition:r .2s}.gnode text{font-size:11px;fill:var(--ink);font-family:var(--f-body)}
+.gnode:hover circle,.gnode:focus circle,.gnode.on circle{fill:hsl(var(--h) 70% 48%);stroke:hsl(var(--h) 70% 30%)}.gnode:focus{outline:none}.gnode.on text{font-weight:700}
+@media (prefers-reduced-motion:no-preference){.gnode circle{animation:gpop .5s ease both}@keyframes gpop{from{opacity:0;transform:scale(.6);transform-origin:center}}}

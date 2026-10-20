@@ -8071,8 +8071,12 @@ Object.assign(UI,{cnT:'Connected',cnWhy:'Why it works: the reasoning behind it',
 const CN_MAPTYPES=new Set(['E','N','M','C','S','F','A','X','B','K']);
 const caseUses=m=>CASES.filter(z=>z!==m&&((m.type==='P'&&(z.tools||[]).includes(m.code))||(z.links||[]).some(t=>find(t)===m)));
 const sitsFor=m=>DAYS.filter(d=>d!==m&&((m.type==='P'&&(d.tools||[]).includes(m.code))||(d.links||[]).some(t=>find(t)===m)));
+// the maps that explain why a practice works: maps that recommend it, maps that link to it, then maps behind the situations that use it
+function reasonFor(m){const out=[],seen=new Set(),add=x=>{if(x&&x!==m&&CN_MAPTYPES.has(x.type)&&!seen.has(x.id)){seen.add(x.id);out.push(x)}};
+ (USES[m.code]||[]).forEach(add);(BACK[m.id]||[]).forEach(add);(m.links||[]).forEach(t=>add(find(t)));
+ if(out.length<3)DAYS.concat(CASES).filter(d=>(d.tools||[]).includes(m.code)).forEach(d=>(d.links||[]).forEach(t=>add(find(t))));return out}
 function connectData(m){const G=[];
- if(m.type==='P'){const why=(USES[m.code]||[]).filter(x=>CN_MAPTYPES.has(x.type));G.push([UI.cnWhy,why.slice(0,8)],[UI.cnHelps,sitsFor(m).slice(0,8)],[UI.cnStories,caseUses(m).slice(0,6)])}
+ if(m.type==='P'){const why=reasonFor(m);G.push([UI.cnWhy,why.slice(0,8)],[UI.cnHelps,sitsFor(m).slice(0,8)],[UI.cnStories,caseUses(m).slice(0,6)])}
  else if(m.type==='D'){const tools=new Set(m.tools||[]);G.push([UI.cnStories,CASES.filter(z=>(z.tools||[]).some(c=>tools.has(c))||(z.links||[]).some(t=>find(t)===m)).slice(0,6)])}
  else if(m.type==='Z'){const tools=new Set(m.tools||[]);G.push([UI.cnSit,DAYS.filter(d=>(d.tools||[]).some(c=>tools.has(c))).slice(0,6)],[UI.cnSimilar,CASES.filter(z=>z!==m&&(z.tools||[]).some(c=>tools.has(c))).slice(0,6)])}
  else if(CN_MAPTYPES.has(m.type)){G.push([UI.cnSit,sitsFor(m).slice(0,8)],[UI.cnStories,caseUses(m).slice(0,6)])}
