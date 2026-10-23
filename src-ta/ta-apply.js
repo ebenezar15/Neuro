@@ -4,7 +4,7 @@
  // lookups that use English titles are worked out once, before titles change
  ORDER.forEach(m=>{m._pf=planFor(m)});planFor=function(m){return m._pf||[]};
  const catOld=CATS.map(c=>c[0]);
- const R={ORDER,SECS,CATS,DAILY_REPS,MODELDATA,PDESIGN,DWHY,MM,BRAIN,BRAIN_PTS,BRAIN_SCEN,RM,SIMPLE_DAYS,SIMPLE_STUDY,PAGE_SIMPLE,STUDIES,TIPS,FACTS,LEARN,UI,DEEP,SIMS,QUIZZES,DETOX,CORTEX,CORTEX_SCEN,BIG5_ITEMS,BIG5,BATTERY,STRENGTHS,VIRTUES,STUCK_Q,STUCK_R};
+ const R={ORDER,SECS,CATS,DAILY_REPS,MODELDATA,PDESIGN,DWHY,MM,BRAIN,BRAIN_PTS,BRAIN_SCEN,RM,SIMPLE_DAYS,SIMPLE_STUDY,PAGE_SIMPLE,STUDIES,TIPS,FACTS,LEARN,UI,DEEP,SIMS,QUIZZES,DETOX,CORTEX,CORTEX_SCEN,BIG5_ITEMS,BIG5,BATTERY,STRENGTHS,VIRTUES,STUCK_Q,STUCK_R,WOUND_Q};
  let miss=0;TA_DATA.forEach(([p,v])=>{let o=R[p[0]];for(let i=1;i<p.length-1&&o;i++)o=o[p[i]];if(o&&typeof v==='string')o[p[p.length-1]]=v;else miss++});
  STUDIES.forEach((s,i)=>{const parts=TA_HTML[i];if(parts&&parts.every(x=>typeof x==='string'))s.html=parts.join('')});
  const cm={};catOld.forEach((n,i)=>cm[n]=CATS[i][0]);DAYS.forEach(d=>{if(cm[d.cat])d.cat=cm[d.cat]});
