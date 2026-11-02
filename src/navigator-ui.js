@@ -1,0 +1,52 @@
+// ===== PROBLEM NAVIGATOR UI: #navigator (visual map), #navfind (guided finder), #nav-<id> (pattern, roots, signs, way out) =====
+const NVP=Object.fromEntries(NAV_P.map(p=>[p.id,p]));const NVB=Object.fromEntries(NAV_B.map(b=>[b.id,b]));
+const nvList=s=>String(s||'').split(/;(?! )/).filter(Boolean);
+function nvMapSVG(sel){const C=200,pos={},bpos={};const ang={emo:-135,self:-45,rel:135,do:45};
+ NAV_B.forEach(b=>{const a=ang[b.id]*Math.PI/180;bpos[b.id]=[C+82*Math.cos(a),C+82*Math.sin(a)];const ps=NAV_P.filter(p=>p.b===b.id);ps.forEach((p,i)=>{const t=(ang[b.id]+(i-(ps.length-1)/2)*(56/Math.max(1,ps.length-1)))*Math.PI/180;pos[p.id]=[C+168*Math.cos(t),C+168*Math.sin(t),t]})});
+ return `<svg viewBox="-20 -10 440 420" class="nvmap" role="img" aria-label="${esc(UI.nvT)}">
+ ${NAV_B.map(b=>{const [x,y]=bpos[b.id];return `<path d="M${C} ${C}L${x} ${y}" class="nv-l" style="--h:${b.h}"/>`+NAV_P.filter(p=>p.b===b.id).map(p=>{const [px,py]=pos[p.id];return `<path d="M${x} ${y}Q${(x+px)/2+(C-x)*.12} ${(y+py)/2+(C-y)*.12} ${px} ${py}" class="nv-l thin" style="--h:${b.h}"/>`}).join('')}).join('')}
+ <circle cx="${C}" cy="${C}" r="40" class="nv-core"/><text x="${C}" y="${C-4}" class="nv-ct">${esc(UI.nvMap)}</text><text x="${C}" y="${C+12}" class="nv-cs">${NAV_P.length}</text>
+ ${NAV_B.map(b=>{const [x,y]=bpos[b.id];return `<g class="nv-b" style="--h:${b.h}" data-nb="${b.id}" tabindex="0" role="button" aria-label="${esc(b.n)}"><circle cx="${x}" cy="${y}" r="24"/><text x="${x}" y="${y+4}">${esc(b.n.split(' ')[0])}</text></g>`}).join('')}
+ ${NAV_P.map(p=>{const [x,y,t]=pos[p.id],b=NVB[p.b],c=Math.cos(t),anchor=c<-.3?'end':c>.3?'start':'middle',lx=x+15*c,ly=y+15*Math.sin(t)+4;
+  return `<g class="nv-p${sel===p.id?' on':''}" style="--h:${b.h}" data-np="${p.id}" tabindex="0" role="link" aria-label="${esc(p.n)}"><circle cx="${x}" cy="${y}" r="9"/><text x="${lx}" y="${ly}" text-anchor="${anchor}">${esc(p.sn||p.n)}</text></g>`}).join('')}</svg>`}
+function nvBind(){$$('[data-np]').forEach(g=>{const go=()=>{location.hash='nav-'+g.dataset.np};g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+ $$('[data-nb]').forEach(g=>{const f=()=>{const id=g.dataset.nb;$$('.nv-p').forEach(x=>x.classList.toggle('dim',NVP[x.dataset.np].b!==id));$$('.nv-b').forEach(x=>x.classList.toggle('on',x.dataset.nb===id));const l=document.getElementById('nvb-'+id);if(l)l.scrollIntoView({behavior:'smooth',block:'nearest'})};g.addEventListener('click',f);g.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();f()}})})}
+function viewNavigator(){app().innerHTML=`<div class="wrap fade"><div class="page-h"><p class="eyebrow">${esc(UI.nvCard)}</p><h1>${esc(UI.nvT)}</h1><p>${esc(UI.nvSub)}</p></div>
+ <div class="actions" style="margin-bottom:10px"><a class="pill on" href="#navfind">${esc(UI.nvStart)} →</a></div>
+ <div class="panel nvwrap">${nvMapSVG()}</div>
+ <div class="nvbranches">${NAV_B.map(b=>`<section class="nvbranch" id="nvb-${b.id}" style="--h:${b.h}"><h3>${esc(b.n)}<span class="note"> · ${esc(b.q)}</span></h3><div class="nvchips">${NAV_P.filter(p=>p.b===b.id).map(p=>`<a class="nvchip" href="#nav-${p.id}"><b>${esc(p.n)}</b><span>${esc(p.one)}</span></a>`).join('')}</div></section>`).join('')}</div></div>`;
+ nvBind();addSimple(UI.nvSub)}
+let NVF=null;
+function viewNavFind(){const b=NVF&&NVB[NVF];app().innerHTML=`<div class="wrap fade nvfind"><div class="page-h"><p class="eyebrow">${esc(UI.nvT)}</p><h1>${esc(b?UI.nvQ2:UI.nvQ1)}</h1></div>
+ <div class="nvsteps"><span class="on">1</span><i></i><span class="${b?'on':''}">2</span><i></i><span>3</span></div>
+ ${b?`<div class="nvpick">${NAV_P.filter(p=>p.b===b.id).map(p=>`<a class="nvopt" href="#nav-${p.id}" style="--h:${b.h}"><b>${esc(p.n)}</b><span>${esc(p.one)}</span><span class="nvgo">→</span></a>`).join('')}</div><div class="actions" style="margin-top:12px"><button class="pill" id="nvback">← ${esc(UI.nvBack)}</button><a class="pill" href="#navigator">${esc(UI.nvAll)}</a></div>`
+ :`<div class="nvpick four">${NAV_B.map(x=>`<button class="nvopt big" data-nf="${x.id}" style="--h:${x.h}"><b>${esc(x.n)}</b><span>${esc(x.q)}</span><span class="nvn mono">${NAV_P.filter(p=>p.b===x.id).length}</span></button>`).join('')}</div><div class="actions" style="margin-top:12px"><a class="pill" href="#navigator">${esc(UI.nvAll)}</a></div>`}</div>`;
+ $$('[data-nf]').forEach(x=>x.onclick=()=>{NVF=x.dataset.nf;viewNavFind();scrollTo(0,0)});const bk=$('#nvback');if(bk)bk.onclick=()=>{NVF=null;viewNavFind()};addSimple(UI.nvSub)}
+function rootsSVG(p,h){const W=360,ys=[150,150,150,150,150],xs=[30,105,180,255,330];
+ return `<svg viewBox="0 0 ${W} 190" class="nvroots" aria-hidden="true"><rect x="110" y="8" width="140" height="34" rx="17" class="nr-trunk" style="--h:${h}"/><text x="180" y="29" class="nr-t" text-anchor="middle">${esc(p.sn||p.n)}</text><rect x="172" y="42" width="16" height="36" class="nr-trunk" style="--h:${h}"/>
+ ${xs.map((x,i)=>`<path d="M180 78C180 110 ${x} 105 ${x} ${ys[i]-14}" class="nr-root" style="--h:${h};animation-delay:${i*.12}s"/><circle cx="${x}" cy="${ys[i]}" r="13" class="nr-n" style="--h:${[150,30,262,200,45][i]}"/><text x="${x}" y="${ys[i]+4}" text-anchor="middle" class="nr-i">${i+1}</text><text x="${x}" y="${ys[i]+30}" text-anchor="middle" class="nr-l">${esc(NAV_L[i].split(' ')[0])}</text>`).join('')}</svg>`}
+function viewNavProblem(id){const p=NVP[id],b=NVB[p.b];const i=NAV_P.indexOf(p),prev=NAV_P[i-1],next=NAV_P[i+1];const [vr,vt]=String(p.v).split('|');let fit=new Set(store.get('navfit-'+id,[]));
+ const maps=String(p.l).split(';').map(find).filter(Boolean),prs=String(p.p).split(';').map(c=>PR[c]).filter(Boolean);
+ app().innerHTML=`<article class="wrap fade nvpage" style="--h:${b.h}"><div class="crumbs"><a href="#navigator">${esc(UI.nvT)}</a> / <span class="mono">${esc(b.n)}</span></div>
+ <div class="nvhero"><h1>${esc(p.n)}</h1><p>${esc(p.one)}</p></div>
+ <nav class="hubtabs">${[['pat',UI.nvPattern],['root',UI.nvRoots],['sig',UI.nvSigns],['way',UI.nvWay],['truth',UI.nvTruth]].map(([k,t],j)=>`<a class="pill" href="#nav-${id}" data-nj="${k}"><span class="mono">${j+1}</span> ${esc(t)}</a>`).join('')}</nav>
+ <section class="nvsec" id="nj-pat"><h2><span class="mono">1</span>${esc(UI.nvPattern)}</h2><div class="panel">${cycleSVG(p.cy.split('>').map(x=>x.trim()),b.h)}</div></section>
+ <section class="nvsec" id="nj-root"><h2><span class="mono">2</span>${esc(UI.nvRoots)}</h2><div class="panel">${rootsSVG(p,b.h)}<ol class="nvrootlist">${p.r.map((r,j)=>`<li style="--h:${[150,30,262,200,45][j]}"><b>${esc(NAV_L[j])}</b><span>${esc(r)}</span></li>`).join('')}</ol></div></section>
+ <section class="nvsec" id="nj-sig"><h2><span class="mono">3</span>${esc(UI.nvSigns)}</h2><div class="nvsigns">${p.s.map((s,j)=>`<button class="nvsig${fit.has(j)?' on':''}" data-sg="${j}" aria-pressed="${fit.has(j)}"><span class="ck">✓</span>${esc(s)}</button>`).join('')}</div><p class="note" id="nvfit"><b>${fit.size}/${p.s.length}</b> ${esc(UI.nvFit)}</p></section>
+ <section class="nvsec" id="nj-way"><h2><span class="mono">4</span>${esc(UI.nvWay)}</h2><div class="nvflow">${[[UI.nvNow,p.now,0],[UI.nvToday,p.today,45],[UI.nvWeeks,p.weeks,150]].map(([t,s,hh],j)=>`<div class="nvstep" style="--h:${hh}"><p class="eyebrow">${esc(t)}</p><ul>${nvList(s).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>${j<2?'<div class="nvarrow" aria-hidden="true">↓</div>':''}`).join('')}</div>
+  ${prs.length?`<p class="eyebrow" style="margin:16px 0 8px">${esc(UI.nvTools)}</p><div class="pgrid">${prs.map(pcardHTML).join('')}</div>`:''}</section>
+ <section class="nvsec" id="nj-truth"><h2><span class="mono">5</span>${esc(UI.nvTruth)}</h2><blockquote class="case-verse nvverse">${esc(vt)}<cite>${esc(vr)}</cite></blockquote>
+  ${maps.length?`<p class="eyebrow" style="margin:16px 0 8px">${esc(UI.nvDeeper)}</p><div class="chips">${maps.map(chip).join('')}</div>`:''}</section>
+ <div class="pager">${prev?`<a href="#nav-${prev.id}" style="--h:${NVB[prev.b].h}"><small>←</small><b>${esc(prev.n)}</b></a>`:'<span></span>'}${next?`<a href="#nav-${next.id}" style="--h:${NVB[next.b].h}"><small>→</small><b>${esc(next.n)}</b></a>`:''}</div></article>`;
+ $$('[data-nj]').forEach(a=>a.onclick=e=>{e.preventDefault();const el=document.getElementById('nj-'+a.dataset.nj);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});
+ $$('[data-sg]').forEach(x=>x.onclick=()=>{const j=+x.dataset.sg;fit.has(j)?fit.delete(j):fit.add(j);store.set('navfit-'+id,[...fit]);x.classList.toggle('on');x.setAttribute('aria-pressed',fit.has(j));$('#nvfit').innerHTML=`<b>${fit.size}/${p.s.length}</b> ${esc(UI.nvFit)}`});
+ addSimple(p.simple)}
+const _renderRouteNv=renderRoute;renderRoute=function(){const h=location.hash.slice(1);let mt;
+ if(h==='navigator'){stopPractice();setNav('library');viewNavigator();document.title=UI.nvT+' · Rewiring';return}
+ if(h==='navfind'){stopPractice();setNav('library');viewNavFind();document.title=UI.nvT+' · Rewiring';return}
+ if((mt=h.match(/^nav-(\w+)$/))&&NVP[mt[1]]){stopPractice();setNav('library');viewNavProblem(mt[1]);document.title=NVP[mt[1]].n+' · Rewiring';return}
+ _renderRouteNv()};
+Object.assign(PLAY_IC,{navigator:'<circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><path d="M6 6l4 4M18 6l-4 4M6 18l4-4M18 18l-4-4"/>'});
+const _viewPlayNv=viewPlay;viewPlay=function(){_viewPlayNv();const g=$('#app .casegrid');if(g)g.insertAdjacentHTML('afterbegin',`<a class="casecard playcard" href="#navigator" style="--h:262"><span class="ac-ic">${picon('navigator')}</span><b>${esc(UI.nvT)}</b><span class="note">${esc(UI.nvCardSub)}</span></a>`)};
+PLAY_ROUTES.play=viewPlay;
+const _viewTodayNv=viewToday;viewToday=function(){_viewTodayNv();const s=$('#app .sec.duo');if(s)s.insertAdjacentHTML('afterbegin',`<a class="panel learncard nvcard" href="#navigator"><span class="ac-ic" aria-hidden="true">${picon('navigator')}</span><span style="min-width:0;flex:1 1 200px"><b>${esc(UI.nvCard)}</b><span class="note" style="display:block">${esc(UI.nvCardSub)}</span></span><span class="pill on">${esc(UI.nvT)} →</span></a>`)};

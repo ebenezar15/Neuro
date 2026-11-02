@@ -2,7 +2,7 @@
 const fs=require('fs');const src=fs.readFileSync(__dirname+'/build.js','utf8');const order=eval(src.match(/const js=(\[[^\]]*\])/)[1]);
 const r=f=>fs.readFileSync(__dirname+'/src/'+f,'utf8');
 const js=order.concat(['alt/hubs.js']).map(r).join('\n');
-const shell=r('shell.html').replace('<title>Rewiring</title>','<title>Rewiring Hubs</title>');
+const shell=r('shell.html').replace('<title>Rewiring</title>','<title>Rewiring Hubs</title>').replace('family=Atkinson+Hyperlegible','family=Figtree:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Atkinson+Hyperlegible');
 const frag=shell.replace('/*ATLAS_CSS*/',()=>r('atlas.css')).replace('/*APP_CSS*/',()=>r('app.css')+'\n'+r('alt/alt.css')).replace('/*JS*/',()=>js);
 fs.mkdirSync(__dirname+'/dist',{recursive:true});fs.writeFileSync(__dirname+'/dist/rewiring-hubs.html',frag);
 console.log('built hubs',(frag.length/1024).toFixed(0)+'KB');

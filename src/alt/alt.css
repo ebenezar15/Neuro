@@ -32,3 +32,26 @@ a.acard:hover,.acard-main:hover b{color:hsl(var(--h,176) var(--as) var(--al))}.a
 .gnode{cursor:pointer}.gnode circle{fill:hsl(var(--h) 55% 60%);stroke:var(--bg);stroke-width:3;transition:r .2s}.gnode text{font-size:11px;fill:var(--ink);font-family:var(--f-body)}
 .gnode:hover circle,.gnode:focus circle,.gnode.on circle{fill:hsl(var(--h) 70% 48%);stroke:hsl(var(--h) 70% 30%)}.gnode:focus{outline:none}.gnode.on text{font-weight:700}
 @media (prefers-reduced-motion:no-preference){.gnode circle{animation:gpop .5s ease both}@keyframes gpop{from{opacity:0;transform:scale(.6);transform-origin:center}}}
+/* ===== Golden-hour redesign: warm sunrise light, deep indigo ink, soft rounded forms (inspired by calm wellbeing sites) ===== */
+:root{--bg:#FFF8EC;--surface:#FFFDF8;--sunk:#F6ECDA;--ink:#201453;--muted:#5E5679;--line:#EADCC4;--accent:#3D2C8D;--spark:#F2A20C;--on-accent:#FFFFFF;--al:42%;--as:55%;--atint:93%;--amid:80%;--glow:rgba(242,162,12,.35);
+ --f-display:"Source Serif 4","Source Serif Pro",Georgia,serif;--f-body:"Figtree","Avenir Next",system-ui,sans-serif;--r:20px;--sun1:#FFD27A;--sun2:#FFB38A;--sun3:#C9B8F2}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#16112E;--surface:#1F1940;--sunk:#271F4E;--ink:#F7F1E6;--muted:#B9B0D6;--line:#3A3166;--accent:#FBB534;--spark:#87CAF6;--on-accent:#16112E;--al:70%;--as:60%;--atint:20%;--amid:34%;--glow:rgba(251,181,52,.3);--sun1:#5B3A8C;--sun2:#8C4A5E;--sun3:#2E2A6B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#16112E;--surface:#1F1940;--sunk:#271F4E;--ink:#F7F1E6;--muted:#B9B0D6;--line:#3A3166;--accent:#FBB534;--spark:#87CAF6;--on-accent:#16112E;--al:70%;--as:60%;--atint:20%;--amid:34%;--glow:rgba(251,181,52,.3);--sun1:#5B3A8C;--sun2:#8C4A5E;--sun3:#2E2A6B;color-scheme:dark}
+body{background:var(--bg)}
+h1,h2,.hubcard b,.acard b,.nvopt b{font-family:var(--f-display);letter-spacing:-.01em}
+.sunhero{position:relative;overflow:hidden;border-radius:28px;padding:28px 22px 24px;margin-top:14px;background:linear-gradient(160deg,var(--sun1),var(--sun2) 55%,var(--sun3));color:#201453;isolation:isolate}
+:root[data-theme="dark"] .sunhero{color:#F7F1E6}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sunhero{color:#F7F1E6}}
+.sunhero h1{font-size:clamp(32px,6vw,54px);line-height:1.05;margin:4px 0 8px;text-wrap:balance}.sunhero p{margin:0;font-size:17px;max-width:46ch;opacity:.9}
+.sunhero .eyebrow{color:inherit;opacity:.8}
+.sun{position:absolute;right:-40px;top:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#FFF3C4,#FFC94A 60%,transparent 70%);z-index:-1;animation:sunfloat 9s ease-in-out infinite}
+.blob{position:absolute;left:-60px;bottom:-80px;width:240px;height:200px;border-radius:50%;background:rgba(255,255,255,.28);filter:blur(4px);z-index:-1;animation:sunfloat 12s ease-in-out infinite reverse}
+@keyframes sunfloat{50%{transform:translate(-14px,10px) scale(1.04)}}
+@media (prefers-reduced-motion:reduce){.sun,.blob{animation:none}}
+.sunhero .actions{margin-top:16px}.sunhero .pill{background:rgba(255,255,255,.85);color:#201453;border-color:transparent}.sunhero .pill.on{background:#201453;color:#FFF8EC}
+.homemap{margin-top:14px;padding:10px;border-radius:24px;background:var(--surface);border:1px solid var(--line)}
+.needbtn{border-radius:20px}.hubcard{border-radius:22px;border-left-width:0;border-top:6px solid hsl(var(--h) var(--as) var(--al))}
+.hubgrid.sm .hubcard{border-top-width:0;border-left:6px solid hsl(var(--h) var(--as) var(--al))}
+.acard{border-radius:18px}.pill{border-radius:999px}
+.hubhero .hub-ic.big{border-radius:28px;box-shadow:0 10px 30px -18px hsl(var(--h) 60% 40%/.7)}
+.nvstrip{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:8px}
+:root[data-theme="dark"] .sun{opacity:.45}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sun{opacity:.45}}

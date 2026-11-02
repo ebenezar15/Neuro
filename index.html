@@ -907,6 +907,36 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .sn-bg{fill:none;stroke:var(--sunk);stroke-width:10}.sn-fg{fill:none;stroke:var(--accent);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .5s linear}
 .sn-mid{position:absolute;inset:0;display:grid;place-items:center}.sn-mid b{font-size:clamp(28px,8vw,40px)}
 .sn-cheer{min-height:2.6em;text-align:center;font-weight:600;margin:6px 0}
+/* ---- problem navigator ---- */
+.nvwrap{padding:8px}.nvmap{width:100%;max-width:560px;height:auto;display:block;margin:0 auto;overflow:visible}
+.nv-l{fill:none;stroke:hsl(var(--h) 55% 60%);stroke-width:3;opacity:.55}.nv-l.thin{stroke-width:1.6;opacity:.45;stroke-dasharray:400;stroke-dashoffset:400;animation:nvdraw 1.1s ease forwards}
+@keyframes nvdraw{to{stroke-dashoffset:0}}
+.nv-core{fill:var(--surface);stroke:var(--accent);stroke-width:3}.nv-ct{font:700 12px var(--f-display);fill:var(--ink);text-anchor:middle}.nv-cs{font:11px var(--f-mono);fill:var(--muted);text-anchor:middle}
+.nv-b{cursor:pointer}.nv-b circle{fill:hsl(var(--h) 60% 52%);stroke:var(--bg);stroke-width:3;transition:r .2s}.nv-b text{fill:#fff;font:700 9.5px var(--f-body);text-anchor:middle;pointer-events:none}.nv-b:hover circle,.nv-b.on circle,.nv-b:focus circle{r:27}.nv-b:focus{outline:none}
+.nv-p{cursor:pointer;transition:opacity .2s}.nv-p circle{fill:hsl(var(--h) 55% 62%);stroke:var(--bg);stroke-width:2.5;transition:r .2s}.nv-p text{font:600 10.5px var(--f-body);fill:var(--ink)}
+.nv-p:hover circle,.nv-p:focus circle{r:12;fill:hsl(var(--h) 70% 48%)}.nv-p:focus{outline:none}.nv-p.dim{opacity:.25}
+@media (prefers-reduced-motion:reduce){.nv-l.thin{animation:none;stroke-dashoffset:0}}
+.nvbranches{display:grid;gap:14px;margin-top:16px}.nvbranch h3{margin:0 0 8px;color:hsl(var(--h) var(--as) var(--al));scroll-margin-top:80px}
+.nvchips{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:8px}
+.nvchip,.nvopt{display:grid;gap:4px;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);border-left:5px solid hsl(var(--h,200) var(--as) var(--al));text-decoration:none;color:inherit;min-width:0}
+.nvbranch .nvchip{border-left-color:hsl(var(--h) var(--as) var(--al))}.nvchip span,.nvopt span{color:var(--muted);font-size:14px}.nvchip:hover,.nvopt:hover{transform:translateY(-1px);box-shadow:0 6px 18px -12px hsl(var(--h,200) 50% 30%/.6)}
+.nvsteps{display:flex;align-items:center;gap:6px;margin:4px 0 16px}.nvsteps span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);font-weight:700}.nvsteps span.on{background:var(--accent);color:var(--on-accent)}.nvsteps i{flex:0 0 28px;height:2px;background:var(--line)}
+.nvpick{display:grid;gap:10px}.nvpick.four{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.nvopt{position:relative;font:inherit;text-align:left;cursor:pointer;padding-right:40px}.nvopt b{font-family:var(--f-display);font-size:18px}.nvopt.big{min-height:110px;align-content:center;background:hsl(var(--h) 45% var(--atint));border-color:hsl(var(--h) 40% 80%/.6)}
+.nvgo,.nvn{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:hsl(var(--h) var(--as) var(--al));font-size:20px}.nvn{font-size:14px}
+.nvhero{padding-block:8px 6px}.nvhero h1{font-size:clamp(30px,5vw,46px);letter-spacing:-.03em;margin:0 0 6px;color:hsl(var(--h) var(--as) var(--al));text-wrap:balance}.nvhero p{color:var(--muted);font-size:18px;margin:0;max-width:60ch}
+.nvsec{margin-top:24px;scroll-margin-top:70px}.nvsec h2{display:flex;gap:10px;align-items:center;font-size:clamp(20px,3vw,26px);margin:0 0 10px}
+.nvsec h2 .mono{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:hsl(var(--h) 45% var(--atint));color:hsl(var(--h) var(--as) var(--al));font-size:14px;flex:none}
+.nvroots{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}.nr-trunk{fill:hsl(var(--h) 50% 55%)}.nr-t{fill:#fff;font:700 11px var(--f-body)}
+.nr-root{fill:none;stroke:hsl(var(--h) 40% 55%);stroke-width:4;stroke-linecap:round;stroke-dasharray:200;stroke-dashoffset:200;animation:nvdraw 1s ease forwards}
+.nr-n{fill:hsl(var(--h) 60% 55%);stroke:var(--surface);stroke-width:3}.nr-i{fill:#fff;font:700 11px var(--f-body)}.nr-l{fill:var(--ink);font:600 10px var(--f-body)}
+@media (prefers-reduced-motion:reduce){.nr-root{animation:none;stroke-dashoffset:0}}
+.nvrootlist{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}.nvrootlist li{display:grid;gap:2px;padding:8px 12px;border-left:4px solid hsl(var(--h) 55% 55%);background:var(--sunk);border-radius:8px}
+.nvsigns{display:grid;gap:8px}.nvsig{display:flex;gap:10px;align-items:center;text-align:left;font:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.nvsig .ck{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:transparent;flex:none;transition:all .2s}.nvsig.on{border-color:hsl(var(--h) var(--as) var(--al))}.nvsig.on .ck{background:hsl(var(--h) var(--as) var(--al));border-color:transparent;color:#fff}
+.nvflow{display:grid;gap:0}.nvstep{padding:12px 16px;border-radius:14px;background:hsl(var(--h) 45% var(--atint));border:1px solid hsl(var(--h) 40% 80%/.5)}.nvstep .eyebrow{margin:0 0 4px;color:hsl(var(--h) var(--as) var(--al))}.nvstep ul{margin:0;padding-left:20px}
+.nvarrow{text-align:center;font-size:22px;color:var(--muted);line-height:1.4}
+.nvverse{font-size:18px}
 
 </style>
 <div class="app-shell">
@@ -6894,6 +6924,139 @@ Z({"t":"Wired but Tired With a New Baby","cat":"Body","who":"Rebecca, 29, a firs
 Z({"t":"A Body Always on Alert","cat":"Mind","who":"David, 45, a school administrator in Chennai, who grew up in a troubled home","story":"David's body never seemed to relax. He startled at sudden noises, sat with his back to the wall in restaurants and could not sleep without the lights on. He had headaches and stomach problems. When his wife touched his shoulder from behind, he jumped. He thought this was just his personality. At church he heard a talk about trauma and the body and realised his symptoms matched. As a child, David lived with a father who drank and often became violent at night. He learned to listen for footsteps, to be ready to hide or protect his mother. Now, decades later, his body still behaved as if danger was near.","behind":"Research suggests that childhood trauma can leave the nervous system stuck on high alert. The brain's alarm centre becomes very sensitive, and the body stays ready for danger. This is called hypervigilance. Even when life is safe, small triggers like footsteps, raised voices or darkness can send the body back to old memories. David's younger self still felt unsafe and was trying to protect him. His stress response, with cortisol and adrenaline, never fully switched off. Without help, the body does not know the danger is over. Felt safety, meaning the body truly feels safe and not just knows it, is needed for healing.","turn":"In counselling, David read Psalm 91:1, about dwelling under the shadow of the Almighty. He began to imagine God as a safe Father who would never harm him. Slowly he let his younger self rest in God's care.","steps":["Begin trauma-informed counselling","Practise grounding when startled","Picture himself as a boy safe in God's care","Tell his wife what helps him feel safe","Build a calm evening routine with gentle light and prayer"],"tools":["safeinGod","triggerpause","completecycle","downshift"],"links":["Triggers and the Wounded Inner Child","Felt Sense of Safety","Window of Tolerance"],"bible":"The gospel offers David a Father who is safe. \"He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty\" (Psalm 91:1). David's earthly father brought fear, but his heavenly Father brings refuge. \"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety\" (Psalm 4:8). Jesus understands suffering and fear (Hebrews 4:15). David also experienced healing through others. His counsellor, his wife and a men's prayer group offered safe relationships where he could share his story. \"He healeth the broken in heart, and bindeth up their wounds\" (Psalm 147:3). God's love reached the frightened boy inside the grown man.","design":"God designed the brain to protect us from danger, but also to return to calm when danger passes. Research suggests that trauma interrupts this process. Healing comes through repeated experiences of safety, in the body as well as the mind. Safe relationships, gentle routines, grounding and calming practices help widen the window of tolerance, so that triggers no longer overwhelm. Imagining God's protective presence can bring a deep sense of felt safety. God made our brains changeable, so even long-held patterns can heal over time.","verse":"Psalm 91:1|He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.","meditate":["Psalm 4:8","Psalm 147:3","Hebrews 4:15"],"outcome":"After a year of counselling, David sleeps with only a small night light and startles less often. His headaches have reduced. He still has hard days, especially around the anniversary of his father's death. But he can now tell his wife when he is triggered, and she knows how to help. He describes himself as learning to live as a safe son.","lesson":"A body formed in danger can learn felt safety through God's love and safe relationships.","simple":"David grew up scared, so his body always felt on alert. With counselling and God's love, he is learning that he is safe now.","cid":"alertbody"});
 extendAtlas();CASES.forEach(m=>{if(!m.simple)m.simple=m.lesson});
 
+// ===== PROBLEM NAVIGATOR: one simple visual map of common problems, their pattern, roots and way out =====
+// roots layers: body & brain, past, beliefs, life now, spirit. Links point to existing pages and practices.
+const NAV_B=[{id:'emo',n:'Feelings',q:'Strong or missing feelings',h:200},{id:'self',n:'Thoughts & self',q:'How I see myself and think',h:262},{id:'rel',n:'People',q:'Relationships and trust',h:340},{id:'do',n:'Doing',q:'Habits, energy and getting things done',h:30}];
+const NAV_L=['Body & brain','Past','Beliefs','Life now','Spirit'];
+const NAV_P=[
+ {id:'anxiety',sn:'Anxiety',b:'emo',n:'Anxiety',one:'Worry and fear that feel bigger than the situation.',
+  cy:'Uncertain situation>"What if…?" thought>Body alarm>Avoid or over-prepare>Relief, so the brain learns it was dangerous',
+  r:['An over-sensitive alarm system, poor sleep, caffeine','Unpredictable or frightening childhood experiences','"I must be ready for everything", "I can\'t cope"','Real pressures: money, work, health, relationships','Carrying tomorrow alone instead of trusting God with it'],
+  s:['Racing thoughts about the future','Tight chest or stomach','Avoiding things that feel risky','Needing reassurance','Trouble sleeping'],
+  now:'Breathe out longer than you breathe in;Name the fear in one sentence',today:'Write the worry and one small step;Move your body for ten minutes',weeks:'Face feared situations in small steps;Practise worry time and breath prayer;See a counsellor if it limits your life',
+  v:'Philippians 4:6-7|Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.',
+  l:'The Anxiety Cycle;The Roots of Anxiety;Worry vs. Anxiety vs. Panic',p:'sigh;worrytree;breathprayer',simple:'Anxiety is your body\'s alarm going off too much. Slow breaths, small brave steps and praying help it calm down.'},
+ {id:'panic',sn:'Panic attacks',b:'emo',n:'Panic attacks',one:'Sudden waves of intense fear with a pounding heart, dizziness or breathlessness.',
+  cy:'Body sensation>"Something terrible is happening">Adrenaline surge>More sensations>Fear of the next attack',
+  r:['A sensitive fight-or-flight system, stimulants, a physical cause','Past trauma or a sudden shock','"These feelings are dangerous"','Long stress without recovery','Feeling alone and out of control'],
+  s:['Pounding heart and fast breathing','Fear of dying or losing control','Tingling, dizziness or chest tightness','Avoiding places where it happened','Constant fear of the next attack'],
+  now:'Slow the out-breath and plant your feet;Tell yourself: "This is a panic wave. It will pass."',today:'Rest, drink water and eat;Tell someone safe what happened',weeks:'Get a medical check once;Learn that the sensations are safe;Get help from a counsellor trained in panic',
+  v:'Psalm 56:3|What time I am afraid, I will trust in thee.',
+  l:'The Panic Wave;A sudden panic or anxiety spike;Worry vs. Anxiety vs. Panic',p:'sigh;ground;coherent',simple:'A panic attack is your body\'s alarm going off very loudly. It feels scary but it is not dangerous, and it always passes.'},
+ {id:'anger',sn:'Anger',b:'emo',n:'Anger outbursts',one:'Anger that comes out too fast or too strong, hurting people and relationships.',
+  cy:'Trigger>Hurt or threat underneath>Body heats up>Outburst>Guilt or blame>Tension builds again',
+  r:['Tiredness, hunger, stress hormones','A volatile or harsh home growing up','"I must control things to be respected"','Unmet needs and unspoken expectations','Unforgiveness and carrying injustice alone'],
+  s:['Snapping at small things','Shouting or slamming','Regret after outbursts','People walking on eggshells','Feeling disrespected often'],
+  now:'Leave the room and breathe;Say: "I need 20 minutes"',today:'Name the hurt under the anger;Repair with an honest apology',weeks:'Learn your triggers;Turn expectations into clear requests;Bring old anger to God and a counsellor',
+  v:'James 1:19-20|Let every man be swift to hear, slow to speak, slow to wrath: For the wrath of man worketh not the righteousness of God.',
+  l:'The Anger Iceberg;The Violation Wound;Righteous Anger vs. Ego-Driven Anger',p:'angerunder;threer;apology5',simple:'Anger is often a cover for hurt or fear. Take a break, find the hurt, and talk about it calmly.'},
+ {id:'tolerance',sn:'Low tolerance',b:'emo',n:'Low tolerance',one:'Little patience for frustration, discomfort, waiting or mistakes.',
+  cy:'Small frustration>"I can\'t stand this">Body tenses fast>Quit, snap or escape>Never learn to cope with it',
+  r:['A narrow window of tolerance from stress or poor sleep','Being rescued too often, or overwhelmed too early, as a child','"Things should be easy and fair"','Too much stimulation and instant rewards','Little practice of patience and surrender'],
+  s:['Irritated by delays','Giving up when things get hard','Short temper with slow people','Needing everything now','Easily overwhelmed by noise or mess'],
+  now:'Breathe and say: "This is uncomfortable, not unbearable"',today:'Do one hard thing slowly on purpose;Cut one quick-hit habit for a day',weeks:'Widen your window with daily calming practice;Practise boredom and waiting;Ask God to grow patience',
+  v:'James 1:3-4|The trying of your faith worketh patience. But let patience have her perfect work.',
+  l:'Window of Tolerance;Frustration;Widening Your Window',p:'boredom;coherent;notyet',simple:'Low tolerance means getting upset very fast. Practising waiting and calming down little by little makes you stronger.'},
+ {id:'numb',sn:'No interest',b:'emo',n:'No interest in anything',one:'Nothing feels enjoyable or meaningful. You feel flat, empty or numb.',
+  cy:'Low mood or exhaustion>Stop doing things>Less joy and connection>Feel flatter>Withdraw more',
+  r:['Depression, burnout, illness, low iron or thyroid','Long periods of stress, grief or trauma','"Nothing will change", "What\'s the point?"','Overstimulation, loneliness, no purpose','Spiritual dryness or feeling far from God'],
+  s:['Losing interest in things you used to enjoy','Feeling flat or empty','Low energy most days','Withdrawing from people','Sleeping or eating much more or less'],
+  now:'Do one tiny thing: open a window, drink water',today:'Go outside for ten minutes;Text one person',weeks:'Schedule small enjoyable activities even without feeling like it;See a doctor to rule out depression or physical causes;Find one small purpose to serve',
+  v:'Psalm 42:11|Why art thou cast down, O my soul? hope thou in God: for I shall yet praise him.',
+  l:'Feeling numb or flat;Sadness vs. Grief vs. Depression;I feel hopeless',p:'hopedose;nature;goodpleasure',simple:'If nothing feels fun anymore, your mind and body may be very tired or sad. Small steps, sunshine, friends and a doctor can help.'},
+ {id:'esteem',sn:'Low self-worth',b:'self',n:'Low self-esteem',one:'Seeing yourself as not good enough, unlovable or less worthy than others.',
+  cy:'Situation>Inner critic speaks>Shame or hiding>Avoid or over-perform>Worth still feels shaky',
+  r:['A threat-focused brain that notices failure more','Criticism, neglect or comparison growing up','"I am not enough", "I must earn love"','Constant comparison and social media','Not knowing who you are in God'],
+  s:['Harsh self-talk','Struggling to accept compliments','Not trying in case you fail','Needing approval','Feeling like a fraud'],
+  now:'Notice the critic\'s voice and name it',today:'Write one thing God says about you;Speak to yourself as you would to a friend',weeks:'Practise self-compassion daily;Use your strengths to serve;Root identity in being God\'s beloved child',
+  v:'Psalm 139:14|I will praise thee; for I am fearfully and wonderfully made.',
+  l:'Low Self-Esteem;The Tree of Self-Worth;Identity as Beloved',p:'kindstory;critic;strengthuse',simple:'Low self-esteem means thinking you are not good enough. God made you and loves you, and you can learn to speak kindly to yourself.'},
+ {id:'inferior',sn:'Inferiority',b:'self',n:'Inferiority complex',one:'A deep feeling of being lower than others, often hidden behind withdrawal or showing off.',
+  cy:'Notice someone else>Compare>"I am less">Hide, envy or compensate>Comparison grows',
+  r:['A brain wired to watch status and threat','Being compared, bullied or looked down on','"My worth depends on being better"','Competitive culture and social media','Measuring worth by people instead of God'],
+  s:['Constantly comparing','Envy of others\' success','Feeling small around certain people','Showing off or putting others down','Avoiding people who seem better'],
+  now:'Stop and say: "Different is not less"',today:'Celebrate someone else\'s success;Compare only with your own yesterday',weeks:'Reduce comparison triggers;Discover your strengths;Receive your worth from grace, not ranking',
+  v:'Galatians 6:4|Let every man prove his own work, and then shall he have rejoicing in himself alone, and not in another.',
+  l:'Constant Comparison;The Insecurity Wound;The Inadequacy Wound',p:'notyet;strengthuse;kindstory',simple:'Feeling lower than others comes from comparing. God made each person different, and nobody is worth less.'},
+ {id:'perfect',sn:'Perfectionism',b:'self',n:'Perfectionism',one:'Impossibly high standards and fear of mistakes that make life exhausting.',
+  cy:'Task>"It must be perfect">Fear and delay>Over-work or avoid>Never satisfied',
+  r:['Anxious brain that hates uncertainty','Love that felt conditional on performance','"Mistakes make me unacceptable"','High-pressure school or work','Trying to earn what grace already gives'],
+  s:['Redoing things many times','Procrastinating from fear','Harsh self-criticism','Difficulty delegating','Never feeling satisfied'],
+  now:'Set a "good enough" standard for one task',today:'Finish one thing imperfectly on purpose',weeks:'Practise healthy striving instead of perfection;Treat mistakes as learning;Rest in grace',
+  v:'2 Corinthians 12:9|My grace is sufficient for thee: for my strength is made perfect in weakness.',
+  l:'Perfectionism;The Perfectionism Iceberg;Perfectionism vs. Healthy Striving',p:'shrink;notyet;kindstory',simple:'Perfectionism means feeling things must be perfect. Good enough is often best, and God loves you even when you make mistakes.'},
+ {id:'overthink',sn:'Overthinking',b:'self',n:'Overthinking',one:'Going round and round in thoughts without reaching a decision or peace.',
+  cy:'A worry or memory>Analyse it again>Feel worse>Look for certainty>Think more',
+  r:['An idle default-mode network and anxious brain','Learning that mistakes were dangerous','"If I think enough, I\'ll be safe"','Too little action, too much screen time','Trying to control what belongs to God'],
+  s:['Replaying conversations','Imagining worst cases','Trouble sleeping','Asking for reassurance','Feeling mentally tired'],
+  now:'Write the thought down and close the notebook',today:'Turn one thought into one action;Go for a walk',weeks:'Use worry time;Practise noticing thoughts without following them;Hand over what you can\'t control',
+  v:'Isaiah 26:3|Thou wilt keep him in perfect peace, whose mind is stayed on thee.',
+  l:'Overthinking;The Rumination Whirlpool;Overthinking vs. Problem-Solving vs. Reflection',p:'defuse;handover;walkthink',simple:'Overthinking is when your mind goes in circles. Write it down, do one small thing, and give the rest to God.'},
+ {id:'decide',sn:'Indecision',b:'self',n:'Indecision',one:'Difficulty making choices, big or small, from fear of choosing wrong.',
+  cy:'Choice needed>"What if I choose wrong?">Gather more information>Delay>Choice gets harder',
+  r:['Anxiety and decision fatigue','Being criticised for choices as a child','"There is one perfect choice"','Too many options and little time','Fear of missing God\'s will'],
+  s:['Delaying decisions','Asking many people','Regretting choices','Feeling paralysed by options','Letting others decide'],
+  now:'Narrow to two options',today:'Set a deadline and choose',weeks:'Use your values as a compass;Accept good-enough choices;Trust God to guide you as you move',
+  v:'Proverbs 3:5-6|Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.',
+  l:'Indecision;Decision Fatigue;Stuck on a decision',p:'ownwhy;excuseplan;handover',simple:'Indecision is being stuck choosing. Pick from two good choices, set a time, and trust God to guide you.'},
+ {id:'pleasing',sn:'People-pleasing',b:'rel',n:'People-pleasing',one:'Saying yes when you mean no, to avoid conflict, rejection or disapproval.',
+  cy:'Request>Fear of upsetting them>Automatic yes>Exhaustion and resentment>Fear grows',
+  r:['The fawn response of the stress system','Love that felt conditional or unsafe','"My needs don\'t matter"','Roles that reward self-sacrifice','Fearing people more than trusting God'],
+  s:['Hard to say no','Apologising too much','Feeling responsible for others\' feelings','Resentment','Exhaustion'],
+  now:'Say: "Let me check and get back to you"',today:'Find the fear behind one yes',weeks:'Practise small, kind noes;Notice resentment as a signal;Rest your worth in God\'s approval',
+  v:'Galatians 1:10|For do I now persuade men, or God? or do I seek to please men?',
+  l:'People-Pleasing;Fawn Response;People-Pleasing vs. Kindness vs. Love',p:'fearyes;needsaudit;resentsignal',simple:'People-pleasing means always saying yes because you are scared. You can be kind and still say no.'},
+ {id:'trust',sn:'Trust issues',b:'rel',n:'Trust issues',one:'Finding it hard to trust people, expecting to be hurt, used or betrayed.',
+  cy:'Closeness>"They will hurt me">Check, test or keep walls up>Distance>"See, people can\'t be trusted"',
+  r:['A hypervigilant threat system','Betrayal, dishonesty or unstable care growing up','"People have hidden motives"','A recent betrayal or unsafe relationship','Not yet resting in God\'s faithfulness'],
+  s:['Checking up on people','Reading hidden meanings','Keeping walls up','Testing loyalty','Expecting to be let down'],
+  now:'Ask: "Is this the past or the present?"',today:'Share a fear without accusing',weeks:'Build trust slowly with safe people;Heal past betrayals;Rest in God\'s faithfulness',
+  v:'Psalm 9:10|They that know thy name will put their trust in thee: for thou, LORD, hast not forsaken them that seek thee.',
+  l:'Difficulty Trusting;The Distrust Wound;Forgiveness vs. Trust vs. Reconciliation',p:'triggertalk;safeinGod;checkin',simple:'Trust issues come from being hurt before. Trust can grow again slowly with safe people, and God is always faithful.'},
+ {id:'jealous',sn:'Jealousy',b:'rel',n:'Jealousy',one:'Fear of losing someone or something to another person, or resentment at their good.',
+  cy:'See a threat or someone\'s success>"I will lose" or "I am less">Suspicion or envy>Control or withdraw>Relationship strains',
+  r:['Attachment alarm and insecurity','Loss, rejection or favouritism growing up','"Love is scarce"','Comparison and real uncertainty','Forgetting God\'s generous love'],
+  s:['Checking partner\'s phone','Feeling threatened by others','Resenting friends\' success','Needing constant reassurance','Possessiveness'],
+  now:'Name the fear underneath',today:'Ask for reassurance honestly instead of accusing',weeks:'Heal the insecurity wound;Practise gratitude;Celebrate others',
+  v:'1 Corinthians 13:4|Charity suffereth long, and is kind; charity envieth not.',
+  l:'Jealousy & Insecurity;Envy;The Insecurity Wound',p:'gratexchange;triggertalk;kindstory',simple:'Jealousy is fear of losing someone or feeling less. Tell the truth about your fear and thank God for what you have.'},
+ {id:'lonely',sn:'Loneliness',b:'rel',n:'Loneliness',one:'Feeling disconnected or unseen, even around people.',
+  cy:'Feel alone>Expect rejection>Withdraw>Fewer connections>Lonelier',
+  r:['Social pain circuits and low mood','Moves, losses or rejection','"No one wants me"','Busy, screen-heavy life','Not experiencing God\'s presence or church family'],
+  s:['Feeling unseen','Long hours alone','Scrolling instead of connecting','Feeling left out','Sadness in the evenings'],
+  now:'Send one message to someone',today:'Have one real conversation',weeks:'Join a small group or serve;Build regular rhythms of connection;Spend time with God as a friend',
+  v:'Psalm 68:6|God setteth the solitary in families.',
+  l:'Loneliness;Lonely, even around people',p:'partner;presence;gratexchange',simple:'Loneliness means feeling alone. Reach out to one person today, and remember God is always with you.'},
+ {id:'procrast',sn:'Procrastination',b:'do',n:'Procrastination',one:'Putting things off even when you want to do them.',
+  cy:'Task>Uncomfortable feeling>Escape to something easy>Relief>Guilt and more avoidance',
+  r:['Instant rewards win in the brain','Pressure or criticism around performance','"It must be perfect", "I can\'t do it"','Unclear steps and distractions','The willing spirit and weak flesh'],
+  s:['Last-minute rush','Excuses','Scrolling instead of starting','Guilt','Missed deadlines'],
+  now:'Do the smallest first step for two minutes',today:'Name the feeling you are avoiding;Move distractions away',weeks:'Make if-then plans;Track progress;Find your own why',
+  v:'Ecclesiastes 9:10|Whatsoever thy hand findeth to do, do it with thy might.',
+  l:'Procrastination;Why We Don\'t Do What We Want To;Procrastinating and can\'t start',p:'shrink;feelavoid;excuseplan',simple:'Procrastination is putting things off. Start with a tiny step for two minutes. Starting is the hardest part.'},
+ {id:'lazy',sn:'Low energy',b:'do',n:'Low energy and "laziness"',one:'Feeling unmotivated or sluggish. Usually it is tiredness, discouragement or a lack of purpose, not a character flaw.',
+  cy:'Low energy>Do less>Feel guilty>Less motivation>Even less energy',
+  r:['Poor sleep, diet, illness, low iron or thyroid','Being labelled lazy, or never given responsibility','"I am just lazy"','No clear goals, overstimulation','Purpose not yet found in God'],
+  s:['Hard to get going','Lots of screen time','Unfinished tasks','Feeling guilty','No goals'],
+  now:'Stand up, drink water and move',today:'Do one useful thing for 10 minutes',weeks:'Fix sleep and movement;Find meaningful goals;Get a health check if fatigue lasts',
+  v:'Proverbs 6:6|Go to the ant, thou sluggard; consider her ways, and be wise.',
+  l:'Getting Started (Activation Energy);Motivation vs. Discipline vs. Habit;The Energy Battery',p:'shrink;chain;bodycheck',simple:'Feeling lazy is often feeling tired or without a goal. Rest well, move your body, and find something that matters to you.'},
+ {id:'fail',sn:'Fear of failure',b:'do',n:'Fear of failure',one:'Avoiding challenges because failing feels unbearable.',
+  cy:'New challenge>"What if I fail?">Avoid or over-prepare>No growth>Fear grows',
+  r:['Threat system sensitive to judgment','Harsh reactions to mistakes growing up','"Failure means I am a failure"','High-stakes pressure','Worth tied to success instead of grace'],
+  s:['Avoiding new things','Perfectionism','Self-handicapping','Anxiety before tests','Giving up early'],
+  now:'Say: "Failing at something does not make me a failure"',today:'Take one small risk',weeks:'Practise "not yet";Learn from mistakes;Remember your worth is secure in God',
+  v:'Proverbs 24:16|For a just man falleth seven times, and riseth up again.',
+  l:'Fear of Failure;Perfectionism;Fear of Judgment',p:'notyet;shrink;kindstory',simple:'Fear of failure stops us trying. Everyone fails sometimes. God still loves you, and you can try again.'},
+ {id:'lust',sn:'Lust',b:'do',n:'Lust and unwanted sexual habits',one:'Repeated sexual thoughts or behaviour you don\'t want, often a way of coping with deeper pain.',
+  cy:'Stress, loneliness or boredom>Craving>Act out>Shame>Hide, and the cycle repeats',
+  r:['The reward system trained by intense stimulation','Family wounds, abuse or early exposure','"I am bad", "I need this to cope"','Loneliness, futility, anger, easy access','Shame that hides instead of coming into the light'],
+  s:['Repeated urges','Secret behaviour','Shame afterwards','Seeing people as objects','Promising to stop and failing'],
+  now:'Leave the place and call someone',today:'Note what happened before the urge',weeks:'Reset your brain from high stimulation;Bring it into the light with safe people;Pursue purpose and good pleasure',
+  v:'1 Corinthians 10:13|God is faithful, who will not suffer you to be tempted above that ye are able; but will with the temptation also make a way to escape.',
+  l:'Unwanted sexual behaviour (pornography, fantasy, secret habits);What Drives Unwanted Behaviour?;Sexual thoughts keep popping into my mind',p:'mapstory;brainreset;intolight',simple:'If you keep doing a sexual thing you don\'t want, tell a safe person, find out what you are really needing, and let God heal you.'}];
+Object.assign(UI,{nvT:'Problem navigator',nvSub:'A simple map of common struggles. Tap one to see its pattern, its roots, the signs, and the way out.',nvStart:'Help me find it',nvMap:'The map',nvQ1:'Where do you notice it most?',nvQ2:'Which of these sounds like you?',nvBack:'Back',nvPattern:'The pattern',nvRoots:'The roots',nvSigns:'Do these fit you?',nvFit:'fit you',nvWay:'The way out',nvNow:'Right now',nvToday:'Today',nvWeeks:'Over weeks',nvTruth:'God\'s truth',nvDeeper:'Go deeper',nvTools:'Practices',nvAll:'See the whole map',nvCard:'Find what\'s going on',nvCardSub:'A simple visual map of common struggles, their roots and the way out.'});
+
 // ===== INTERACTIVE WIDGETS on practice pages =====
 const rng=(id,val,min=0,max=10)=>`<span class="rangerow"><input type="range" id="${id}" min="${min}" max="${max}" value="${val}"><output id="${id}-v">${val}</output></span>`;
 const bindRng=(r,id,cb)=>{const el=$('#'+id,r);el.oninput=()=>{$('#'+id+'-v',r).textContent=el.value;if(cb)cb()}};
@@ -8441,6 +8604,59 @@ function connectData(m){const G=[];
 function connectBox(m){const G=connectData(m);if(!G.length)return '';
  return `<div class="cols cnbox"><div class="box w12"><h3><span class="k">LINKS</span>${esc(UI.cnT)}</h3>${G.map(([t,list])=>`<p class="eyebrow" style="margin:12px 0 6px">${esc(t)}</p><div class="chips">${list.map(chip).join('')}</div>`).join('')}</div></div>`}
 const _sheetCn=sheet;sheet=function(m){_sheetCn(m);const a=$('#app article');if(a&&!a.querySelector('.cnbox')){const html=connectBox(m);if(html){const f=a.querySelector('.simple.pg');if(f)f.insertAdjacentHTML('beforebegin',html);else a.insertAdjacentHTML('beforeend',html)}}};
+
+// ===== PROBLEM NAVIGATOR UI: #navigator (visual map), #navfind (guided finder), #nav-<id> (pattern, roots, signs, way out) =====
+const NVP=Object.fromEntries(NAV_P.map(p=>[p.id,p]));const NVB=Object.fromEntries(NAV_B.map(b=>[b.id,b]));
+const nvList=s=>String(s||'').split(/;(?! )/).filter(Boolean);
+function nvMapSVG(sel){const C=200,pos={},bpos={};const ang={emo:-135,self:-45,rel:135,do:45};
+ NAV_B.forEach(b=>{const a=ang[b.id]*Math.PI/180;bpos[b.id]=[C+82*Math.cos(a),C+82*Math.sin(a)];const ps=NAV_P.filter(p=>p.b===b.id);ps.forEach((p,i)=>{const t=(ang[b.id]+(i-(ps.length-1)/2)*(56/Math.max(1,ps.length-1)))*Math.PI/180;pos[p.id]=[C+168*Math.cos(t),C+168*Math.sin(t),t]})});
+ return `<svg viewBox="-20 -10 440 420" class="nvmap" role="img" aria-label="${esc(UI.nvT)}">
+ ${NAV_B.map(b=>{const [x,y]=bpos[b.id];return `<path d="M${C} ${C}L${x} ${y}" class="nv-l" style="--h:${b.h}"/>`+NAV_P.filter(p=>p.b===b.id).map(p=>{const [px,py]=pos[p.id];return `<path d="M${x} ${y}Q${(x+px)/2+(C-x)*.12} ${(y+py)/2+(C-y)*.12} ${px} ${py}" class="nv-l thin" style="--h:${b.h}"/>`}).join('')}).join('')}
+ <circle cx="${C}" cy="${C}" r="40" class="nv-core"/><text x="${C}" y="${C-4}" class="nv-ct">${esc(UI.nvMap)}</text><text x="${C}" y="${C+12}" class="nv-cs">${NAV_P.length}</text>
+ ${NAV_B.map(b=>{const [x,y]=bpos[b.id];return `<g class="nv-b" style="--h:${b.h}" data-nb="${b.id}" tabindex="0" role="button" aria-label="${esc(b.n)}"><circle cx="${x}" cy="${y}" r="24"/><text x="${x}" y="${y+4}">${esc(b.n.split(' ')[0])}</text></g>`}).join('')}
+ ${NAV_P.map(p=>{const [x,y,t]=pos[p.id],b=NVB[p.b],c=Math.cos(t),anchor=c<-.3?'end':c>.3?'start':'middle',lx=x+15*c,ly=y+15*Math.sin(t)+4;
+  return `<g class="nv-p${sel===p.id?' on':''}" style="--h:${b.h}" data-np="${p.id}" tabindex="0" role="link" aria-label="${esc(p.n)}"><circle cx="${x}" cy="${y}" r="9"/><text x="${lx}" y="${ly}" text-anchor="${anchor}">${esc(p.sn||p.n)}</text></g>`}).join('')}</svg>`}
+function nvBind(){$$('[data-np]').forEach(g=>{const go=()=>{location.hash='nav-'+g.dataset.np};g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+ $$('[data-nb]').forEach(g=>{const f=()=>{const id=g.dataset.nb;$$('.nv-p').forEach(x=>x.classList.toggle('dim',NVP[x.dataset.np].b!==id));$$('.nv-b').forEach(x=>x.classList.toggle('on',x.dataset.nb===id));const l=document.getElementById('nvb-'+id);if(l)l.scrollIntoView({behavior:'smooth',block:'nearest'})};g.addEventListener('click',f);g.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();f()}})})}
+function viewNavigator(){app().innerHTML=`<div class="wrap fade"><div class="page-h"><p class="eyebrow">${esc(UI.nvCard)}</p><h1>${esc(UI.nvT)}</h1><p>${esc(UI.nvSub)}</p></div>
+ <div class="actions" style="margin-bottom:10px"><a class="pill on" href="#navfind">${esc(UI.nvStart)} →</a></div>
+ <div class="panel nvwrap">${nvMapSVG()}</div>
+ <div class="nvbranches">${NAV_B.map(b=>`<section class="nvbranch" id="nvb-${b.id}" style="--h:${b.h}"><h3>${esc(b.n)}<span class="note"> · ${esc(b.q)}</span></h3><div class="nvchips">${NAV_P.filter(p=>p.b===b.id).map(p=>`<a class="nvchip" href="#nav-${p.id}"><b>${esc(p.n)}</b><span>${esc(p.one)}</span></a>`).join('')}</div></section>`).join('')}</div></div>`;
+ nvBind();addSimple(UI.nvSub)}
+let NVF=null;
+function viewNavFind(){const b=NVF&&NVB[NVF];app().innerHTML=`<div class="wrap fade nvfind"><div class="page-h"><p class="eyebrow">${esc(UI.nvT)}</p><h1>${esc(b?UI.nvQ2:UI.nvQ1)}</h1></div>
+ <div class="nvsteps"><span class="on">1</span><i></i><span class="${b?'on':''}">2</span><i></i><span>3</span></div>
+ ${b?`<div class="nvpick">${NAV_P.filter(p=>p.b===b.id).map(p=>`<a class="nvopt" href="#nav-${p.id}" style="--h:${b.h}"><b>${esc(p.n)}</b><span>${esc(p.one)}</span><span class="nvgo">→</span></a>`).join('')}</div><div class="actions" style="margin-top:12px"><button class="pill" id="nvback">← ${esc(UI.nvBack)}</button><a class="pill" href="#navigator">${esc(UI.nvAll)}</a></div>`
+ :`<div class="nvpick four">${NAV_B.map(x=>`<button class="nvopt big" data-nf="${x.id}" style="--h:${x.h}"><b>${esc(x.n)}</b><span>${esc(x.q)}</span><span class="nvn mono">${NAV_P.filter(p=>p.b===x.id).length}</span></button>`).join('')}</div><div class="actions" style="margin-top:12px"><a class="pill" href="#navigator">${esc(UI.nvAll)}</a></div>`}</div>`;
+ $$('[data-nf]').forEach(x=>x.onclick=()=>{NVF=x.dataset.nf;viewNavFind();scrollTo(0,0)});const bk=$('#nvback');if(bk)bk.onclick=()=>{NVF=null;viewNavFind()};addSimple(UI.nvSub)}
+function rootsSVG(p,h){const W=360,ys=[150,150,150,150,150],xs=[30,105,180,255,330];
+ return `<svg viewBox="0 0 ${W} 190" class="nvroots" aria-hidden="true"><rect x="110" y="8" width="140" height="34" rx="17" class="nr-trunk" style="--h:${h}"/><text x="180" y="29" class="nr-t" text-anchor="middle">${esc(p.sn||p.n)}</text><rect x="172" y="42" width="16" height="36" class="nr-trunk" style="--h:${h}"/>
+ ${xs.map((x,i)=>`<path d="M180 78C180 110 ${x} 105 ${x} ${ys[i]-14}" class="nr-root" style="--h:${h};animation-delay:${i*.12}s"/><circle cx="${x}" cy="${ys[i]}" r="13" class="nr-n" style="--h:${[150,30,262,200,45][i]}"/><text x="${x}" y="${ys[i]+4}" text-anchor="middle" class="nr-i">${i+1}</text><text x="${x}" y="${ys[i]+30}" text-anchor="middle" class="nr-l">${esc(NAV_L[i].split(' ')[0])}</text>`).join('')}</svg>`}
+function viewNavProblem(id){const p=NVP[id],b=NVB[p.b];const i=NAV_P.indexOf(p),prev=NAV_P[i-1],next=NAV_P[i+1];const [vr,vt]=String(p.v).split('|');let fit=new Set(store.get('navfit-'+id,[]));
+ const maps=String(p.l).split(';').map(find).filter(Boolean),prs=String(p.p).split(';').map(c=>PR[c]).filter(Boolean);
+ app().innerHTML=`<article class="wrap fade nvpage" style="--h:${b.h}"><div class="crumbs"><a href="#navigator">${esc(UI.nvT)}</a> / <span class="mono">${esc(b.n)}</span></div>
+ <div class="nvhero"><h1>${esc(p.n)}</h1><p>${esc(p.one)}</p></div>
+ <nav class="hubtabs">${[['pat',UI.nvPattern],['root',UI.nvRoots],['sig',UI.nvSigns],['way',UI.nvWay],['truth',UI.nvTruth]].map(([k,t],j)=>`<a class="pill" href="#nav-${id}" data-nj="${k}"><span class="mono">${j+1}</span> ${esc(t)}</a>`).join('')}</nav>
+ <section class="nvsec" id="nj-pat"><h2><span class="mono">1</span>${esc(UI.nvPattern)}</h2><div class="panel">${cycleSVG(p.cy.split('>').map(x=>x.trim()),b.h)}</div></section>
+ <section class="nvsec" id="nj-root"><h2><span class="mono">2</span>${esc(UI.nvRoots)}</h2><div class="panel">${rootsSVG(p,b.h)}<ol class="nvrootlist">${p.r.map((r,j)=>`<li style="--h:${[150,30,262,200,45][j]}"><b>${esc(NAV_L[j])}</b><span>${esc(r)}</span></li>`).join('')}</ol></div></section>
+ <section class="nvsec" id="nj-sig"><h2><span class="mono">3</span>${esc(UI.nvSigns)}</h2><div class="nvsigns">${p.s.map((s,j)=>`<button class="nvsig${fit.has(j)?' on':''}" data-sg="${j}" aria-pressed="${fit.has(j)}"><span class="ck">✓</span>${esc(s)}</button>`).join('')}</div><p class="note" id="nvfit"><b>${fit.size}/${p.s.length}</b> ${esc(UI.nvFit)}</p></section>
+ <section class="nvsec" id="nj-way"><h2><span class="mono">4</span>${esc(UI.nvWay)}</h2><div class="nvflow">${[[UI.nvNow,p.now,0],[UI.nvToday,p.today,45],[UI.nvWeeks,p.weeks,150]].map(([t,s,hh],j)=>`<div class="nvstep" style="--h:${hh}"><p class="eyebrow">${esc(t)}</p><ul>${nvList(s).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>${j<2?'<div class="nvarrow" aria-hidden="true">↓</div>':''}`).join('')}</div>
+  ${prs.length?`<p class="eyebrow" style="margin:16px 0 8px">${esc(UI.nvTools)}</p><div class="pgrid">${prs.map(pcardHTML).join('')}</div>`:''}</section>
+ <section class="nvsec" id="nj-truth"><h2><span class="mono">5</span>${esc(UI.nvTruth)}</h2><blockquote class="case-verse nvverse">${esc(vt)}<cite>${esc(vr)}</cite></blockquote>
+  ${maps.length?`<p class="eyebrow" style="margin:16px 0 8px">${esc(UI.nvDeeper)}</p><div class="chips">${maps.map(chip).join('')}</div>`:''}</section>
+ <div class="pager">${prev?`<a href="#nav-${prev.id}" style="--h:${NVB[prev.b].h}"><small>←</small><b>${esc(prev.n)}</b></a>`:'<span></span>'}${next?`<a href="#nav-${next.id}" style="--h:${NVB[next.b].h}"><small>→</small><b>${esc(next.n)}</b></a>`:''}</div></article>`;
+ $$('[data-nj]').forEach(a=>a.onclick=e=>{e.preventDefault();const el=document.getElementById('nj-'+a.dataset.nj);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});
+ $$('[data-sg]').forEach(x=>x.onclick=()=>{const j=+x.dataset.sg;fit.has(j)?fit.delete(j):fit.add(j);store.set('navfit-'+id,[...fit]);x.classList.toggle('on');x.setAttribute('aria-pressed',fit.has(j));$('#nvfit').innerHTML=`<b>${fit.size}/${p.s.length}</b> ${esc(UI.nvFit)}`});
+ addSimple(p.simple)}
+const _renderRouteNv=renderRoute;renderRoute=function(){const h=location.hash.slice(1);let mt;
+ if(h==='navigator'){stopPractice();setNav('library');viewNavigator();document.title=UI.nvT+' · Rewiring';return}
+ if(h==='navfind'){stopPractice();setNav('library');viewNavFind();document.title=UI.nvT+' · Rewiring';return}
+ if((mt=h.match(/^nav-(\w+)$/))&&NVP[mt[1]]){stopPractice();setNav('library');viewNavProblem(mt[1]);document.title=NVP[mt[1]].n+' · Rewiring';return}
+ _renderRouteNv()};
+Object.assign(PLAY_IC,{navigator:'<circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><path d="M6 6l4 4M18 6l-4 4M6 18l4-4M18 18l-4-4"/>'});
+const _viewPlayNv=viewPlay;viewPlay=function(){_viewPlayNv();const g=$('#app .casegrid');if(g)g.insertAdjacentHTML('afterbegin',`<a class="casecard playcard" href="#navigator" style="--h:262"><span class="ac-ic">${picon('navigator')}</span><b>${esc(UI.nvT)}</b><span class="note">${esc(UI.nvCardSub)}</span></a>`)};
+PLAY_ROUTES.play=viewPlay;
+const _viewTodayNv=viewToday;viewToday=function(){_viewTodayNv();const s=$('#app .sec.duo');if(s)s.insertAdjacentHTML('afterbegin',`<a class="panel learncard nvcard" href="#navigator"><span class="ac-ic" aria-hidden="true">${picon('navigator')}</span><span style="min-width:0;flex:1 1 200px"><b>${esc(UI.nvCard)}</b><span class="note" style="display:block">${esc(UI.nvCardSub)}</span></span><span class="pill on">${esc(UI.nvT)} →</span></a>`)};
 
 boot();
 </script>
