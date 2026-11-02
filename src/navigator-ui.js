@@ -3,7 +3,7 @@ const NVP=Object.fromEntries(NAV_P.map(p=>[p.id,p]));const NVB=Object.fromEntrie
 const nvList=s=>String(s||'').split(/;(?! )/).filter(Boolean);
 function nvMapSVG(sel){const C=200,pos={},bpos={};const ang={emo:-135,self:-45,rel:135,do:45};
  NAV_B.forEach(b=>{const a=ang[b.id]*Math.PI/180;bpos[b.id]=[C+82*Math.cos(a),C+82*Math.sin(a)];const ps=NAV_P.filter(p=>p.b===b.id);ps.forEach((p,i)=>{const t=(ang[b.id]+(i-(ps.length-1)/2)*(56/Math.max(1,ps.length-1)))*Math.PI/180;pos[p.id]=[C+168*Math.cos(t),C+168*Math.sin(t),t]})});
- return `<svg viewBox="-20 -10 440 420" class="nvmap" role="img" aria-label="${esc(UI.nvT)}">
+ return `<svg viewBox="-70 -10 540 420" class="nvmap" role="img" aria-label="${esc(UI.nvT)}">
  ${NAV_B.map(b=>{const [x,y]=bpos[b.id];return `<path d="M${C} ${C}L${x} ${y}" class="nv-l" style="--h:${b.h}"/>`+NAV_P.filter(p=>p.b===b.id).map(p=>{const [px,py]=pos[p.id];return `<path d="M${x} ${y}Q${(x+px)/2+(C-x)*.12} ${(y+py)/2+(C-y)*.12} ${px} ${py}" class="nv-l thin" style="--h:${b.h}"/>`}).join('')}).join('')}
  <circle cx="${C}" cy="${C}" r="40" class="nv-core"/><text x="${C}" y="${C-4}" class="nv-ct">${esc(UI.nvMap)}</text><text x="${C}" y="${C+12}" class="nv-cs">${NAV_P.length}</text>
  ${NAV_B.map(b=>{const [x,y]=bpos[b.id];return `<g class="nv-b" style="--h:${b.h}" data-nb="${b.id}" tabindex="0" role="button" aria-label="${esc(b.n)}"><circle cx="${x}" cy="${y}" r="24"/><text x="${x}" y="${y+4}">${esc(b.n.split(' ')[0])}</text></g>`}).join('')}
