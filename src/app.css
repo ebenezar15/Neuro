@@ -705,3 +705,14 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .nvflow{display:grid;gap:0}.nvstep{padding:12px 16px;border-radius:14px;background:hsl(var(--h) 45% var(--atint));border:1px solid hsl(var(--h) 40% 80%/.5)}.nvstep .eyebrow{margin:0 0 4px;color:hsl(var(--h) var(--as) var(--al))}.nvstep ul{margin:0;padding-left:20px}
 .nvarrow{text-align:center;font-size:22px;color:var(--muted);line-height:1.4}
 .nvverse{font-size:18px}
+/* ---- pressure triangle ---- */
+.trsvg{width:100%;max-width:460px;height:auto;display:block;margin:0 auto;overflow:visible}
+.tr-e{stroke-width:5;fill:none;stroke-linecap:round}.tr-e.bad{stroke:hsl(4 70% 55%);stroke-dasharray:10 8;animation:trflow 1s linear infinite}.tr-e.good{stroke:hsl(150 55% 42%)}
+@keyframes trflow{to{stroke-dashoffset:-18}}@media (prefers-reduced-motion:reduce){.tr-e.bad{animation:none}}
+.tr-ah.bad{fill:hsl(4 70% 55%)}.tr-ah.good{fill:hsl(150 55% 42%)}
+.tr-heat{fill:hsl(4 80% 60%/.18);animation:trpulse 1.6s ease-in-out infinite}@keyframes trpulse{50%{fill:hsl(4 80% 60%/.32)}}
+.tr-fence{fill:none;stroke:hsl(150 55% 42%);stroke-width:3;stroke-dasharray:6 5}
+.tr-n circle{fill:hsl(var(--h) 55% 58%);stroke:var(--surface);stroke-width:4;transition:r .3s}.tr-n text{font:600 12px var(--f-body);fill:var(--ink)}.tr-n.lit circle{fill:hsl(var(--h) 75% 45%);filter:drop-shadow(0 0 8px hsl(var(--h) 80% 55%))}
+.tr-dot{fill:var(--spark);stroke:var(--bg);stroke-width:2}
+.wf-done{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:10px;background:var(--sunk)}.wf-q p{font-weight:600;margin:0 0 8px;font-size:17px}
+.wf-res{padding:14px 16px;border-radius:14px;background:hsl(150 45% var(--atint));border:2px solid hsl(150 50% 45%);font-weight:700;font-size:17px;animation:simin .35s ease}
