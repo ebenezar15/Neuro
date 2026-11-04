@@ -717,3 +717,11 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .wf-done{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:10px;background:var(--sunk)}.wf-q p{font-weight:600;margin:0 0 8px;font-size:17px}
 .wf-res{padding:14px 16px;border-radius:14px;background:hsl(150 45% var(--atint));border:2px solid hsl(150 50% 45%);font-weight:700;font-size:17px;animation:simin .35s ease}
 .nv-p text{pointer-events:none}.nv-p circle.nv-hit{fill:transparent;stroke:none}.nv-p:hover circle.nv-hit{fill:transparent}
+/* ---- behind the behaviour iceberg ---- */
+.icesvg{width:100%;max-width:460px;height:auto;display:block;margin:0 auto;border-radius:16px}
+.ice-sky{fill:hsl(200 70% 88%)}.ice-sea{fill:hsl(205 60% 30%)}.ice-top{fill:#fff;stroke:hsl(200 40% 70%);stroke-width:2}.ice-under{fill:hsl(195 50% 60%/.55);stroke:hsl(195 60% 75%/.6);stroke-width:2}
+.ice-wave{fill:none;stroke:#fff;stroke-width:2;opacity:.7}.ice-t{font:700 18px var(--f-display);fill:#16232A}.ice-l{font:700 10px var(--f-mono);fill:hsl(200 70% 88%);letter-spacing:.08em;text-transform:uppercase}
+.ice-b{font:600 13px var(--f-body);fill:#fff}.ice-n{font:700 14px var(--f-body);fill:#FFE38A}
+.icepanel{padding:8px}.icepanel .icesvg{animation:simin .4s ease}
+.icegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;margin-top:12px}
+.icecard{padding:12px 14px;border-radius:14px;background:hsl(var(--h) 45% var(--atint));border-left:5px solid hsl(var(--h) var(--as) var(--al))}.icecard .eyebrow{margin:0 0 4px}.icecard p:last-child{margin:0}
