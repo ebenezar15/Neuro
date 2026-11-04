@@ -55,3 +55,44 @@ h1,h2,.hubcard b,.acard b,.nvopt b{font-family:var(--f-display);letter-spacing:-
 .hubhero .hub-ic.big{border-radius:28px;box-shadow:0 10px 30px -18px hsl(var(--h) 60% 40%/.7)}
 .nvstrip{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:8px}
 :root[data-theme="dark"] .sun{opacity:.45}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sun{opacity:.45}}
+/* ===== Rewiring House: multi-room redesign ===== */
+.moodrow{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.moodbtn{display:grid;justify-items:center;gap:2px;flex:1 1 56px;min-width:56px;padding:8px 4px;border-radius:16px;border:0;background:rgba(255,255,255,.7);color:#201453;font:600 12px var(--f-body);cursor:pointer;transition:transform .2s,background .2s}
+.moodbtn .me{font-size:26px;line-height:1}.moodbtn:hover{transform:translateY(-3px)}.moodbtn.on{background:#201453;color:#FFF8EC;transform:scale(1.06)}
+.moodmsg{min-height:1.4em;margin:10px 0 0;font-weight:600}.moodmsg a{color:inherit}
+.housewrap{border-radius:28px;overflow:hidden;box-shadow:0 20px 50px -30px rgba(32,20,83,.5)}
+.housesvg{width:100%;height:auto;display:block}
+.hs1{stop-color:var(--sun3)}.hs2{stop-color:var(--sun1)}
+.hsun{fill:#FFE38A;opacity:.9;animation:sunfloat 8s ease-in-out infinite}
+.hroof{fill:#3D2C8D}.hchim{fill:#2A1E66}.hwall{fill:#FFF3DF}.hground{fill:#7FB77E}
+:root[data-theme="dark"] .hwall{fill:#2A2350}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hwall{fill:#2A2350}}
+.smoke circle{fill:#fff;opacity:0;animation:smoke 6s ease-in infinite}.smoke circle:nth-child(2){animation-delay:2s}.smoke circle:nth-child(3){animation-delay:4s}
+@keyframes smoke{0%{opacity:0;transform:translateY(10px)}30%{opacity:.6}100%{opacity:0;transform:translateY(-30px)}}
+.htree circle{fill:#5BA36A;transform-origin:28px 380px;animation:sway 5s ease-in-out infinite}.htree rect{fill:#8B5E3C}@keyframes sway{50%{transform:rotate(3deg)}}
+.hroom{cursor:pointer}.hroom>rect{fill:hsl(var(--h) 45% 88%);stroke:hsl(var(--h) 40% 70%);stroke-width:2;transition:fill .25s}
+:root[data-theme="dark"] .hroom>rect{fill:hsl(var(--h) 30% 26%)}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hroom>rect{fill:hsl(var(--h) 30% 26%)}}
+.hglow rect{fill:hsl(45 100% 70%/.0);transition:fill .3s}.hroom:hover .hglow rect,.hroom:focus .hglow rect,.hroom.pulse .hglow rect{fill:hsl(45 100% 70%/.55)}
+.hroom.pulse .hglow rect{animation:hpulse 0.8s ease-in-out 3}@keyframes hpulse{50%{fill:hsl(45 100% 70%/.15)}}
+.hobj{fill:none;stroke:hsl(var(--h) 55% 38%);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+:root[data-theme="dark"] .hobj{stroke:hsl(var(--h) 70% 75%)}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hobj{stroke:hsl(var(--h) 70% 75%)}}
+.hroom text{font:700 10.5px var(--f-body);fill:var(--ink)}.hroom:focus{outline:none}.hroom:hover>rect,.hroom:focus>rect{stroke-width:3}
+@media (prefers-reduced-motion:reduce){.smoke circle,.htree circle,.hsun{animation:none}}
+.roompage .roomhero{padding-block:18px 8px}.roomhero h1{font-size:clamp(32px,6vw,52px);margin:2px 0 6px;color:hsl(var(--h) var(--as) var(--al));text-wrap:balance}.roomhero p{margin:0;color:var(--muted);font-size:17px}
+.roomscene{border-radius:24px;overflow:hidden;margin-top:10px;background:hsl(var(--h) 45% var(--atint))}
+.roomsvg{width:100%;height:auto;display:block}
+.rwall{fill:hsl(var(--h) 50% var(--atint))}.rfloor{fill:hsl(var(--h) 30% 80%)}.rline{stroke:hsl(var(--h) 30% 65%);stroke-width:2}
+:root[data-theme="dark"] .rfloor{fill:hsl(var(--h) 25% 22%)}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .rfloor{fill:hsl(var(--h) 25% 22%)}}
+.rwin{fill:hsl(200 70% 85%);stroke:hsl(var(--h) 30% 60%);stroke-width:3}.rwinf{stroke:hsl(var(--h) 30% 60%);stroke-width:3}
+.robj{cursor:pointer}.robj .rhalo{fill:var(--surface);stroke:hsl(var(--h) 50% 60%);stroke-width:2;transition:transform .25s}.robj .ricon{fill:none;stroke:hsl(var(--h) var(--as) var(--al));stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.robj>g{animation:bob 4s ease-in-out infinite;animation-delay:var(--d)}@keyframes bob{50%{transform:translateY(-6px)}}
+.robj g{transform-box:fill-box}.robj:hover .rhalo,.robj:focus .rhalo{fill:hsl(45 100% 80%)}
+.robj text{font:700 11.5px var(--f-body);fill:var(--ink)}
+.robj .flame,.ricon .flame{fill:hsl(40 100% 60%);stroke:hsl(30 100% 50%);animation:flick 1.2s ease-in-out infinite;transform-origin:24px 15px}@keyframes flick{50%{transform:scaleY(1.15) scaleX(.9)}}
+@media (prefers-reduced-motion:reduce){.robj>g,.flame{animation:none}}
+.roomnav{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:22px}
+.roomgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px}
+.roomcard{display:grid;gap:6px;padding:18px;border-radius:24px;background:linear-gradient(160deg,hsl(var(--h) 50% var(--atint)),var(--surface));border:1px solid var(--line);text-decoration:none;color:inherit;min-width:0;animation:simin .5s ease both;animation-delay:var(--d)}
+.roomcard b{font-family:var(--f-display);font-size:20px}.roomcard:hover{transform:translateY(-3px);box-shadow:0 14px 30px -20px hsl(var(--h) 50% 30%/.7)}
+.rc-ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:var(--surface);color:hsl(var(--h) var(--as) var(--al))}
+.roomcrumb{display:inline-flex;margin-top:12px;color:hsl(var(--h) var(--as) var(--al));border-color:hsl(var(--h) 40% 75%)}
+.moodrow{flex-wrap:nowrap;gap:5px}.moodbtn{flex:1 1 0;min-width:0;font-size:11px;padding:8px 2px}.moodbtn .me{font-size:24px}

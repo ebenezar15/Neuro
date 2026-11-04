@@ -1,0 +1,80 @@
+// ===== REWIRING HOUSE: a multi-room redesign. The app is a house; each room is an animated, illustrated space =====
+// Rooms gather topic hubs, interactive tools and struggles. Home is an animated cutaway of the house with a one-tap mood check-in.
+const ROOMS=[
+ {id:'porch',n:'Front Porch',sub:'Check in, breathe, and find what you need today.',h:40,hubs:[],tools:['navigator','stuck'],nav:[],obj:[['bench','Check in','#today'],['lamp','Find what\'s going on','#navfind'],['door','Ask a question','#ask'],['map','Learning path','#learn']]},
+ {id:'lab',n:'The Brain Lab',sub:'How your brain and nervous system work, change and calm down.',h:220,hubs:['brain','body'],tools:['cortex','detox'],nav:['overthink','tolerance','panic'],obj:[['brain','Brain areas explorer','#cortex'],['microscope','Brain maps','#hub-brain'],['chart','30-day brain reset','#detox'],['flask','Body & gut','#hub-body']]},
+ {id:'studio',n:'The Feelings Studio',sub:'Anxiety, sadness, anger and every feeling in between.',h:200,hubs:['anxiety','emotions','grief'],tools:['iceberg','sim'],nav:['anxiety','depression','anger','rude','numb'],obj:[['easel','Behind the behaviour','#iceberg'],['wave','Anxiety & stress','#hub-anxiety'],['palette','Emotions & anger','#hub-emotions'],['cloud','Grief & loss','#hub-grief']]},
+ {id:'mirror',n:'The Mirror Room',sub:'Who you are: identity, worth, personality and character.',h:320,hubs:['identity','personality'],tools:['bigfive','strengths','battery'],nav:['esteem','inferior','perfect','critical'],obj:[['mirror','Identity & worth','#hub-identity'],['star','Character strengths','#strengths'],['dial','Big Five self-check','#bigfive'],['battery','Social battery','#battery']]},
+ {id:'living',n:'The Living Room',sub:'Relationships, family, boundaries and the people in between.',h:340,hubs:['relationships','family','parenting'],tools:['triangle','wounds','sim'],nav:['middle','pleasing','trust','passiveagg','controlling','lonely'],obj:[['sofa','Relationships','#hub-relationships'],['triangle','The pressure triangle','#triangle'],['frame','Family & the past','#hub-family'],['toys','Gospel parenting','#hub-parenting']]},
+ {id:'workshop',n:'The Workshop',sub:'Motivation, focus, habits, work and leadership.',h:30,hubs:['motivation','habits','work'],tools:['startnow','stuck','detox'],nav:['procrast','lazy','fail','workaholic','nodelegate','lust'],obj:[['toolbox','Motivation & focus','#hub-motivation'],['clock','Start Now timer','#startnow'],['gear','Habits & reset','#hub-habits'],['briefcase','Work & leadership','#hub-work']]},
+ {id:'garden',n:'The Garden',sub:'Rest, the body, the gut and growing slowly.',h:140,hubs:['body'],tools:['detox','battery'],nav:['lazy','carerburn'],obj:[['tree','Body, gut & health','#hub-body'],['flower','Rest & recovery','#detox'],['sun','Daily tip','#today'],['bird','Real stories','#cases']]},
+ {id:'prayer',n:'The Prayer Room',sub:'Stillness, prayer, Scripture and the gospel that heals.',h:262,hubs:['faith'],tools:['startnow'],nav:['depression','lonely'],obj:[['candle','Faith & practices','#hub-faith'],['book','In-depth studies','#library'],['window','The relational gospel','#hub-relationships'],['dove','Ask a question','#ask']]},
+ {id:'library',n:'The Library',sub:'Every map, study, case study and practice in one place.',h:250,hubs:[],tools:['navigator'],nav:[],obj:[['books','Browse everything','#library'],['scroll','Case studies','#cases'],['globe','How topics connect','#graph'],['compass','Problem navigator','#navigator']]}];
+const ROOM=Object.fromEntries(ROOMS.map(r=>[r.id,r]));
+// simple drawn objects for room scenes (48x48 boxes)
+const OBJ={bench:'<rect x="6" y="26" width="36" height="6" rx="2"/><path d="M10 32v10M38 32v10M8 20h32"/>',lamp:'<path d="M18 8h12l6 14H12z"/><path d="M24 22v18M16 42h16"/>',door:'<rect x="12" y="6" width="24" height="38" rx="2"/><circle cx="31" cy="26" r="1.8"/>',map:'<path d="M6 12l12-4 12 4 12-4v30l-12 4-12-4-12 4z"/><path d="M18 8v30M30 12v30"/>',
+ brain:'<path d="M18 10a7 7 0 0 0-7 7 6 6 0 0 0-3 11 7 7 0 0 0 9 8 6 6 0 0 0 7 2V12a7 7 0 0 0-6-2z"/><path d="M30 10a7 7 0 0 1 7 7 6 6 0 0 1 3 11 7 7 0 0 1-9 8 6 6 0 0 1-7 2"/>',microscope:'<path d="M20 6l8 4-8 16-8-4z"/><path d="M14 38h22M30 38a10 10 0 0 0-6-18"/>',chart:'<path d="M8 40V8M8 40h34"/><rect x="14" y="26" width="6" height="14"/><rect x="24" y="18" width="6" height="22"/><rect x="34" y="10" width="6" height="30"/>',flask:'<path d="M18 6h12M20 6v12L10 38a3 3 0 0 0 3 4h22a3 3 0 0 0 3-4L28 18V6"/><path d="M14 30h20"/>',
+ easel:'<rect x="10" y="6" width="28" height="22" rx="2"/><path d="M16 28l-6 16M32 28l6 16M24 28v10"/>',wave:'<path d="M4 24q6-8 12 0t12 0 12 0 8-4"/><path d="M4 34q6-8 12 0t12 0 12 0"/>',palette:'<path d="M24 6a18 18 0 1 0 0 36c3 0 3-4 1-6s0-6 4-6h6a8 8 0 0 0 7-8A18 18 0 0 0 24 6z"/><circle cx="16" cy="18" r="2"/><circle cx="24" cy="14" r="2"/><circle cx="32" cy="18" r="2"/>',cloud:'<path d="M14 32a8 8 0 0 1 2-16 10 10 0 0 1 19 2 7 7 0 0 1-1 14z"/><path d="M18 38v4M26 38v4M34 38v4"/>',
+ mirror:'<ellipse cx="24" cy="20" rx="12" ry="15"/><path d="M24 35v8M16 43h16"/><path d="M19 14l6 10"/>',star:'<path d="M24 6l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z"/>',dial:'<circle cx="24" cy="24" r="17"/><path d="M24 24l9-7"/><circle cx="24" cy="24" r="2"/>',battery:'<rect x="6" y="14" width="32" height="20" rx="3"/><path d="M42 20v8"/><rect x="10" y="18" width="16" height="12"/>',
+ sofa:'<path d="M8 22v-6a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v6"/><path d="M6 22h36v12H6zM10 34v6M38 34v6"/>',triangle:'<path d="M24 6l18 32H6z"/><circle cx="24" cy="26" r="3"/>',frame:'<rect x="8" y="8" width="32" height="32" rx="2"/><circle cx="18" cy="20" r="3"/><circle cx="30" cy="20" r="3"/><path d="M12 34c2-5 10-5 12 0M24 34c2-5 10-5 12 0"/>',toys:'<rect x="8" y="26" width="14" height="14" rx="2"/><circle cx="33" cy="33" r="7"/><path d="M15 26v-8l7 4"/>',
+ toolbox:'<rect x="6" y="18" width="36" height="22" rx="2"/><path d="M18 18v-6h12v6M6 28h36"/>',clock:'<circle cx="24" cy="24" r="17"/><path d="M24 14v10l7 5"/>',gear:'<circle cx="24" cy="24" r="7"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/>',briefcase:'<rect x="6" y="16" width="36" height="24" rx="3"/><path d="M18 16v-5h12v5"/>',
+ tree:'<circle cx="24" cy="18" r="13"/><path d="M24 31v12M18 43h12"/>',flower:'<circle cx="24" cy="18" r="4"/><circle cx="24" cy="10" r="4"/><circle cx="31" cy="18" r="4"/><circle cx="17" cy="18" r="4"/><circle cx="24" cy="25" r="4"/><path d="M24 29v14M24 36l-6-4"/>',sun:'<circle cx="24" cy="24" r="8"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/>',bird:'<path d="M8 26c8-2 12-12 22-12 5 0 8 4 10 6l-6 2c-2 8-10 12-20 10z"/><circle cx="34" cy="18" r="1.5"/>',
+ candle:'<rect x="18" y="20" width="12" height="22" rx="2"/><path d="M24 20v-4"/><path d="M24 6c-3 4-3 7 0 9 3-2 3-5 0-9z" class="flame"/>',book:'<path d="M6 10h14a4 4 0 0 1 4 4v28a3 3 0 0 0-3-3H6zM42 10H28a4 4 0 0 0-4 4v28a3 3 0 0 1 3-3h15z"/>',window:'<path d="M10 42V18a14 14 0 0 1 28 0v24z"/><path d="M24 4v38M10 24h28"/>',dove:'<path d="M6 24c10 0 14-10 22-10 6 0 10 4 14 2-2 6-8 8-12 8l-4 10-6-6c-6 2-10 0-14-4z"/>',
+ books:'<rect x="6" y="10" width="7" height="32"/><rect x="15" y="14" width="7" height="28"/><rect x="24" y="8" width="7" height="34"/><path d="M34 12l7 2-7 28-7-2z"/>',scroll:'<path d="M12 8h22a4 4 0 0 1 0 8H14v24a4 4 0 0 1-8 0V12a4 4 0 0 1 4-4"/><path d="M18 22h14M18 30h10"/>',globe:'<circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c-6 6-6 28 0 34M24 7c6 6 6 28 0 34"/>',compass:'<circle cx="24" cy="24" r="17"/><path d="M30 18l-4 10-8 2 4-10z"/>'};
+const objSVG=(k,s)=>`<svg viewBox="0 0 48 48" width="${s||40}" height="${s||40}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${OBJ[k]||OBJ.lamp}</svg>`;
+
+// ---------- the house (home) ----------
+const MOODS=[['😞','Heavy','studio'],['😟','Anxious','studio'],['😐','Flat','garden'],['🙂','Okay','workshop'],['😊','Good','mirror']];
+function houseSVG(){const R=(id,x,y,w,h)=>{const r=ROOM[id];return `<g class="hroom" data-room="${id}" style="--h:${r.h}" tabindex="0" role="link" aria-label="${esc(r.n)}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6"/><g class="hglow"><rect x="${x+6}" y="${y+6}" width="${w-12}" height="${h-30}" rx="4"/></g><g transform="translate(${x+w/2-15} ${y+(h-30)/2-12}) scale(.62)" class="hobj">${OBJ[r.obj[0][0]]}</g><text x="${x+w/2}" y="${y+h-9}" text-anchor="middle">${esc(r.n.replace('The ',''))}</text></g>`};
+ return `<svg viewBox="0 0 400 470" class="housesvg" role="img" aria-label="Rewiring house">
+ <defs><linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="hs1"/><stop offset="1" class="hs2"/></linearGradient></defs>
+ <rect x="0" y="0" width="400" height="470" fill="url(#hsky)" rx="24"/><circle cx="340" cy="54" r="22" class="hsun"/>
+ <path d="M60 140L200 40L340 140Z" class="hroof"/><rect x="270" y="58" width="22" height="40" class="hchim"/><g class="smoke"><circle cx="281" cy="48" r="6"/><circle cx="288" cy="34" r="8"/><circle cx="296" cy="18" r="10"/></g>
+ ${R('prayer',150,80,100,60)}
+ <rect x="54" y="140" width="292" height="270" class="hwall"/>
+ ${R('lab',62,148,90,82)}${R('mirror',156,148,90,82)}${R('studio',250,148,90,82)}
+ ${R('living',62,236,90,82)}${R('workshop',156,236,90,82)}${R('library',250,236,90,82)}
+ ${R('porch',150,324,100,80)}
+ <g class="htree"><circle cx="28" cy="360" r="22"/><rect x="25" y="380" width="6" height="30"/></g>
+ ${R('garden',4,410,120,52)}<rect x="0" y="406" width="400" height="8" class="hground"/></svg>`}
+function viewHouse(){const hr=new Date().getHours(),greet=hr<5?'Still up':hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';const log=store.get('moods',[]);const last=log[log.length-1];
+ app().innerHTML=`<div class="wrap fade"><div class="sunhero"><span class="sun" aria-hidden="true"></span><span class="blob" aria-hidden="true"></span><p class="eyebrow">${greet}</p><h1>Welcome home.</h1><p>Every room in this house helps with a different part of life. How are you arriving today?</p>
+ <div class="moodrow" role="group" aria-label="How are you today">${MOODS.map(([e,l],i)=>`<button class="moodbtn${last&&last.d===new Date().toDateString()&&last.m===i?' on':''}" data-mood="${i}"><span class="me">${e}</span><span>${l}</span></button>`).join('')}</div><p class="moodmsg" id="moodmsg" aria-live="polite"></p></div>
+ <section class="hubsec"><h2>Explore the house</h2><p class="note" style="margin:0 0 8px">Tap a room to step inside.</p><div class="housewrap">${houseSVG()}</div></section>
+ <section class="hubsec"><div id="tfbox">${tipFactHTML(0)}</div></section>
+ <section class="hubsec"><h2>The struggle map</h2><div class="homemap">${nvMapSVG()}</div></section></div>`;
+ $$('[data-mood]').forEach(b=>b.onclick=()=>{const i=+b.dataset.mood;const L=store.get('moods',[]).filter(x=>x.d!==new Date().toDateString());L.push({d:new Date().toDateString(),m:i});store.set('moods',L.slice(-60));$$('.moodbtn').forEach(x=>x.classList.toggle('on',x===b));const r=ROOM[MOODS[i][2]];
+  $('#moodmsg').innerHTML=`Thank you for checking in. You might like <a href="#room-${r.id}"><b>${esc(r.n)}</b></a> today.`;const g=document.querySelector(`.hroom[data-room="${r.id}"]`);if(g){g.classList.add('pulse');setTimeout(()=>g.classList.remove('pulse'),2400)}});
+ $$('.hroom').forEach(g=>{const go=()=>location.hash='room-'+g.dataset.room;g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+ nvBind();addSimple('This app is like a house. Each room helps with something different. Tap a room to go inside.')}
+
+// ---------- a room ----------
+function roomScene(r){const n=r.obj.length,pos=[[58,128],[160,140],[262,128],[362,140]];
+ return `<svg viewBox="0 0 420 230" class="roomsvg" role="img" aria-label="${esc(r.n)}"><rect x="0" y="0" width="420" height="170" class="rwall"/><rect x="0" y="170" width="420" height="60" class="rfloor"/>
+ <path d="M0 170h420" class="rline"/><rect x="175" y="12" width="70" height="46" rx="6" class="rwin"/><path d="M210 12v46M175 35h70" class="rwinf"/>
+ ${r.obj.map(([k,l,href],i)=>{const [x,y]=pos[i%4];return `<a href="${href}" class="robj" style="--d:${i*.15}s"><g transform="translate(${x-30} ${y-30})"><circle cx="30" cy="30" r="34" class="rhalo"/><g transform="translate(6 6)" class="ricon">${OBJ[k]}</g></g><text x="${x}" y="${y+52}" text-anchor="middle">${esc(l)}</text></a>`}).join('')}</svg>`}
+function viewRoom(id){const r=ROOM[id];const hubs=r.hubs.map(k=>HUB[k]).filter(Boolean),nav=r.nav.map(k=>NVP[k]).filter(Boolean);
+ const i=ROOMS.indexOf(r),prev=ROOMS[i-1],next=ROOMS[i+1];
+ app().innerHTML=`<div class="wrap fade roompage" style="--h:${r.h}"><div class="roomhero"><p class="eyebrow">Room ${i+1} of ${ROOMS.length}</p><h1>${esc(r.n)}</h1><p>${esc(r.sub)}</p></div>
+ <div class="roomscene">${roomScene(r)}</div>
+ ${hubs.length?`<section class="hubsec"><h2>Topics in this room</h2><div class="agrid">${hubs.map(h=>`<a class="acard" href="#hub-${h.id}" style="--h:${h.h}"><span class="acard-t">${hubPages(h.id).length} pages</span><b>${esc(h.n)}</b><span class="note">${esc(h.sub)}</span></a>`).join('')}</div></section>`:''}
+ ${nav.length?`<section class="hubsec"><h2>Struggles explored here</h2><div class="nvstrip">${nav.map(p=>`<a class="nvchip" href="#nav-${p.id}" style="--h:${NVB[p.b].h}"><b>${esc(p.n)}</b><span>${esc(p.one)}</span></a>`).join('')}</div></section>`:''}
+ ${r.tools.length?`<section class="hubsec"><h2>Try it in this room</h2><div class="agrid">${r.tools.map(toolCard).join('')}</div></section>`:''}
+ ${id==='library'?`<section class="hubsec"><h2>Every topic</h2><div class="hubgrid sm">${HUBS.map(h=>`<a class="hubcard" href="#hub-${h.id}" style="--h:${h.h}"><span class="hub-ic">${hubIcon(h.id,22)}</span><b>${esc(h.n)}</b></a>`).join('')}</div></section>`:''}
+ <div class="roomnav">${prev?`<a class="pill" href="#room-${prev.id}">← ${esc(prev.n)}</a>`:'<span></span>'}<a class="pill" href="#today">⌂ House</a>${next?`<a class="pill" href="#room-${next.id}">${esc(next.n)} →</a>`:'<span></span>'}</div></div>`;
+ addSimple(r.sub)}
+function viewRooms(){app().innerHTML=`<div class="wrap fade"><div class="page-h"><p class="eyebrow">The house</p><h1>Rooms</h1><p>Nine rooms, each for a different part of life. Step into any of them.</p></div>
+ <div class="roomgrid">${ROOMS.map((r,i)=>`<a class="roomcard" href="#room-${r.id}" style="--h:${r.h};--d:${i*.05}s"><span class="rc-ic">${objSVG(r.obj[0][0],34)}</span><b>${esc(r.n)}</b><span class="note">${esc(r.sub)}</span></a>`).join('')}</div>
+ <div class="actions" style="margin-top:14px"><a class="pill" href="#hubs">All 14 topics</a><a class="pill" href="#graph">How topics connect</a></div></div>`;addSimple('These are the rooms in the house. Each one helps with something different.')}
+
+// ---------- navigation and routes ----------
+NAV.length=0;NAV.push(['today','House'],['rooms','Rooms'],['tools','Tools'],['ask','Ask'],['me','Me']);
+IC.rooms=sv('<path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/>');IC.today=sv('<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><rect x="10" y="14" width="4" height="6"/>');
+Object.assign(NAVMAP,{hubs:'rooms',library:'rooms',struggles:'rooms'});
+const _renderRouteRooms=renderRoute;renderRoute=function(){const h=location.hash.slice(1)||'today';let mt;
+ if(h==='today'){stopPractice();setNav('today');viewHouse();document.title='Rewiring Hubs';return}
+ if(h==='rooms'){stopPractice();setNav('rooms');viewRooms();document.title='Rooms · Rewiring Hubs';return}
+ if((mt=h.match(/^room-(\w+)$/))&&ROOM[mt[1]]){stopPractice();setNav('rooms');viewRoom(mt[1]);document.title=ROOM[mt[1]].n+' · Rewiring Hubs';return}
+ _renderRouteRooms()};
+// on topic pages, show which room you are in
+const _viewHubRm=viewHub;viewHub=function(id){_viewHubRm(id);const r=ROOMS.find(x=>x.hubs.includes(id));const hh=$('#app .hubhero');if(r&&hh&&!$('#app .roomcrumb'))hh.insertAdjacentHTML('beforebegin',`<a class="pill roomcrumb" href="#room-${r.id}" style="--h:${r.h}">⌂ ${esc(r.n)}</a>`)};
