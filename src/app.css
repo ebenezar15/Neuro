@@ -716,3 +716,4 @@ details.week summary{display:flex;justify-content:space-between;gap:12px;align-i
 .tr-dot{fill:var(--spark);stroke:var(--bg);stroke-width:2}
 .wf-done{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:10px;background:var(--sunk)}.wf-q p{font-weight:600;margin:0 0 8px;font-size:17px}
 .wf-res{padding:14px 16px;border-radius:14px;background:hsl(150 45% var(--atint));border:2px solid hsl(150 50% 45%);font-weight:700;font-size:17px;animation:simin .35s ease}
+.nv-p text{pointer-events:none}.nv-p circle.nv-hit{fill:transparent;stroke:none}.nv-p:hover circle.nv-hit{fill:transparent}
