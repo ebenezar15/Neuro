@@ -1,0 +1,6 @@
+// ===== Observatory layout: numbered topics in the desktop rail, and a softly animated hero =====
+function railTopics(){const rail=document.getElementById('railnav');if(!rail||rail.querySelector('.railtopics'))return;
+ rail.insertAdjacentHTML('beforeend',`<div class="railtopics"><div class="grp">Topics</div>${HUBS.map((h,i)=>`<a href="#hub-${h.id}" data-rt="${h.id}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${esc(h.n)}</span></a>`).join('')}</div>`)}
+function railMark(){const m=location.hash.match(/^#hub-(\w+)/);$$('.railtopics a').forEach(a=>a.classList.toggle('on',!!m&&a.dataset.rt===m[1]))}
+const _renderRouteObs=renderRoute;renderRoute=function(){_renderRouteObs();railTopics();railMark();
+ const hero=$('#app .sunhero');if(hero&&!hero.querySelector('.heroglow'))hero.insertAdjacentHTML('afterbegin',`<svg class="heroglow" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M20 200C90 120 150 210 210 130S330 70 390 40"/><path d="M10 120C80 60 170 150 250 90S360 40 400 20"/>${[[300,40],[340,90],[260,60],[370,150],[220,30]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="2.5" style="animation-delay:${i*.7}s"/>`).join('')}</svg>`)};
