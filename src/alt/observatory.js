@@ -1,5 +1,5 @@
 // ===== Observatory layout: numbered topics in the desktop rail, and a softly animated hero =====
-function railTopics(){const rail=document.getElementById('railnav');if(!rail||rail.querySelector('.railtopics'))return;
+function railTopics(){if(typeof HUBS==='undefined')return;const rail=document.getElementById('railnav');if(!rail||rail.querySelector('.railtopics'))return;
  rail.insertAdjacentHTML('beforeend',`<div class="railtopics"><div class="grp">Topics</div>${HUBS.map((h,i)=>`<a href="#hub-${h.id}" data-rt="${h.id}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${esc(h.n)}</span></a>`).join('')}</div>`)}
 function railMark(){const m=location.hash.match(/^#hub-(\w+)/);$$('.railtopics a').forEach(a=>a.classList.toggle('on',!!m&&a.dataset.rt===m[1]))}
 const _renderRouteObs=renderRoute;renderRoute=function(){_renderRouteObs();railTopics();railMark();
