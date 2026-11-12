@@ -4,7 +4,7 @@
  // lookups that use English titles are worked out once, before titles change
  ORDER.forEach(m=>{m._pf=planFor(m)});planFor=function(m){return m._pf||[]};
  const catOld=CATS.map(c=>c[0]);
- const R={ORDER,SECS,CATS,DAILY_REPS,MODELDATA,PDESIGN,DWHY,MM,BRAIN,BRAIN_PTS,BRAIN_SCEN,RM,SIMPLE_DAYS,SIMPLE_STUDY,PAGE_SIMPLE,STUDIES,TIPS,FACTS,LEARN,UI,DEEP,SIMS,QUIZZES,DETOX,CORTEX,CORTEX_SCEN,BIG5_ITEMS,BIG5,BATTERY,STRENGTHS,VIRTUES,STUCK_Q,STUCK_R,WOUND_Q,NAV_B,NAV_L,NAV_P,TRI_SCEN,ICE};
+ const R={ORDER,SECS,CATS,DAILY_REPS,MODELDATA,PDESIGN,DWHY,MM,BRAIN,BRAIN_PTS,BRAIN_SCEN,RM,SIMPLE_DAYS,SIMPLE_STUDY,PAGE_SIMPLE,STUDIES,TIPS,FACTS,LEARN,UI,DEEP,SIMS,QUIZZES,DETOX,CORTEX,CORTEX_SCEN,BIG5_ITEMS,BIG5,BATTERY,STRENGTHS,VIRTUES,STUCK_Q,STUCK_R,WOUND_Q,NAV_B,NAV_L,NAV_P,TRI_SCEN,ICE,HUBS};
  let miss=0;TA_DATA.forEach(([p,v])=>{let o=R[p[0]];for(let i=1;i<p.length-1&&o;i++)o=o[p[i]];if(o&&typeof v==='string')o[p[p.length-1]]=v;else miss++});
  STUDIES.forEach((s,i)=>{const parts=TA_HTML[i];if(parts&&parts.every(x=>typeof x==='string'))s.html=parts.join('')});
  const cm={};catOld.forEach((n,i)=>cm[n]=CATS[i][0]);DAYS.forEach(d=>{if(cm[d.cat])d.cat=cm[d.cat]});
@@ -12,7 +12,7 @@
  ORDER.forEach(m=>{BYT[String(m.t).toLowerCase()]=m});
  STUDIES.forEach(s=>{if(STUDY_TEXT[s.id]!==undefined)STUDY_TEXT[s.id]=(s.t+' '+s.full+' '+s.sum+' '+s.html.replace(/<[^>]+>/g,' ')).toLowerCase()});
  UI.ofDone='/';
- const SHORT={struggles:'சவால்கள்',toolkit:'கருவிகள்',journal:'குறிப்பேடு'};NAV.forEach(n=>{if(SHORT[n[0]])n[1]=SHORT[n[0]]});
+ const SHORT={struggles:'சவால்கள்',toolkit:'கருவிகள்',journal:'குறிப்பேடு'};NAV.forEach(n=>{if(SHORT[n[0]])n[1]=SHORT[n[0]];if(n[0]==='topics')n[1]=UI.tpNav});
  Object.assign(WHEN,{now:'இந்த நொடியில்',daily:'தினசரிப் பயிற்சி',deep:'ஆழமான பணி'});
  Object.assign(UI,{cnT:'தொடர்புடையவை',cnWhy:'இது ஏன் உதவுகிறது: பின்னால் உள்ள காரணம்',cnHelps:'இந்தச் சூழ்நிலைகளுக்கு உதவுகிறது',cnStories:'உண்மை வாழ்க்கை அனுபவங்கள்',cnSit:'அன்றாடச் சூழ்நிலைகள்',cnSimilar:'இதே போன்ற அனுபவங்கள்',cnTools:'இதற்கான பயிற்சிகள்'});
  if(miss)console.warn('Tamil: '+miss+' entries could not be placed');

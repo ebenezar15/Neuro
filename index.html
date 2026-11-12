@@ -1104,6 +1104,82 @@ table.cmp .vs-col{outline:2px solid hsl(var(--h,176) var(--as) var(--al));outlin
 @media (prefers-reduced-motion:reduce){.fl-bar,.fl-wt,#flhov,.fl-dot-h{animation:none!important}}
 .fl-axl{font-family:var(--f-mono);font-size:12px;fill:var(--muted)}.fl-res{margin-bottom:12px}
 
+/* ===== Topic navigation: areas, topics, six-step topic pages, find-by-need, A–Z index ===== */
+@keyframes tpIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes tpRing{from{stroke-dashoffset:var(--full)}to{stroke-dashoffset:var(--off)}}
+@keyframes tpFloat{50%{transform:translateY(-5px)}}
+@keyframes tpSlide{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes tpFlow{to{background-position:-200% 0}}
+.tp-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:center;padding:22px;border-radius:22px;border:1px solid var(--line);background:radial-gradient(120% 90% at 90% 0%,var(--glory-soft,transparent),transparent 60%),radial-gradient(90% 80% at 0% 100%,var(--living-soft,transparent),transparent 60%),var(--surface);margin-bottom:14px;overflow:hidden}
+.tp-hero h1{margin:.1em 0 .25em;font-size:clamp(1.9rem,5vw,2.9rem)}.tp-hero p{color:var(--muted);margin:0}
+.tp-orbit{width:100%;height:auto;max-height:190px}.tp-o-path{fill:none;stroke:var(--line);stroke-dasharray:3 6}
+.tp-o-n circle{fill:hsl(var(--h) var(--as) var(--al));opacity:.9}.tp-o-s{fill:var(--spark)}.tp-o-core{fill:var(--surface);stroke:var(--spark);stroke-width:3}
+@media (max-width:640px){.tp-hero{grid-template-columns:1fr}.tp-orbit{max-height:120px;order:-1}}
+.tp-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin:0 0 14px}
+.tp-q{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:600;font-size:.9rem;animation:tpIn .45s ease both;animation-delay:calc(var(--i)*.06s);transition:transform .2s,border-color .2s}
+.tp-q svg{width:20px;height:20px;flex:none;color:var(--accent)}.tp-q:hover{transform:translateY(-2px);border-color:var(--accent)}
+.tp-jump{margin-bottom:6px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 4px);z-index:2}.tp-jump .pill{backdrop-filter:blur(8px)}
+.tp-dot{width:10px;height:10px;border-radius:50%;background:hsl(var(--h) var(--as) var(--al));display:inline-block;margin-right:6px}
+.tp-area{margin-top:22px;scroll-margin-top:70px}
+.tp-area>header{display:flex;align-items:center;gap:12px;padding-bottom:10px;border-bottom:2px solid hsl(var(--h) var(--as) var(--al));margin-bottom:12px}
+.tp-area h2{margin:0;font-size:1.5rem}.tp-area header .note{margin:0}.tp-num{margin-left:auto;font-size:1.6rem;color:hsl(var(--h) var(--as) var(--al));opacity:.5}
+.tp-ic{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:hsl(var(--h) 45% var(--atint));color:hsl(var(--h) var(--as) var(--al))}
+.tp-ic.big{width:54px;height:54px;border-radius:16px}.tp-ic.huge{width:72px;height:72px;border-radius:22px;animation:tpFloat 5s ease-in-out infinite}
+.tp-hubs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px}
+.tp-hub{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;border:1px solid var(--line);border-left:4px solid hsl(var(--h) var(--as) var(--al));background:var(--surface);color:var(--ink);text-decoration:none;animation:tpIn .5s ease both;animation-delay:calc(var(--i)*.08s);transition:transform .25s,box-shadow .25s,border-color .25s}
+.tp-hub:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.12)}.tp-hub:hover .tp-ic{animation:tpFloat 1.2s ease-in-out infinite}
+.tp-hub-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.tp-hub-t b{font-family:var(--f-display);font-weight:400;font-size:1.1rem;line-height:1.2}.tp-hub-t .note{font-size:.84rem}
+.tp-meta{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tp-ring{flex:none}.tp-ring-bg{fill:none;stroke:var(--sunk);stroke-width:4}.tp-ring-fg{fill:none;stroke:hsl(var(--h,176) var(--as) var(--al));stroke-width:4;stroke-linecap:round;stroke-dashoffset:var(--off);animation:tpRing 1.1s ease both .2s}
+.tp-ring text{font-family:var(--f-mono);font-size:9px;fill:var(--muted)}
+.tp-thero{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:18px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(135deg,hsl(var(--h) 45% var(--atint)),var(--surface) 60%);margin-bottom:14px}
+.tp-thero>div:nth-child(2){flex:1 1 220px;min-width:0}.tp-thero h1{margin:.05em 0 .2em;font-size:clamp(1.6rem,4.5vw,2.4rem)}.tp-thero p{margin:0}
+.tp-prog{display:flex;flex-direction:column;align-items:center;gap:2px}
+.tp-steps{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:6px 2px 10px;margin-bottom:6px;scroll-margin-top:60px}
+.tp-step{flex:1 0 96px;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;font:inherit;color:var(--muted);cursor:pointer;padding:4px;animation:tpIn .4s ease both;animation-delay:calc(var(--i)*.06s)}
+.tp-sn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-weight:600;border:2px solid var(--line);background:var(--surface);transition:all .3s}
+.tp-st{font-size:.82rem;font-weight:600;text-align:center;line-height:1.2}.tp-step .mono{font-size:.68rem;opacity:.7}
+.tp-step.past .tp-sn{border-color:hsl(var(--h) var(--as) var(--al));color:hsl(var(--h) var(--as) var(--al))}
+.tp-step.on{color:var(--ink)}.tp-step.on .tp-sn{background:hsl(var(--h) var(--as) var(--al));border-color:hsl(var(--h) var(--as) var(--al));color:var(--bg);transform:scale(1.15);box-shadow:0 0 0 6px hsl(var(--h) 45% var(--atint))}
+.tp-sl{flex:0 1 26px;min-width:10px;height:3px;border-radius:3px;align-self:flex-start;margin-top:22px;background:linear-gradient(90deg,var(--line) 0 40%,hsl(var(--h) var(--as) var(--al)) 50%,var(--line) 60% 100%);background-size:200% 100%;animation:tpFlow 2.4s linear infinite}
+.tp-panel{animation:tpSlide .35s ease both}.tp-psub{margin:0 0 10px}
+.tp-h3{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px;font-weight:500}.tp-h3 .mono{opacity:.6}
+.tp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:10px;margin-bottom:10px}.tp-grid.big{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.tp-card{position:relative;display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;animation:tpIn .4s ease both;animation-delay:calc(var(--i)*.035s);transition:transform .2s,border-color .2s}
+.tp-card::before{content:"";position:absolute;left:14px;right:14px;top:-1px;height:2px;border-radius:2px;background:hsl(var(--h) var(--as) var(--al))}
+.tp-card:hover{transform:translateY(-3px);border-color:hsl(var(--h) var(--as) var(--al))}
+.tp-card b{font-family:var(--f-display);font-weight:400;font-size:1.05rem;line-height:1.25}.tp-card .note{font-size:.86rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tp-grid.big .tp-card b{font-size:1.25rem}
+.tp-ty{align-self:flex-start;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--sunk);color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tp-ok{display:none;position:absolute;top:10px;right:12px;font-style:normal;color:hsl(150 50% 40%);font-weight:700}.seen>.tp-ok{display:block}
+.tp-card.tool{background:linear-gradient(135deg,hsl(var(--h) 45% var(--atint)),var(--surface) 70%)}
+.tp-more{margin:2px 0 10px}
+.tp-strip{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
+.tp-chip{flex:0 0 min(78%,220px);scroll-snap-align:start;display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);border-left:3px solid hsl(var(--h) var(--as) var(--al));background:var(--surface);color:var(--ink);text-decoration:none;animation:tpIn .4s ease both;animation-delay:calc(var(--i)*.05s)}
+.tp-chip span{font-size:.8rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tp-foot{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tp-needs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:10px}
+.tp-need{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;font:inherit;padding:16px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(140deg,hsl(var(--h) 45% var(--atint)),var(--surface) 65%);color:var(--ink);text-decoration:none;cursor:pointer;animation:tpIn .45s ease both;animation-delay:calc(var(--i)*.05s);transition:transform .2s,border-color .2s}
+.tp-need svg{width:28px;height:28px;color:hsl(var(--h) var(--as) var(--al))}.tp-need b{font-family:var(--f-display);font-weight:400;font-size:1.12rem;line-height:1.25}
+.tp-need:hover,.tp-need.on{transform:translateY(-3px);border-color:hsl(var(--h) var(--as) var(--al))}
+.tp-filter{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);margin-bottom:10px}
+.tp-letters{display:flex;flex-wrap:wrap;gap:4px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 4px);z-index:2;padding:6px;border-radius:12px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px)}
+.tp-letters a{min-width:30px;height:30px;display:grid;place-items:center;border-radius:8px;font-family:var(--f-mono);font-size:.8rem;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface)}
+.tp-letters a:hover{background:var(--accent);color:var(--on-accent)}
+.tp-let{font-size:2rem;color:var(--accent);margin:18px 0 6px;scroll-margin-top:110px}section[id^="tpl-"]{scroll-margin-top:110px}
+.tp-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:4px 12px}
+.tp-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;align-items:center;padding:8px 10px;border-radius:10px;text-decoration:none;color:var(--ink);border-left:3px solid hsl(var(--h) var(--as) var(--al));background:var(--surface)}
+.tp-row b{font-weight:600;font-size:.94rem}.tp-row .note{grid-column:2;font-size:.76rem}.tp-row:hover{background:var(--sunk)}.tp-row.seen b::after{content:" ✓";color:hsl(150 50% 40%)}
+.tp-crumb{font-weight:600;color:hsl(var(--h,176) var(--as) var(--al))!important}
+.tp-today{margin:0 0 14px}.tp-today-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.tp-today-h b{font-family:var(--f-display);font-weight:400;font-size:1.2rem}
+.tp-areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px}
+.tp-atile{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(150deg,hsl(var(--h) 45% var(--atint)),var(--surface) 70%);color:var(--ink);text-decoration:none;animation:tpIn .45s ease both;animation-delay:calc(var(--i)*.07s);transition:transform .2s}
+.tp-atile:hover{transform:translateY(-3px)}.tp-atile b{font-family:var(--f-display);font-weight:400;font-size:1.05rem}
+@media (max-width:480px){.tp-areas{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){.tp *,.tp-today *{animation:none!important}.tp-ring-fg{stroke-dashoffset:var(--off)}}
+@media (max-width:560px){.tp-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;overflow:visible}.tp-sl{display:none}.tp-step{flex-direction:row;justify-content:flex-start;gap:6px;padding:6px 8px;border-radius:12px;border:1px solid var(--line);background:var(--surface);min-width:0}.tp-step.on{border-color:hsl(var(--h) var(--as) var(--al));background:hsl(var(--h) 45% var(--atint))}.tp-sn{width:26px;height:26px;font-size:.75rem;flex:none}.tp-step.on .tp-sn{transform:none;box-shadow:none}.tp-st{text-align:left;font-size:.84rem;flex:1;min-width:0}.tp-step .mono{display:none}
+ .tp-thero{gap:10px;padding:14px}.tp-ic.huge{width:52px;height:52px;border-radius:16px}.tp-prog{flex-direction:row;gap:8px}}
+
 /* ===== Observatory redesign: deep ink-teal, gold for truth, teal for rest, coral for stress, violet for thought ===== */
 :root:not([data-theme="light"]){--bg:#0a1517;--surface:#0f1d20;--sunk:#15282c;--ink:#e7efe9;--muted:#93a8a3;--line:#23393d;--accent:#5cc8b8;--spark:#e8b65a;--on-accent:#0a1517;
  --al:70%;--as:52%;--atint:16%;--amid:30%;--glow:rgba(232,182,90,.25);--glory:#e8b65a;--living:#5cc8b8;--stress:#ef7a63;--violet:#a99bf0;
@@ -9940,6 +10016,135 @@ const _viewPlayFL=viewPlay;viewPlay=function(){_viewPlayFL();const g=$('#app .ca
 PLAY_ROUTES.play=viewPlay;PLAY_ROUTES.familylab=viewFamilyLab;
 const _renderRouteFL=renderRoute;renderRoute=function(){if(location.hash.slice(1)==='familylab'){stopPractice();setNav('toolkit');viewFamilyLab();document.title=UI.flT+' · Rewiring';return}_renderRouteFL()};
 const _sheetFL=sheet;sheet=function(m){_sheetFL(m);const tie=['Dysfunctional Family Roles: The Parts We Play to Survive','The Four Classic Parenting Styles','Over-Involved Parenting: Helicopter, Snowplough and Tiger','The Six Dysfunctional Family Roles','Authoritative vs. Authoritarian vs. Permissive vs. Uninvolved','Helicopter vs. Snowplough vs. Tiger vs. Lighthouse','Family Roles','Gentle Parenting Styles Compared'].map(find);if(tie.includes(m)||['stuckrole','invisiblekid','strictsoft','overinvolved','overparented'].includes(m.sid)){const t=$('#app .sheet-h .tools');if(t&&!t.querySelector('.fllink'))t.insertAdjacentHTML('beforeend',`<a class="pill on fllink" href="#familylab">▶ ${esc(UI.flT)}</a>`)}};
+
+// ===== TOPICS: the 14 topics every page belongs to, grouped into four areas (shared by every layout) =====
+const HUBS=[
+ {id:'brain',n:'Your Brain & Nervous System',h:220,sub:'How the brain and nervous system work, change and calm down.',areas:['neu','nsr'],kw:/brain|neuro|nervous|vagus|vagal|amygdala|cortex|dopamine|focus|attention|flow|broca|hebb|polyvagal/i,tools:['cortex','detox','quiz'],studies:['brainstates','rewire'],q:'How does my brain work?'},
+ {id:'anxiety',n:'Anxiety, Fear & Stress',h:200,sub:'Why worry, panic and stress happen, and how to feel safe again.',areas:['anx','str'],kw:/anx|worry|fear|panic|stress|threat|safety|overwhelm|catastroph|hypervigil/i,tools:['quiz','sim'],studies:[],q:'I feel anxious or stressed'},
+ {id:'emotions',n:'Emotions & Anger',h:0,sub:'Understanding feelings, anger and tears, and how to regulate them.',areas:['emo'],kw:/emotion|feeling|anger|angry|rage|sad|cry|irritab|regulat|numb/i,tools:['sim'],studies:['emotions'],q:'My emotions feel too big'},
+ {id:'identity',n:'Identity, Shame & Self-Worth',h:320,sub:'Shame, the inner critic, comparison and who God says you are.',areas:['self'],kw:/shame|identity|worth|critic|perfection|compar|guilt|self-compassion|beloved|imposter|fraud|tired of myself/i,tools:['quiz'],studies:['shame'],q:'I feel not good enough'},
+ {id:'relationships',n:'Relationships, Boundaries & Conflict',h:340,sub:'Attachment, boundaries, conflict, forgiveness and repair.',areas:['rel','bnd'],kw:/relationship|attach|boundar|conflict|marriage|spouse|friend|repair|forgiv|insult|respect|pleas|codepend|communicat|betray|lonel|reconcil/i,tools:['iceberg','triangle','wounds','sim','quiz'],studies:['forgiveness','revenge','sorry','control'],q:'My relationships hurt'},
+ {id:'family',n:'Family, Childhood & Healing the Past',h:30,sub:'How childhood and family shape us, and how old wounds heal.',areas:['fam','cht'],kw:/family|childhood|origin|inner child|trauma|abuse|wound|neglect|sibling/i,tools:['familylab','wounds'],studies:['hardened','threepaths'],q:'My past still affects me'},
+ {id:'parenting',n:'Gospel Parenting',h:45,sub:'Gentle, relational parenting for every age, with real problems solved.',areas:['par'],kw:/child|toddler|teen|parent|baby|tantrum|kids|son |daughter|student/i,tools:['familylab','sim'],studies:['parenting'],q:'Help with my children'},
+ {id:'habits',n:'Habits, Addiction & Brain Reset',h:280,sub:'Why habits stick, unwanted behaviour, phones, porn and how to reset.',areas:['sab'],kw:/habit|addict|porn|sexual|scroll|phone|gaming|urge|craving|relapse|detox|reset|unwanted|overstimul/i,tools:['detox','quiz','sim'],studies:[],q:'I can\'t break a habit'},
+ {id:'motivation',n:'Motivation, Focus & Follow-Through',h:24,sub:'Excuses, procrastination, focus, practice, studying and starting with joy.',areas:['mot','foc'],kw:/motivat|procrast|excuse|practi[cs]e|study|learn|start|deadline|discipline|lazy|follow-through|stuck/i,tools:['startnow','stuck'],studies:[],q:'I can\'t get started'},
+ {id:'work',n:'Work, Leadership & Purpose',h:180,sub:'Work stress, burnout, money, leading people and finding purpose.',areas:['wrk'],kw:/work|job|leader|team|money|burnout|career|purpose|boss|manager|office|futility/i,tools:['sim'],studies:[],q:'Work and leadership'},
+ {id:'grief',n:'Grief, Loss & Change',h:250,sub:'Grieving well, lament, hope after loss and coping with change.',areas:['grf'],kw:/grief|griev|loss|death|lament|bereave|change|hope|suffer|why god/i,tools:[],studies:[],q:'I\'m grieving'},
+ {id:'body',n:'Body, Gut & Health',h:150,sub:'The mind–body connection, gut, sleep, pain and psychosomatic conditions.',areas:['bod','gut','psy'],kw:/body condition|psychosomatic|gut|stomach|ibs|headache|pain|sleep|eat|food|health|reflux|bowel|nausea|psychosom|intimacy|skin|heart rate/i,tools:['detox'],studies:['gut'],q:'My body is stressed'},
+ {id:'personality',n:'Personality & Character',h:290,sub:'Introverts and extroverts, how character forms, and trustworthy measures.',areas:['per','kno'],kw:/personality|introvert|extrovert|character|strength|temperament|virtue|values|self-knowledge/i,tools:['bigfive','battery','strengths'],studies:['belief'],q:'Understand myself'},
+ {id:'faith',n:'Faith & Spiritual Practices',h:262,sub:'Prayer, Scripture, stillness, worship and the gospel that heals.',areas:['fth'],kw:/\bgod\b|pray|prayer|bible|scripture|faith|spirit|worship|church|jesus|sabbath|tongues|meditat|gospel|lament|devotion/i,tools:['safeplace','startnow'],studies:['newcreation','spirit','union','spiritbody'],q:'I feel far from God'}];
+const HUB=Object.fromEntries(HUBS.map(h=>[h.id,h]));
+const AREA_HUB={};HUBS.forEach(h=>h.areas.forEach(a=>AREA_HUB[a]=h.id));
+// assign every page to one or two hubs: its own section, then the sections of the pages it links to, then keywords
+const PAGE_HUBS={};
+(function(){const nb=m=>{const s=new Set();(m.links||[]).forEach(t=>{const x=find(t);if(x)s.add(x)});(BACK[m.id]||[]).forEach(x=>s.add(x));(m.tools||[]).forEach(c=>{if(PR[c])s.add(PR[c])});if(m.type==='P'){(USES[m.code]||[]).forEach(x=>s.add(x));DAYS.concat(CASES).forEach(d=>{if((d.tools||[]).includes(m.code))s.add(d)})}else planFor(m).forEach(x=>s.add(x));return s};
+ const own=m=>AREA_HUB[m.area];const NB={};ORDER.forEach(m=>NB[m.id]=[...nb(m)]);
+ const kwScore=(m,add)=>{const t=String(m.t).toLowerCase(),rest=((m.tags||'')+' '+(m.u||'')+' '+(m.who||'')).toLowerCase();HUBS.forEach(h=>{if(h.kw.test(t))add(h.id,4);else if(h.kw.test(rest))add(h.id,1.5)})};
+ const pass=prev=>{const res={};ORDER.forEach(m=>{const sc={};const add=(k,v)=>{if(k)sc[k]=(sc[k]||0)+v};add(own(m),8);
+  NB[m.id].forEach(x=>{add(own(x),2);if(prev&&prev[x.id])add(prev[x.id][0],1.5)});kwScore(m,add);
+  const r=Object.entries(sc).sort((a,b)=>b[1]-a[1]);res[m.id]=r.length?r.filter((x,i)=>i===0||(i===1&&x[1]>=Math.max(4,r[0][1]*.6))).map(x=>x[0]):['brain']});return res};
+ Object.assign(PAGE_HUBS,pass(pass(null)))})();
+const hubPages=id=>ORDER.filter(m=>(PAGE_HUBS[m.id]||[]).includes(id));
+const hubIcon=(h,s)=>`<svg viewBox="0 0 24 24" width="${s||22}" height="${s||22}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${{brain:'<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 3 5 3 3 0 0 0 5 1V5a3 3 0 0 0-3-1z"/><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-3 5 3 3 0 0 1-5 1"/>',anxiety:'<path d="M3 12h4l3-8 4 16 3-8h4"/>',emotions:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',identity:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>',relationships:'<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c1-3 3-5 6-5s5 2 6 5M14 15c3 0 6 2 7 5"/>',family:'<path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/>',parenting:'<circle cx="9" cy="6" r="3"/><circle cx="17" cy="10" r="2"/><path d="M4 21v-4a5 5 0 0 1 10 0v4M14 21v-2a3 3 0 0 1 6 0v2"/>',habits:'<path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2-2a5 5 0 1 0 1 6"/>',motivation:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',work:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5h8v2M3 13h18"/>',grief:'<path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/><path d="M12 8v6"/>',body:'<circle cx="12" cy="4" r="2"/><path d="M12 6v8M8 9l4 2 4-2M9 21l3-7 3 7"/>',personality:'<circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 4"/>',faith:'<path d="M12 3v18M7 8h10"/>'}[h]||''}</svg>`;
+const HUB_NAV={anxiety:['anxiety','panic','overthink'],emotions:['depression','anger','rude','tolerance','numb'],identity:['courage','esteem','inferior','perfect','critical'],relationships:['obnoxious','passiveagg','controlling','middle','rescuer','peacekeeper','martyr','guilttrip','pleasing','trust','jealous','lonely'],motivation:['courage','procrast','lazy','fail','decide'],habits:['lust','procrast'],brain:['overthink','tolerance'],work:['helperfatigue','middle','workaholic','nodelegate','fail','perfect','decide'],faith:['traumatrig','helperfatigue','depression','numb','lonely'],family:['familyrole','parentstyle','overparenting','middle','scapegoat','parentified','guilttrip','carerburn','trust','pleasing'],grief:['traumatrig','depression','numb','lonely'],body:['panic','lazy'],personality:['esteem','inferior'],parenting:['parentstyle','overparenting','anger','tolerance']};
+// four areas group the 14 topics, so there are only four choices to make first
+const TP_AREAS=[{id:'mind',h:200,ic:'brain',hubs:['brain','anxiety','emotions','body']},{id:'self',h:320,ic:'identity',hubs:['identity','personality','habits','motivation']},{id:'people',h:340,ic:'relationships',hubs:['relationships','family','parenting','work']},{id:'faith',h:262,ic:'faith',hubs:['faith','grief']}];
+const HUB_AREA={};TP_AREAS.forEach(a=>a.hubs.forEach(h=>HUB_AREA[h]=a));
+Object.assign(UI,{tpNav:'Topics',tpT:'Explore by topic',tpSub:'Everything is sorted into four areas and fourteen topics. Pick an area, then a topic, then follow the steps.',
+ tpAreas:'Mind & Body|Your brain, feelings, stress and health;Who I Am|Identity, personality, habits and motivation;Me & Others|Relationships, family, parenting and work;Faith & Healing|Walking with God through life, loss and change',
+ tpTabs:'Start here;Understand;Practise;Real life;Stories;Tools',tpTabSub:'The best first pages;Maps that explain why it happens;Step-by-step tools that help;Everyday situations with a plan;People who worked through this;Interactive tools, studies and linked topics',
+ tpPages:'pages',tpSeen:'explored',tpMore:'Show all',tpNext:'Next step',tpStruggles:'Common struggles in this topic',tpLinked:'Linked topics',tpStudy:'Study guide',tpTopic:'Topic',tpAllTopics:'All topics',tpJump:'Jump to an area',
+ tpFind:'Find by need',tpFindSub:'Tell us what you need right now and go straight there.',tpIndex:'A–Z index',tpIndexSub:'Every page in one list. Type to filter, or jump to a letter.',tpFilter:'Type to filter…',tpLib:'Library by section',tpNone:'Nothing matches. Try a shorter word.',
+ tpNeeds:'I need to calm down right now|Quick practices for this moment;I want to understand why I do this|A map of struggles, their roots and the way out;I need help with a relationship|Boundaries, conflict, forgiveness and repair;My family or my past still affects me|Family roles, childhood and healing;I need help with my children|Parenting styles and real problems solved;I want to help someone who is hurting|How to be a safe, caring presence;I want to grow closer to God|Prayer, Scripture and the gospel that heals;I want to learn step by step|The learning path, in the best order;I am not sure what is wrong|Answer a few questions to find it'});
+
+// ===== TOPIC NAVIGATION: areas -> topics -> six-step topic pages, plus "Find by need" and an A–Z index =====
+const tpL=k=>String(UI[k]).split(';'),tpR=k=>tpL(k).map(x=>x.split('|'));
+const tpHubs=()=>typeof viewHub==='function';   // the Hubs layout has its own topic pages
+const tpHref=id=>(tpHubs()?'#hub-':'#topic-')+id;
+const tpFirst=s=>{s=String(s||'');const m=s.match(/^.*?[.!?।](\s|$)/);return (m?m[0]:s).trim()};
+const TP_SEEN=new Set(store.get('seen',[]));
+const tpRing=(n,t,sz)=>{const r=15,c=2*Math.PI*r,f=t?n/t:0;return `<svg class="tp-ring" viewBox="0 0 40 40" width="${sz||40}" height="${sz||40}" role="img" aria-label="${n}/${t}"><circle cx="20" cy="20" r="${r}" class="tp-ring-bg"/><circle cx="20" cy="20" r="${r}" class="tp-ring-fg" stroke-dasharray="${c.toFixed(1)}" style="--off:${(c*(1-f)).toFixed(1)};--full:${c.toFixed(1)}" transform="rotate(-90 20 20)"/><text x="20" y="24" text-anchor="middle">${Math.round(f*100)}%</text></svg>`};
+const tpCard=(m,i)=>`<a class="tp-card${TP_SEEN.has(m.id)?' seen':''}" href="#${m.id}" style="--h:${m.h};--i:${Math.min(i,14)}"><span class="tp-ty">${esc(m.type==='P'?(WHEN[m.w]||TYPE.P)+(m.time?' · '+m.time:''):m.type==='Z'?(m.who||TYPE.Z):TYPE[m.type]||'')}</span><b>${esc(m.t)}</b><span class="note">${esc(tpFirst(m.simple||SIMPLE[m.t]||m.u))}</span><i class="tp-ok" aria-hidden="true">✓</i></a>`;
+const tpGrid=(list,id)=>{if(!list.length)return '';const n=12;return `<div class="tp-grid">${list.slice(0,n).map(tpCard).join('')}</div>${list.length>n?`<div class="tp-grid" id="${id}" hidden>${list.slice(n).map(tpCard).join('')}</div><button class="pill tp-more" data-tpmore="${id}">${esc(UI.tpMore)} (${list.length})</button>`:''}`};
+const TP_TOOL={sim:['simT','simSub'],quiz:['quizT','quizSub'],detox:['detoxT','detoxSub'],cortex:['cortexT','cortexSub'],iceberg:['icT','icSub'],triangle:['trT','trSub'],safeplace:['spT','spSub'],familylab:['flT','flSub'],wounds:['wdT','wdSub'],bigfive:['b5T','b5Sub'],battery:['batT','batSub'],strengths:['vsT','vsSub'],startnow:['snT','snSub'],stuck:['stkT','stkSub'],navigator:['nvT','nvCardSub'],review:['rvT','rvSub']};
+const tpTool=(k,i)=>{const t=TP_TOOL[k];return t&&UI[t[0]]?`<a class="tp-card tool" href="#${k}" style="--h:${[205,150,45,320,24,176][i%6]};--i:${i}"><span class="tp-ty">▶ ${esc(UI.playT)}</span><b>${esc(UI[t[0]])}</b><span class="note">${esc(UI[t[1]]||'')}</span></a>`:''};
+const tpStats=id=>{const ps=hubPages(id);return {ps,seen:ps.filter(m=>TP_SEEN.has(m.id)).length}};
+const tpHubCard=(h,i)=>{const s=tpStats(h.id);return `<a class="tp-hub" href="${tpHref(h.id)}" style="--h:${h.h};--i:${i}"><span class="tp-ic">${hubIcon(h.id,26)}</span><span class="tp-hub-t"><b>${esc(h.n)}</b><span class="note">${esc(h.sub)}</span><span class="tp-meta mono">${s.ps.length} ${esc(UI.tpPages)}</span></span>${tpRing(s.seen,s.ps.length)}</a>`};
+const tpAreaName=i=>tpR('tpAreas')[i]||['',''];
+const tpQuick=()=>`<div class="tp-quick">${[['find','tpFind','<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>'],['index','tpIndex','<path d="M5 6h14M5 12h14M5 18h9"/>'],['navigator','nvT','<circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/>'],['learn','learnT','<path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/>'],['library','tpLib','<path d="M5 4h4v16H5zM11 4h4v16h-4zM17 6l3 1-3 13-3-1z"/>']].filter(x=>UI[x[1]]).map(([h,k,p],i)=>`<a class="tp-q" href="#${h}" style="--i:${i}">${sv(p)}<span>${esc(UI[k])}</span></a>`).join('')}</div>`;
+const tpOrbit=()=>`<svg class="tp-orbit" viewBox="0 0 320 180" aria-hidden="true"><ellipse cx="160" cy="90" rx="130" ry="62" class="tp-o-path"/><ellipse cx="160" cy="90" rx="78" ry="36" class="tp-o-path"/>${TP_AREAS.map((a,i)=>`<g class="tp-o-n" style="--h:${a.h};--i:${i}"><circle r="15"/><animateMotion dur="${26+i*5}s" begin="${-i*7}s" repeatCount="indefinite" path="M290 90A130 62 0 1 1 30 90A130 62 0 1 1 290 90"/></g>`).join('')}${[0,1,2,3,4].map(i=>`<circle r="3.5" class="tp-o-s"><animateMotion dur="${11+i*2}s" begin="${-i*2.5}s" repeatCount="indefinite" path="M238 90A78 36 0 1 0 82 90A78 36 0 1 0 238 90"/></circle>`).join('')}<circle cx="160" cy="90" r="20" class="tp-o-core"/></svg>`;
+
+function viewTopics(){app().innerHTML=`<div class="wrap fade tp"><div class="tp-hero"><div><p class="eyebrow">${ORDER.length} ${esc(UI.tpPages)} · ${HUBS.length} ${esc(UI.tpNav)}</p><h1>${esc(UI.tpT)}</h1><p>${esc(UI.tpSub)}</p></div>${tpOrbit()}</div>
+ ${tpQuick()}
+ <nav class="chips tp-jump" aria-label="${esc(UI.tpJump)}">${TP_AREAS.map((a,i)=>`<a class="pill" href="#topics" data-tpj="${a.id}" style="--h:${a.h}"><span class="tp-dot"></span>${esc(tpAreaName(i)[0])}</a>`).join('')}</nav>
+ ${TP_AREAS.map((a,i)=>`<section class="tp-area" id="tpa-${a.id}" style="--h:${a.h}"><header><span class="tp-ic big">${hubIcon(a.ic,30)}</span><div><h2>${esc(tpAreaName(i)[0])}</h2><p class="note">${esc(tpAreaName(i)[1])}</p></div><span class="mono tp-num">0${i+1}</span></header><div class="tp-hubs">${a.hubs.map((k,j)=>tpHubCard(HUB[k],j)).join('')}</div></section>`).join('')}</div>`;
+ $$('[data-tpj]').forEach(a=>a.onclick=e=>{e.preventDefault();const el=document.getElementById('tpa-'+a.dataset.tpj);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});addSimple(UI.tpSub)}
+
+const TP_TAB={};
+function viewTopic(id){const h=HUB[id],a=HUB_AREA[id],ai=TP_AREAS.indexOf(a),{ps,seen}=tpStats(id);
+ const maps=ps.filter(m=>CN_MAPTYPES.has(m.type)||m.type==='X'),prac=ps.filter(m=>m.type==='P'),days=ps.filter(m=>m.type==='D'),cases=ps.filter(m=>m.type==='Z');
+ const central=maps.slice().sort((x,y)=>((BACK[y.id]||new Set()).size+(y.type==='E'?2:0))-((BACK[x.id]||new Set()).size+(x.type==='E'?2:0))).slice(0,3);
+ const nv=(HUB_NAV[id]||[]).map(k=>NVP[k]).filter(Boolean),studies=(h.studies||[]).map(s=>STUDY[s]).filter(Boolean);
+ const link={};ps.forEach(m=>(PAGE_HUBS[m.id]||[]).forEach(k=>{if(k!==id)link[k]=(link[k]||0)+1}));const rel=Object.entries(link).sort((x,y)=>y[1]-x[1]).slice(0,4);
+ const tabs=tpL('tpTabs'),subs=tpL('tpTabSub'),counts=[central.length+nv.length,maps.length,prac.length,days.length,cases.length,h.tools.length+studies.length+rel.length];
+ let cur=TP_TAB[id]||0;if(!counts[cur])cur=counts.findIndex(c=>c);
+ const all=HUBS.map(x=>x.id),pi=all.indexOf(id),prev=HUB[all[pi-1]],next=HUB[all[pi+1]];
+ const types=[...new Set(maps.map(m=>m.type))];
+ const panel=i=>[
+  ()=>`${nv.length?`<h3 class="tp-h3">${esc(UI.tpStruggles)}</h3><div class="tp-strip">${nv.map((p,j)=>`<a class="tp-chip" href="#nav-${p.id}" style="--h:${NVB[p.b].h};--i:${j}"><b>${esc(p.n)}</b><span>${esc(p.one)}</span></a>`).join('')}</div>`:''}<div class="tp-grid big">${central.map(tpCard).join('')}</div>`,
+  ()=>types.map(t=>`<h3 class="tp-h3">${esc(TYPE[t]||t)} <span class="mono">${maps.filter(m=>m.type===t).length}</span></h3>${tpGrid(maps.filter(m=>m.type===t),'tpm-'+t)}`).join(''),
+  ()=>tpGrid(prac,'tpm-p'),()=>tpGrid(days,'tpm-d'),()=>tpGrid(cases,'tpm-z'),
+  ()=>`<div class="tp-grid">${h.tools.map(tpTool).join('')}${studies.map((s,j)=>`<a class="tp-card" href="#study-${s.id}" style="--h:${s.h||262};--i:${j}"><span class="tp-ty">${esc(UI.tpStudy)}</span><b>${esc(s.t)}</b><span class="note">${esc(tpFirst(s.sum))}</span></a>`).join('')}</div>${rel.length?`<h3 class="tp-h3">${esc(UI.tpLinked)}</h3><div class="tp-hubs">${rel.map(([k],j)=>tpHubCard(HUB[k],j)).join('')}</div>`:''}`][i]();
+ app().innerHTML=`<div class="wrap fade tp" style="--h:${h.h}"><div class="crumbs"><a href="#topics">${esc(UI.tpNav)}</a><span>/</span><a href="#topics" data-tpa="${a.id}">${esc(tpAreaName(ai)[0])}</a></div>
+ <div class="tp-thero"><span class="tp-ic huge">${hubIcon(id,40)}</span><div><p class="eyebrow">${esc(UI.tpTopic)}</p><h1>${esc(h.n)}</h1><p>${esc(h.sub)}</p></div><div class="tp-prog">${tpRing(seen,ps.length,64)}<span class="note">${seen}/${ps.length} ${esc(UI.tpSeen)}</span></div></div>
+ <div class="tp-steps" role="tablist">${tabs.map((t,i)=>counts[i]?`<button class="tp-step${i===cur?' on':''}${i<cur?' past':''}" role="tab" aria-selected="${i===cur}" data-tps="${i}" style="--i:${i}"><span class="tp-sn">${i+1}</span><span class="tp-st">${esc(t)}</span><span class="mono">${counts[i]}</span></button>`:'').join('<i class="tp-sl" aria-hidden="true"></i>')}</div>
+ <section class="tp-panel" id="tppanel"><p class="note tp-psub">${esc(subs[cur]||'')}</p>${panel(cur)}</section>
+ <div class="tp-foot">${(()=>{const nx=counts.findIndex((c,i)=>i>cur&&c);return nx>0?`<button class="pill on" data-tps="${nx}">${esc(UI.tpNext)}: ${esc(tabs[nx])} →</button>`:''})()}<a class="pill" href="#topics">${esc(UI.tpAllTopics)}</a></div>
+ <div class="pager">${prev?`<a href="${tpHref(prev.id)}" style="--h:${prev.h}"><small>←</small><b>${esc(prev.n)}</b></a>`:'<span></span>'}${next?`<a href="${tpHref(next.id)}" style="--h:${next.h}"><small>→</small><b>${esc(next.n)}</b></a>`:''}</div></div>`;
+ $$('[data-tps]').forEach(b=>b.onclick=()=>{TP_TAB[id]=+b.dataset.tps;const y=scrollY,top=$('.tp-steps').getBoundingClientRect().top;viewTopic(id);if(top<0)$('.tp-steps').scrollIntoView({block:'start'});else scrollTo(0,y)});
+ $$('[data-tpmore]').forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.tpmore);if(el){el.hidden=false;b.remove()}});
+ $$('[data-tpa]').forEach(l=>l.onclick=()=>{setTimeout(()=>{const el=document.getElementById('tpa-'+l.dataset.tpa);if(el)el.scrollIntoView({block:'start'})},60)});addSimple(h.sub)}
+
+let TP_NEED=-1;
+function viewFind(){const N=tpR('tpNeeds'),P=k=>ORDER.find(m=>m.code===k),D=k=>ORDER.find(m=>m.sid===k);
+ const dest=[()=>ORDER.filter(m=>m.type==='P'&&m.w==='now').slice(0,9),'#navigator',tpHref('relationships'),tpHref('family'),tpHref('parenting'),()=>[D('heardtrauma'),P('careconsent'),P('careattune'),P('careregulate'),P('careempower'),P('mirrorlisten'),P('helperreset')].filter(Boolean),tpHref('faith'),'#learn','#navfind'];
+ const ic=['<path d="M3 12c3-6 6 6 9 0s6 6 9 0"/>','<circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/>','<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c1-4 9-4 10 0M11 19c1-4 9-4 10 0"/>','<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/>','<circle cx="9" cy="7" r="3"/><circle cx="17" cy="11" r="2"/><path d="M3 20c1-6 11-6 12 0M14 20c0-4 6-4 7 0"/>','<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.500-7 10-7 10z"/>','<path d="M12 3v18M7 8h10"/>','<path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/>','<circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.7.400-1 1-1 1.700M12 17v.01"/>'];
+ app().innerHTML=`<div class="wrap fade tp"><div class="crumbs"><a href="#topics">${esc(UI.tpNav)}</a></div><div class="page-h"><p class="eyebrow">${esc(UI.tpNav)}</p><h1>${esc(UI.tpFind)}</h1><p>${esc(UI.tpFindSub)}</p></div>
+ <div class="tp-needs">${N.map((n,i)=>{const d=dest[i],hue=[176,220,340,30,45,0,262,24,205][i];return typeof d==='string'?`<a class="tp-need" href="${d}" style="--h:${hue};--i:${i}">${sv(ic[i])}<b>${esc(n[0])}</b><span class="note">${esc(n[1]||'')}</span></a>`:`<button class="tp-need${TP_NEED===i?' on':''}" data-tpn="${i}" style="--h:${hue};--i:${i}">${sv(ic[i])}<b>${esc(n[0])}</b><span class="note">${esc(n[1]||'')}</span></button>`}).join('')}</div>
+ ${TP_NEED>=0&&typeof dest[TP_NEED]==='function'?`<section class="tp-panel" id="tpneed"><h3 class="tp-h3">${esc(N[TP_NEED][0])}</h3><div class="tp-grid">${dest[TP_NEED]().map(tpCard).join('')}</div></section>`:''}</div>`;
+ $$('[data-tpn]').forEach(b=>b.onclick=()=>{TP_NEED=+b.dataset.tpn;viewFind();const el=$('#tpneed');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});addSimple(UI.tpFindSub)}
+
+let TP_Q='';
+function viewIndex(){const list=ORDER.slice().sort((a,b)=>String(a.t).localeCompare(String(b.t)));
+ const key=m=>{const c=String(m.t).trim().replace(/^["'“‘(]+/,'').charAt(0).toUpperCase();return /[0-9]/.test(c)?'#':c};
+ const draw=()=>{const q=TP_Q.trim().toLowerCase(),f=q?list.filter(m=>String(m.t).toLowerCase().includes(q)):list,g={};f.forEach(m=>(g[key(m)]=g[key(m)]||[]).push(m));const ks=Object.keys(g);
+  $('#tpletters').innerHTML=ks.map(k=>`<a href="#index" data-tpl="${esc(k)}">${esc(k)}</a>`).join('');
+  $('#tpindex').innerHTML=ks.length?ks.map(k=>`<section id="tpl-${k.charCodeAt(0)}"><h2 class="tp-let">${esc(k)}</h2><div class="tp-rows">${g[k].map(m=>{const hb=HUB[(PAGE_HUBS[m.id]||[])[0]];return `<a class="tp-row${TP_SEEN.has(m.id)?' seen':''}" href="#${m.id}" style="--h:${m.h}"><span class="tp-ty">${esc(TYPE[m.type]||'')}</span><b>${esc(m.t)}</b>${hb?`<span class="note">${esc(hb.n)}</span>`:''}</a>`}).join('')}</div></section>`).join(''):`<p class="note">${esc(UI.tpNone)}</p>`;
+  $$('[data-tpl]').forEach(a=>a.onclick=e=>{e.preventDefault();const el=document.getElementById('tpl-'+a.dataset.tpl.charCodeAt(0));if(el)el.scrollIntoView({behavior:'smooth',block:'start'})})};
+ app().innerHTML=`<div class="wrap fade tp"><div class="crumbs"><a href="#topics">${esc(UI.tpNav)}</a></div><div class="page-h"><p class="eyebrow">${ORDER.length} ${esc(UI.tpPages)}</p><h1>${esc(UI.tpIndex)}</h1><p>${esc(UI.tpIndexSub)}</p></div>
+ <input class="tp-filter" id="tpfilter" type="search" placeholder="${esc(UI.tpFilter)}" aria-label="${esc(UI.tpFilter)}" value="${esc(TP_Q)}"><nav class="tp-letters" id="tpletters" aria-label="A–Z"></nav><div id="tpindex"></div></div>`;
+ $('#tpfilter').oninput=e=>{TP_Q=e.target.value;draw()};draw()}
+
+Object.assign(IC,{topics:sv('<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>')});
+// main navigation: Topics takes the Library's place (the Library stays one tap away, on the Topics page)
+(function(){const lib=NAV.find(n=>n[0]==='library'),get=k=>NAV.find(n=>n[0]===k);if(!lib)return;const order=[get('today'),['topics',UI.tpNav],get('struggles'),get('toolkit'),get('plan'),get('journal')].filter(Boolean);NAV.length=0;order.forEach(n=>NAV.push(n))})();
+const _setNavTP=setNav;setNav=function(id){_setNavTP(!tpHubs()&&id==='library'?'topics':id)};
+const _renderRouteTP=renderRoute;renderRoute=function(){const h=location.hash.slice(1);let m;
+ if(h==='topics'||(m=h.match(/^topic-(\w+)$/))||h==='find'||h==='index'){
+  if(tpHubs()&&(h==='topics'||m)){location.replace(m&&HUB[m[1]]?'#hub-'+m[1]:'#hubs');return}
+  stopPractice();setNav(tpHubs()?'hubs':'topics');
+  if(h==='find'){viewFind();document.title=UI.tpFind+' · Rewiring';return}
+  if(h==='index'){viewIndex();document.title=UI.tpIndex+' · Rewiring';return}
+  if(m&&HUB[m[1]]){viewTopic(m[1]);document.title=HUB[m[1]].n+' · Rewiring';return}
+  viewTopics();document.title=UI.tpT+' · Rewiring';return}
+ _renderRouteTP()};
+// every page remembers it was opened (for the progress rings) and shows which topic it belongs to
+const _sheetTP=sheet;sheet=function(m){_sheetTP(m);if(!TP_SEEN.has(m.id)){TP_SEEN.add(m.id);store.set('seen',[...TP_SEEN])}
+ if(tpHubs())return;const c=$('#app .sheet .crumbs');const hs=(PAGE_HUBS[m.id]||[]).map(k=>HUB[k]).filter(Boolean);
+ if(c&&hs.length&&!c.querySelector('.tp-crumb'))c.insertAdjacentHTML('afterbegin',`<a class="tp-crumb" href="#topics">${esc(UI.tpNav)}</a><span>/</span>${hs.map(h=>`<a class="tp-crumb" href="#topic-${h.id}" style="--h:${h.h}">${esc(h.n)}</a>`).join('<span>·</span>')}<span>/</span>`)};
+const _viewTodayTP=viewToday;viewToday=function(){_viewTodayTP();try{const h=$('#app .page-h');if(h&&!$('#app .tp-today'))h.insertAdjacentHTML('afterend',`<section class="tp-today"><div class="tp-today-h"><b>${esc(UI.tpT)}</b><a href="#find" class="pill">${esc(UI.tpFind)} →</a></div><div class="tp-areas">${TP_AREAS.map((a,i)=>`<a class="tp-atile" href="#topics" data-tpa="${a.id}" style="--h:${a.h};--i:${i}"><span class="tp-ic">${hubIcon(a.ic,24)}</span><b>${esc(tpAreaName(i)[0])}</b><span class="note">${a.hubs.length} ${esc(UI.tpNav)}</span></a>`).join('')}</div></section>`);
+ $$('#app .tp-atile').forEach(l=>l.onclick=()=>setTimeout(()=>{const el=document.getElementById('tpa-'+l.dataset.tpa);if(el)el.scrollIntoView({block:'start'})},80))}catch(e){}};
+const _viewLibraryTP=viewLibrary;viewLibrary=function(){_viewLibraryTP.apply(this,arguments);const h=$('#app .page-h');if(h&&!tpHubs()&&!$('#app .tp-quick'))h.insertAdjacentHTML('afterend',tpQuick().replace('href="#library"','href="#topics"').replace(esc(UI.tpLib),esc(UI.tpT)))};
 
 // ===== VISUAL LEARNING LAYER: animated step-flows on practices, a three-stage path on struggles, a story arc on case studies, and spaced-review flashcards =====
 Object.assign(UI,{vfT:'See it as a flow',vfPlay:'Play the steps',vfStop:'Stop',vfHint:'Tap a step to focus on it.',vpT:'Your path out',vpHint:'Start on the left. Tap a stage to jump to it.',vaT:'The shape of the story',vaEnd:'New life',
