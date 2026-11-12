@@ -72,7 +72,7 @@ NX('controlling','rel','Controlling','Controlling behaviour','Needing to decide,
  ['Anxiety that calms only when in control','Chaos, danger or betrayal growing up','"If I don\'t control it, disaster will happen"','Positions of power without accountability','Trusting control more than God'],
  ['Checking and micromanaging','Making decisions for others','Anger when plans change','Criticising how others do things','Difficulty trusting'],
  'Breathe and ask: "What am I afraid will happen?"','Let one decision go to someone else','Work on the fear underneath;Build trust step by step;Hand outcomes to God in prayer',
- 'Proverbs 3:5|Trust in the LORD with all thine heart; and lean not unto thine own understanding.','Can\'t delegate or let go of control;The Distrust Wound;Perfectionism','handover;rolefirst;decode',
+ 'Proverbs 3:5|Trust in the LORD with all thine heart; and lean not unto thine own understanding.','Care vs. Control;The Distrust Wound;Perfectionism','handover;rolefirst;decode',
  'Controlling means trying to make everything go your way because you are scared. You can trust God and let others choose too.');
 NX('critical','self','Criticism & gossip','Constant criticism and gossip','Finding fault with others, judging or talking about people behind their backs.',
  'Insecurity or hurt>Notice others\' flaws>Criticise or gossip>Brief feeling of being better>Relationships and trust damaged',
